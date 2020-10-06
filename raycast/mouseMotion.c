@@ -6,7 +6,7 @@
 /*   By: jserrano <jserrano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/28 09:25:07 by jserrano          #+#    #+#             */
-/*   Updated: 2020/10/04 18:09:38 by jserrano         ###   ########.fr       */
+/*   Updated: 2020/10/06 10:30:24 by jserrano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,13 @@ static void		mouse_init(t_data *param)
 	param->y = 0;
 	param->mouse_x = 0;
 	param->mouse_y = 0;
+	param->mouse_speed = 0.25;
 }
 
 static void		screen_init(t_data *param)
 {
-	param->resolution_x = 700;
-	param->resolution_y = 500;
+	param->resolution_x = 1240;
+	param->resolution_y = 720;
 	param->id = mlx_init();
 	param->win_id = mlx_new_window(param->id, param->resolution_x,
 								param->resolution_y, "hola");
@@ -44,8 +45,8 @@ static void		vectors_init(t_data *param)
 	param->O[0] = 0;
 	param->O[1] = 0;
 	param->O[2] = 0;
-	param->Vn[0] = 1;
-	param->Vn[1] = 0;
+	param->Vn[0] = 0;
+	param->Vn[1] = 1;
 	param->Vn[2] = 0;
 	module = sqrt(pow(param->Vn[0], 2) + pow(param->Vn[1], 2) + pow(param->Vn[2], 2));
 	i = -1;
@@ -61,7 +62,7 @@ static void		vectors_init(t_data *param)
 		param->rotation_z_axis = 2 * M_PI - asin(param->Vn[1]);
 	param->rotation_y_axis = (param->Vn[2] >= 0) ? asin(param->Vn[2]) :
 			2 * M_PI - asin(param->Vn[2]);
-	param->fov = 144;
+	param->fov = 90;
 	param->screen_dist = (param->resolution_x / 2) /
 						tan((param->fov / 2) * M_PI / 180);
 }
@@ -86,12 +87,23 @@ int		get_pos(int x, int y, t_data *param)
 	{
 		param->x = param->mouse_x + x - param->resolution_x / 2;
 		param->y = -(param->mouse_y + y - param->resolution_y / 2);
+		if (param->y > 249)
+		{
+			param->y = 245;
+			mlx_mouse_move(param->id, param->win_id, x, param->resolution_y / 2 - param->y);
+		}
+		else if (param->y < -249)
+		{
+			param->y = -245;
+			mlx_mouse_move(param->id, param->win_id, x, param->resolution_y / 2 - param->y);
+		}
 		calculate_rotation(param);
 		calculate_vectors(param);
 
 		printf("X: %d, Y: %d\n", param->x, param->y);
 		printf("Screen dist: %f\n", param->screen_dist);
 		printf("Vn[x]: %f, Vn[y]: %f, Vn[z]: %f\n\n\n", param->Vn[0], param->Vn[1], param->Vn[2]);
+		printf("O = (%f, %f, %f)\n", param->O[0], param->O[1], param->O[2]);
 	}
 	return (0);
 }
@@ -113,7 +125,6 @@ int		button_pressed(int button, int x, int y, t_data *param)
 		calculate_rotation(param);
 		calculate_vectors(param);
 	}
-	printf("button = %d\n", button);
 	return (0);
 }
 
@@ -162,14 +173,14 @@ int		key_pressed(int keycode, t_data *param)
 		param->O[2] += 3;
 	else if (keycode == KEY_CTR)
 		param->O[2] += -3;
-	printf("key = %x\n", keycode);
+	//printf("key = %x\n", keycode);
 	return (0);
 }
 
 int ft_loop(t_data *param)
 {
-	//show_camera(param); // solo para pruebas
 	show_pov(param);
+	//show_camera(param);
 	return (0);
 }
 

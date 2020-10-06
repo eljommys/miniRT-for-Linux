@@ -35,6 +35,8 @@ typedef struct	s_data{
 	int		mouse_x;
 	int		mouse_y;
 
+	double	mouse_speed;
+
 	int		x;
 	int		y;
 

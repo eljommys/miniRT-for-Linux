@@ -6,7 +6,7 @@
 /*   By: jserrano <jserrano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/01 09:38:55 by jserrano          #+#    #+#             */
-/*   Updated: 2020/10/04 18:30:31 by jserrano         ###   ########.fr       */
+/*   Updated: 2020/10/06 10:36:01 by jserrano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,8 @@ void	calculate_rotation(t_data *param)
 	double rotation_y_axis;
 	double xy_projection;
 
-	rotation_z_axis = param->x * 2 * M_PI / 250 + param->rotation_z_axis;
-	rotation_y_axis = param->y * M_PI / 500;
+	rotation_z_axis = param->x * 2 * param->mouse_speed * M_PI / 250 + param->rotation_z_axis;
+	rotation_y_axis = param->y * 2 * param->mouse_speed * M_PI / 250 + param->rotation_y_axis;
 	xy_projection = cos(rotation_y_axis);
 	param->Vn[0] = cos(rotation_z_axis) * xy_projection;
 	param->Vn[1] = sin(rotation_z_axis) * xy_projection;
@@ -78,7 +78,7 @@ void	gen_ray(t_data *param, int x, int y)
 
 	i = -1;
 	while (++i < 3)
-		param->pixel[i] = param->P[i] - ((param->resolution_x / 2 + x) * param->Vx[i]) + ((param->resolution_y / 2 - y) * param->Vy[i]);
+		param->pixel[i] = param->P[i] - (param->resolution_x / 2 - x) * param->Vx[i] + (param->resolution_y / 2 - y) * param->Vy[i];
 	i = -1;
 	while (++i < 3)
 		param->ray[i] = param->pixel[i] - param->O[i];
@@ -88,6 +88,36 @@ void	gen_ray(t_data *param, int x, int y)
 		param->ray[i] /= module;
 }
 
+/*
+**	FALTA UNA FUNCION QUE ENVIE EL RAYO Y DETECTE EL OBJETO
+*/
+
+int		is_pixel(t_data *param)
+{
+	double dist;
+	double distance;
+	double origin[3];
+	int i;
+
+	i = -1;
+	while (++i < 3)
+		origin[i] = param->pixel[i];
+	dist = 0;
+	distance = 0;
+	while (distance < 1000)
+	{
+		i = -1;
+		while (++i < 3)
+			param->pixel[i] += param->ray[i] * distance;
+		if (100 < param->pixel[0] && param->pixel[0] < 200 &&
+			100 < param->pixel[1] && param->pixel[1] < 200 &&
+			100 < param->pixel[2] && param->pixel[2] < 200)
+			return (1);
+		distance = sqrt(pow(param->pixel[0] - origin[0], 2) + pow(param->pixel[1] - origin[1], 2) + pow(param->pixel[2] - origin[2], 2));
+		dist += 2;
+	}
+	return (0);
+}
 
 /*
 ** ****************************************************************************
@@ -208,13 +238,45 @@ void	show_pov(t_data *param)
 		while (x < param->resolution_x)
 		{
 			gen_ray(param, x, y);
-			if (param->ray[1] >= 0 && param->ray[0] >= 0 || param->ray[1] < 0 && param->ray[0] < 0)
-				my_mlx_pixel_put(param, x, y, 0xFFFFFF);
+			if (is_pixel(param) == 1)
+				my_mlx_pixel_put(param, x, y, 0x000000);
+			else if (param->ray[2] < 0)
+			{
+				if (param->ray[1] < 0)
+				{
+					if (param->ray[0] < 0)
+						my_mlx_pixel_put(param, x, y, 0x864545);
+					else
+						my_mlx_pixel_put(param, x, y, 0x858645);
+				}
+				else
+				{
+					if (param->ray[0] < 0)
+						my_mlx_pixel_put(param, x, y, 0x458686);
+					else
+						my_mlx_pixel_put(param, x, y, 0x864581);
+				}
+			}
 			else
-				my_mlx_pixel_put(param, x, y, 0);
-			x++;
+			{
+				if (param->ray[1] < 0)
+				{
+					if (param->ray[0] < 0)
+						my_mlx_pixel_put(param, x, y, 0xFF5A5A);
+					else
+						my_mlx_pixel_put(param, x, y, 0xFFFF5A);
+				}
+				else
+				{
+					if (param->ray[0] < 0)
+						my_mlx_pixel_put(param, x, y, 0x5AFAFF);
+					else
+						my_mlx_pixel_put(param, x, y, 0xFF5AFF);
+				}
+			}
+			x += 2;;
 		}
-		y++;
+		y += 2;
 	}
 	mlx_put_image_to_window(param->id, param->win_id, param->img, 0, 0);
 }
