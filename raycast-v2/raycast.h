@@ -61,6 +61,12 @@ typedef struct s_screen{
 	double	dist;
 }				t_screen;
 
+typedef struct {
+	p[3];
+	p_conv[3];
+};
+
+
 typedef struct	s_data{
 
 	t_mouse		mouse;

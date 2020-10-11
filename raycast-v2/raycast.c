@@ -6,7 +6,7 @@
 /*   By: jserrano <jserrano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/01 09:38:55 by jserrano          #+#    #+#             */
-/*   Updated: 2020/10/11 14:09:20 by jserrano         ###   ########.fr       */
+/*   Updated: 2020/10/11 16:35:21 by jserrano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ void	point_rot(t_data *param)
 								param->p[i][1] * param->rot.sin_z) *
 								param->rot.sin_y + param->p[i][2] *
 								param->rot.cos_y + param->rot.Vd[2];
+		i++;
 	}
 }
 
@@ -77,6 +78,7 @@ void	calculate_pixel(t_data *param, int *pixel)
 		}
 		if (0 < pixel[0] && pixel[0] < param->screen.x && 0 < pixel[1] && pixel[1] < param->screen.y)
 			my_mlx_pixel_put(param, pixel[0], pixel[1], 0xFFFFFF);
+		i++;
 	}
 }
 
@@ -94,21 +96,26 @@ double	**add_points(double **p, int n)
 		len++;
 	if (!(aux = (double **)malloc(sizeof(double *) * (len + n + 1))))
 		return (p);
+		// problema aqui se queda pillado por la puta cara
 	i = -1;
 	while(++i < len + n)
 	{
 		aux[i] = (double *)malloc(sizeof(double) * 3);
 		if (i < len)
 		{
-			j = 0;
-			while (j < 3)
-				aux[i][j] = p[i][j++];
+			j = -1;
+			while (++j < 3)
+				aux[i][j] = p[i][j];
 		}
+		//printf("despues\n");
 	}
 	aux[i] = 0;
-	i = 0;
-	while (p[i])
-		free(p[i++]);
+	if (len)
+	{
+		i = 0;
+		while (p[i])
+			free(p[i++]);
+	}
 	free(p);
 	return (aux);
 }
@@ -118,13 +125,15 @@ void	create_cube(t_data *param, double *p1, double *p2)
 	int i;
 	int j;
 
+	//printf("1\n");
 	i = 0;
 	while (param->p[i])
 		i++;
+	//printf("2\n");
 	param->p = add_points(param->p, 8);
 	param->p_conv = add_points(param->p_conv, 8);
-	//definir estas variables bloquean todo el programa. tengo que ver como hacerlo mejor
-	//	probablemente con la cadena de puntos en la estructura en lugar de una cadena de estructuras
+	//printf("3\n");
+
 	j = -1;
 	while (++j < 3)
 		param->p[i][j] = p1[j];
@@ -156,6 +165,7 @@ void	create_cube(t_data *param, double *p1, double *p2)
 	param->p[i + 7][0] = p2[0];
 	param->p[i + 7][1] = p1[1];
 	param->p[i + 7][2] = p2[2];
+	//printf("4\n");
 }
 
 /*
@@ -175,6 +185,7 @@ void	show_pov(t_data *param)
 	int y;
 
 	calculate_pixel(param, pixel);
+	//printf("7\n");
 	y = -1;
 	while (++y < param->screen.y)
 	{

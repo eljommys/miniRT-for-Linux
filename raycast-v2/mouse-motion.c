@@ -6,7 +6,7 @@
 /*   By: jserrano <jserrano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/28 09:25:07 by jserrano          #+#    #+#             */
-/*   Updated: 2020/10/11 14:09:10 by jserrano         ###   ########.fr       */
+/*   Updated: 2020/10/11 16:36:00 by jserrano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,7 @@ void	ft_init(t_data *param)
 	mouse_init(param);
 	screen_init(param);
 	vectors_init(param);
+	printf("5\n");
 }
 
 int		ft_exit(t_data *param)
@@ -155,6 +156,7 @@ int		button_released(int button, int x, int y, t_data *param)
 
 int		key_pressed(int keycode, t_data *param)
 {
+	printf("\nkey = %x\n", keycode);
 	if (keycode == KEY_ESC)
 		ft_exit(param->id);
 	else if (keycode == KEY_W)
@@ -170,12 +172,12 @@ int		key_pressed(int keycode, t_data *param)
 	else if (keycode == KEY_CTR)
 		param->rot.Vd[2] += 10;
 	calculate_rotation(param);
-	//printf("\nkey = %x\n", keycode);
 	return (0);
 }
 
 int ft_loop(t_data *param)
 {
+	//printf("6\n");
 	show_pov(param);
 	return (0);
 }
