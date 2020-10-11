@@ -6,7 +6,7 @@
 /*   By: jserrano <jserrano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/01 09:38:55 by jserrano          #+#    #+#             */
-/*   Updated: 2020/10/06 10:36:01 by jserrano         ###   ########.fr       */
+/*   Updated: 2020/10/08 12:45:46 by jserrano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -238,9 +238,9 @@ void	show_pov(t_data *param)
 		while (x < param->resolution_x)
 		{
 			gen_ray(param, x, y);
-			if (is_pixel(param) == 1)
+			/*if (is_pixel(param) == 1)
 				my_mlx_pixel_put(param, x, y, 0x000000);
-			else if (param->ray[2] < 0)
+			else */if (param->ray[2] < 0)
 			{
 				if (param->ray[1] < 0)
 				{
@@ -274,7 +274,7 @@ void	show_pov(t_data *param)
 						my_mlx_pixel_put(param, x, y, 0xFF5AFF);
 				}
 			}
-			x += 2;;
+			x += 2;
 		}
 		y += 2;
 	}
