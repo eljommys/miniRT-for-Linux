@@ -6,7 +6,7 @@
 /*   By: jserrano <jserrano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/01 09:38:55 by jserrano          #+#    #+#             */
-/*   Updated: 2020/10/11 16:35:21 by jserrano         ###   ########.fr       */
+/*   Updated: 2020/10/15 16:56:57 by jserrano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,10 @@ void	calculate_rotation(t_data *param)
 	double rotation_z_axis;
 	double rotation_y_axis;
 
-	rotation_z_axis = param->coord.x * 2 * param->mouse.speed * M_PI / 250 + param->rot.z;
-	rotation_y_axis = param->coord.y * 2 * param->mouse.speed * M_PI / 250 + param->rot.y;
+	rotation_z_axis = param->coord.x * 2 * param->mouse.speed * M_PI / 250 +
+						param->rot.z;
+	rotation_y_axis = param->coord.y * 2 * param->mouse.speed * M_PI / 250 +
+						param->rot.y;
 	param->rot.cos_y = cos(rotation_y_axis);
 	param->rot.sin_y = sin(rotation_y_axis);
 	param->rot.cos_z = cos(rotation_z_axis);
@@ -64,25 +66,16 @@ void	calculate_rotation(t_data *param)
 **	falta filtrar solo los puntos que estan dentro del cono de vision
 */
 
-void	calculate_pixel(t_data *param, int *pixel)
+void	calculate_pixel(t_data *param, int *pixel, int i)
 {
-	int		i;
-
-	i = 0;
-	while (param->p[i])
+	if (param->p_conv[i][0] > param->screen.dist)
 	{
-		if (param->p_conv[i][0] > param->screen.dist)
-		{
-			pixel[0] =  param->screen.x / 2 - (param->screen.dist * param->p_conv[i][1] / param->p_conv[i][0]);
-			pixel[1] =  param->screen.y / 2 - (param->screen.dist * param->p_conv[i][2] / param->p_conv[i][0]);
-		}
-		if (0 < pixel[0] && pixel[0] < param->screen.x && 0 < pixel[1] && pixel[1] < param->screen.y)
-			my_mlx_pixel_put(param, pixel[0], pixel[1], 0xFFFFFF);
-		i++;
+		pixel[0] =  param->screen.x / 2 - (param->screen.dist *
+					param->p_conv[i][1] / param->p_conv[i][0]);
+		pixel[1] =  param->screen.y / 2 - (param->screen.dist *
+					param->p_conv[i][2] / param->p_conv[i][0]);
 	}
 }
-
-// reducir tamaño
 
 double	**add_points(double **p, int n)
 {
@@ -96,76 +89,121 @@ double	**add_points(double **p, int n)
 		len++;
 	if (!(aux = (double **)malloc(sizeof(double *) * (len + n + 1))))
 		return (p);
-		// problema aqui se queda pillado por la puta cara
 	i = -1;
 	while(++i < len + n)
 	{
 		aux[i] = (double *)malloc(sizeof(double) * 3);
+		j = -1;
 		if (i < len)
-		{
-			j = -1;
 			while (++j < 3)
 				aux[i][j] = p[i][j];
-		}
-		//printf("despues\n");
 	}
 	aux[i] = 0;
+	i = 0;
 	if (len)
-	{
-		i = 0;
 		while (p[i])
 			free(p[i++]);
-	}
 	free(p);
 	return (aux);
 }
 
-void	create_cube(t_data *param, double *p1, double *p2)
+/*
+**	Cada cara son tres direcciones de memoria correspondientes a los puntos
+**	convertidos (con la rotacion aplicada). Esto es asi para no tener que
+**	hacer una funcion que busque que direcciones de la memoria son los puntos.
+*/
+
+double	***add_faces(double ***f, int n)
 {
+	double	***aux;
+	int		len;
+	int		i;
+	int		j;
+
+	len = 0;
+	while (f[len])
+		len++;
+	if (!(aux = (double ***)malloc(sizeof(double **) * (len + n + 1))))
+		return (f);
+	i = -1;
+	while(++i < len + n)
+	{
+		aux[i] = (double **)malloc(sizeof(double*) * 3);
+		j = -1;
+		if (i < len)
+			while (++j < 3)
+				aux[i][j] = f[i][j];
+	}
+	aux[i] = 0;
+	i = 0;
+	if (len)
+		while (f[i])
+			free(f[i++]);
+	free(f);
+	return (aux);
+}
+
+void	cube_faces(char *str, int n, t_data *param, int k, int pos)
+{
+	int f[3];
 	int i;
 	int j;
 
-	//printf("1\n");
+	f[0] = str[0] - 48;
+	f[1] = str[1] - 48;
+	f[2] = str[2] - 48;
+	j = 0;
+	i = -1;
+	while (++i < 3)
+	{
+		param->faces[k][0] = param->p_conv[n + pos];
+		param->faces[k][1] = param->p_conv[f[j] + pos];
+		j++;
+		if (j == 3)
+			j = 0;
+		param->faces[k][2] = param->p_conv[f[j] + pos];
+		k++;
+	}
+}
+
+void	create_cube(t_data *param, double *p, double h)
+{
+	int i;
+	int j;
+	int k;
+	int pos;
+	int f[3];
+
 	i = 0;
 	while (param->p[i])
 		i++;
-	//printf("2\n");
+	k = 0;
+	while (param->faces[k])
+		k++;
 	param->p = add_points(param->p, 8);
 	param->p_conv = add_points(param->p_conv, 8);
-	//printf("3\n");
-
-	j = -1;
-	while (++j < 3)
-		param->p[i][j] = p1[j];
-
-	param->p[i + 1][0] = p1[0];
-	param->p[i + 1][1] = p2[1];
-	param->p[i + 1][2] = p1[2];
-
-	param->p[i + 2][0] = p2[0];
-	param->p[i + 2][1] = p2[1];
-	param->p[i + 2][2] = p1[2];
-
-	param->p[i + 3][0] = p2[0];
-	param->p[i + 3][1] = p1[1];
-	param->p[i + 3][2] = p1[2];
-
-	param->p[i + 4][0] = p1[0];
-	param->p[i + 4][1] = p1[1];
-	param->p[i + 4][2] = p2[2];
-
-	param->p[i + 5][0] = p1[0];
-	param->p[i + 5][1] = p2[1];
-	param->p[i + 5][2] = p2[2];
-
-	j = -1;
-	while (++j < 3)
-		param->p[i + 6][j] = p2[j];
-
-	param->p[i + 7][0] = p2[0];
-	param->p[i + 7][1] = p1[1];
-	param->p[i + 7][2] = p2[2];
-	//printf("4\n");
+	param->faces = add_faces(param->faces, 12);
+	f[2] = -1;
+	pos = i;
+	while (++f[2] < 2)
+	{
+		f[1] = -1;
+		while (++f[1] < 2)
+		{
+			f[0] = -1;
+			while (++f[0] < 2)
+			{
+				j = -1;
+				while (++j < 3)
+					param->p[i][j] = p[j] + h * f[j];
+				i++;
+			}
+		}
+	}
+	cube_faces("124", 0, param, k, pos);
+	cube_faces("217", 3, param, k, pos);
+	cube_faces("147", 5, param, k, pos);
+	cube_faces("427", 6, param, k, pos);
 }
 
 /*
@@ -181,17 +219,22 @@ void	create_cube(t_data *param, double *p1, double *p2)
 void	show_pov(t_data *param)
 {
 	int pixel[2];
+	int i;
 	int x;
 	int y;
 
-	calculate_pixel(param, pixel);
-	//printf("7\n");
 	y = -1;
 	while (++y < param->screen.y)
 	{
 		x = -1;
 		while (++x < param->screen.x)
 			my_mlx_pixel_put(param, x, y, 0);
+	}
+	i = 0;
+	while (param->p_conv[i])
+	{
+		calculate_pixel(param, pixel, i);
+		i++;
 	}
 	mlx_put_image_to_window(param->id, param->win_id, param->img, 0, 0);
 }

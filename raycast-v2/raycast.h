@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   raycast.h                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jserrano <jserrano@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/10/12 20:37:01 by jserrano          #+#    #+#             */
+/*   Updated: 2020/10/12 20:37:01 by jserrano         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef RAYCAST_H
 # define RAYCAST_H
 
@@ -61,12 +73,6 @@ typedef struct s_screen{
 	double	dist;
 }				t_screen;
 
-typedef struct {
-	p[3];
-	p_conv[3];
-};
-
-
 typedef struct	s_data{
 
 	t_mouse		mouse;
@@ -90,10 +96,11 @@ typedef struct	s_data{
 
 	double		**p;
 	double		**p_conv;
+	double		***faces;
 }				t_data;
 
 void 	calculate_rotation(t_data *param);
 void	show_pov(t_data *param);
-void	create_cube(t_data *param, double *p1, double *p2);
+void	create_cube(t_data *param, double *p, double h);
 
 #endif

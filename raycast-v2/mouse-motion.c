@@ -6,12 +6,11 @@
 /*   By: jserrano <jserrano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/28 09:25:07 by jserrano          #+#    #+#             */
-/*   Updated: 2020/10/11 16:36:00 by jserrano         ###   ########.fr       */
+/*   Updated: 2020/10/13 13:02:47 by jserrano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "raycast.h"
-
 
 //	gcc -o unit_test mouseMotion.c raycast.c ../minilibx-linux-master/*.a -L.. -lmlx -lXext -lX11 -lm -lbsd
 
@@ -45,7 +44,8 @@ static void		vectors_init(t_data *param)
 	param->Vn[0] = 1;
 	param->Vn[1] = 0;
 	param->Vn[2] = 0;
-	module = sqrt(pow(param->Vn[0], 2) + pow(param->Vn[1], 2) + pow(param->Vn[2], 2));
+	module = sqrt(pow(param->Vn[0], 2) + pow(param->Vn[1], 2) +
+			pow(param->Vn[2], 2));
 	i = -1;
 	while (++i < 3)
 		param->Vn[i] /= module;
@@ -69,25 +69,22 @@ static void		vectors_init(t_data *param)
 
 void	ft_init(t_data *param)
 {
-	double p1[3];
-	double p2[3];
+	double p[3];
 
-	p1[0] = 1000;
-	p1[1] = 0;
-	p1[2] = 0;
-	p2[0] = 1500;
-	p2[1] = 500;
-	p2[2] = 500;
+	p[0] = 1000;
+	p[1] = 0;
+	p[2] = 0;
 
 	param->p = (double **)malloc(sizeof(double *));
 	*param->p = 0;
 	param->p_conv = (double **)malloc(sizeof(double *));
 	*param->p_conv = 0;
-	create_cube(param, p1, p2);
+	param->faces = (double ***)malloc(sizeof(double **));
+	*param->faces = 0;
+	create_cube(param, p, 500);
 	mouse_init(param);
 	screen_init(param);
 	vectors_init(param);
-	printf("5\n");
 }
 
 int		ft_exit(t_data *param)
@@ -106,18 +103,21 @@ int		get_pos(int x, int y, t_data *param)
 		if (param->coord.y > 249)
 		{
 			param->coord.y = 245;
-			mlx_mouse_move(param->id, param->win_id, x, param->screen.y / 2 - param->coord.y);
+			mlx_mouse_move(param->id, param->win_id, x, param->screen.y / 2
+							- param->coord.y);
 		}
 		else if (param->coord.y < -249)
 		{
 			param->coord.y = -245;
-			mlx_mouse_move(param->id, param->win_id, x, param->screen.y / 2 - param->coord.y);
+			mlx_mouse_move(param->id, param->win_id, x, param->screen.y / 2
+							- param->coord.y);
 		}
 		calculate_rotation(param);
 
 		printf("X: %d, Y: %d\n", param->coord.x, param->coord.y);
 		printf("Screen dist: %f\n", param->screen.dist);
-		printf("Vn[x]: %f, Vn[y]: %f, Vn[z]: %f\n\n\n", param->Vn[0], param->Vn[1], param->Vn[2]);
+		printf("Vn[x]: %f, Vn[y]: %f, Vn[z]: %f\n\n\n", param->Vn[0],
+				param->Vn[1], param->Vn[2]);
 	}
 	return (0);
 }
@@ -128,7 +128,8 @@ int		button_pressed(int button, int x, int y, t_data *param)
 	if (button == 1)
 	{
 		mlx_mouse_hide(param->id, param->win_id);
-		mlx_mouse_move(param->id, param->win_id, param->screen.x / 2, param->screen.y / 2);
+		mlx_mouse_move(param->id, param->win_id, param->screen.x / 2,
+						param->screen.y / 2);
 		param->coord.aux_x = x;
 		param->coord.aux_y = y;
 	}
@@ -147,7 +148,8 @@ int		button_released(int button, int x, int y, t_data *param)
 	{
 		param->mouse.x += (x - param->screen.x / 2);
 		param->mouse.y += (y - param->screen.y / 2);
-		mlx_mouse_move(param->id, param->win_id, param->coord.aux_x, param->coord.aux_y);
+		mlx_mouse_move(param->id, param->win_id, param->coord.aux_x,
+						param->coord.aux_y);
 		mlx_mouse_show(param->id, param->win_id);
 	}
 	param->button = 0;
