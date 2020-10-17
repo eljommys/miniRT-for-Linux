@@ -6,7 +6,7 @@ miniRT-for-Linux is a 42 Programming School project that will help us to underst
 
 This project is still under construction but it will be available soon (probably on November 20th).
 
-If you want to check the progress theres a really basic version of it.
+If you want to check the progress there is a really basic version of it.
 
 ```bash
 cd mk1 && make test
