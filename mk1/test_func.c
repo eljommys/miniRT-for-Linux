@@ -6,7 +6,7 @@
 /*   By: jserrano <jserrano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/17 13:45:20 by jserrano          #+#    #+#             */
-/*   Updated: 2020/10/17 23:54:16 by jserrano         ###   ########.fr       */
+/*   Updated: 2020/10/18 11:21:26 by jserrano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -170,7 +170,7 @@ void	show_sp(t_data *param)
 	double dist;
 	int color;
 
-	step = (param->key == KEY_ENT) ? 1 : 4;
+	step = (param->key == KEY_ENT) ? 1 : 8;
 	y = -1;
 	while (++y < param->scr.y)
 	{
@@ -194,4 +194,3 @@ void	show_sp(t_data *param)
 	}
 	mlx_put_image_to_window(param->id, param->win_id, param->img.img, 0, 0);
 }
-

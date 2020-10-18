@@ -69,7 +69,10 @@ typedef struct	s_ray{
 	double	O[3];
 	double	mod;
 	int		obj_c;
+	int		obj_n;
 	int		ray_c;
+	int		*ray_rgb;
+	double	intens;
 }				t_ray;
 
 typedef struct	s_camera{
@@ -97,6 +100,12 @@ typedef struct	s_sphere{
 	int		col;
 }				t_sphere;
 
+typedef struct	s_plane{
+	double	O[3];
+	double	v[3];
+	int		col;
+}				t_plane;
+
 typedef struct	s_light{
 	double	O[3];
 	int		col;
@@ -113,6 +122,7 @@ typedef struct	s_data{
 	t_camera	cam;
 	t_image		img;
 	t_sphere	**sp;
+	t_plane		**pl;
 	t_light		**l;
 }				t_data;
 
@@ -132,13 +142,16 @@ int		key_pressed(int keycode, t_data *param);
 int		ft_loop(t_data *param);
 int		ft_exit(t_data *param);
 void	my_mlx_pixel_put(t_data *param, int x, int y, int color);
+double	mod(double *v);
+void	rgb_to_hex(int *rgb, int *hex);
+void	*hex_to_rgb(int hex, int *rgb);
 
 /*
 **	init.c
 */
 
 void	mouse_init(t_data *param);
-void		vectors_init(t_data *param);
+void	vectors_init(t_data *param);
 void	ft_init(t_data *param);
 
 /*
@@ -153,6 +166,7 @@ void 	calculate_rotation(t_data *param);
 */
 
 t_sphere	**add_sp(t_sphere **sp, double *O, double r, int c);
+t_plane		**add_pl(t_plane **pl, double *O, double *v, int c);
 t_light		**add_l(t_light **l, double *O, int c);
 
 /*

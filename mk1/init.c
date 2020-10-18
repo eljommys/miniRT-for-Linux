@@ -6,7 +6,7 @@
 /*   By: jserrano <jserrano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/17 13:38:01 by jserrano          #+#    #+#             */
-/*   Updated: 2020/10/17 23:42:53 by jserrano         ###   ########.fr       */
+/*   Updated: 2020/10/18 17:05:56 by jserrano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,8 @@ void		vectors_init(t_data *param)
 	param->cam.Vn[0] = 1;
 	param->cam.Vn[1] = 0;
 	param->cam.Vn[2] = 0;
-	module = sqrt(pow(param->cam.Vn[0], 2) + pow(param->cam.Vn[1], 2) + pow(param->cam.Vn[2], 2));
+	param->cam.ray.ray_rgb = (int *)malloc(sizeof(int) * 3);
+	module = mod(param->cam.Vn);
 	i = -1;
 	while (++i < 3)
 		param->cam.Vn[i] /= module;
@@ -68,6 +69,8 @@ static void		objs_init(t_data *param)
 {
 	param->sp = (t_sphere **)malloc(sizeof(t_sphere *));
 	param->sp[0] = 0;
+	param->pl = (t_plane **)malloc(sizeof(t_plane *));
+	param->pl[0] = 0;
 	param->l = (t_light **)malloc(sizeof(t_light *));
 	param->l[0] = 0;
 }
@@ -78,10 +81,15 @@ void	ft_init(t_data *param)
 	double p1[3];
 	double p2[3];
 	double p3[3];
+	double v[3];
 
 	p[0] = 1500;
 	p[1] = 1500;
 	p[2] = 0;
+
+	v[0] = 0;
+	v[1] = 0;
+	v[2] = 1;
 
 	p1[0] = 500;
 	p1[1] = 500;
@@ -89,7 +97,7 @@ void	ft_init(t_data *param)
 
 	p2[0] = -500;
 	p2[1] = -500;
-	p2[2] = 0;
+	p2[2] = 1000;
 
 	p3[0] = 3500;
 	p3[1] = -3500;
@@ -99,8 +107,9 @@ void	ft_init(t_data *param)
 	screen_init(param);
 	vectors_init(param);
 	objs_init(param);
-	param->sp = add_sp(param->sp, p, 500, 0xF58C72);
-	param->sp = add_sp(param->sp, p1, 100, 0x85B5E6);
-	param->sp = add_sp(param->sp, p3, 3000, 0xAAF572);
+	param->sp = add_sp(param->sp, p1, 100, 0x0000FF);
+	param->sp = add_sp(param->sp, p, 500, 0x00FF00);
+	param->sp = add_sp(param->sp, p3, 3000, 0xFF0000);
+	param->pl = add_pl(param->pl, p3, v, 0xFFFFFF);
 	param->l = add_l(param->l, p2, 0xFFFFFF);
 }

@@ -6,7 +6,7 @@
 /*   By: jserrano <jserrano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/17 13:47:12 by jserrano          #+#    #+#             */
-/*   Updated: 2020/10/17 23:22:13 by jserrano         ###   ########.fr       */
+/*   Updated: 2020/10/18 12:52:45 by jserrano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,5 +89,50 @@ t_light		**add_l(t_light **l, double *O, int c)
 		while (l[i])
 			free(l[i++]);
 	free(l);
+	return (aux);
+}
+
+t_plane	**add_pl(t_plane **pl, double *O, double *v, int c)
+{
+	t_plane		**aux;
+	int			len;
+	int			i;
+	int			j;
+
+	len = 0;
+	while (pl[len])
+		len++;
+	if (!(aux = (t_plane **)malloc(sizeof(t_plane *) * (len + 2))))
+		return (pl);
+	i = -1;
+	while(++i < len + 1)
+	{
+		aux[i] = (t_plane *)malloc(sizeof(t_plane));
+		j = -1;
+		if (i < len)
+		{
+			while (++j < 3)
+			{
+				aux[i]->O[j] = pl[i]->O[j];
+				aux[i]->v[j] = pl[i]->v[j];
+			}
+			aux[i]->col = pl[i]->col;
+		}
+		else
+		{
+			while (++j < 3)
+			{
+				aux[i]->O[j] = O[j];
+				aux[i]->v[j] = v[j];
+			}
+			aux[i]->col = c;
+		}
+	}
+	aux[i] = 0;
+	i = 0;
+	if (len)
+		while (pl[i])
+			free(pl[i++]);
+	free(pl);
 	return (aux);
 }

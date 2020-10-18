@@ -6,7 +6,7 @@
 /*   By: jserrano <jserrano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/01 09:38:55 by jserrano          #+#    #+#             */
-/*   Updated: 2020/10/17 23:46:08 by jserrano         ###   ########.fr       */
+/*   Updated: 2020/10/18 17:45:18 by jserrano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,7 @@ void	gen_ray(t_data *param, int x, int y, int boolean)
 	while (++i < 3)
 		param->cam.ray.V[i] = param->cam.ray.O[i] - param->cam.O[i];
 	if (boolean)
-		param->cam.ray.mod = sqrt(pow(param->cam.ray.V[0], 2) +
-					pow(param->cam.ray.V[1], 2) + pow(param->cam.ray.V[2], 2));
+		param->cam.ray.mod = mod(param->cam.ray.V);
 	i = -1;
 	while (++i < 3)
 		param->cam.ray.V[i] /= param->cam.ray.mod;
@@ -47,12 +46,48 @@ double	sp_dist(t_data *param)
 					param->sp[i]->r;
 		if (aux < dist)
 		{
-			param->cam.ray.obj_c = param->sp[i]->col;
+			param->cam.ray.obj_n = i;
 			dist = aux;
 		}
 		i++;
 	}
 	return (dist);
+}
+
+double	pl_dist(t_data *param)
+{
+	double	dist;
+	double	aux;
+	int		i;
+
+	dist = 2147483647;
+	i = 0;
+	while (param->pl[i])
+	{
+		aux =	fabs(param->pl[i]->v[0] * param->cam.ray.O[0] +
+				param->pl[i]->v[1] * param->cam.ray.O[1] +
+				param->pl[i]->v[2] * param->cam.ray.O[2] -
+				(param->pl[i]->v[0] * param->pl[i]->O[0] +
+				param->pl[i]->v[1] * param->pl[i]->O[1] +
+				param->pl[i]->v[2] * param->pl[i]->O[2])) /
+				mod(param->pl[i]->v);
+		param->cam.ray.obj_n = (aux < dist) ? i : param->cam.ray.obj_n;
+		dist = (aux < dist) ? aux : dist;
+		i++;
+	}
+	return (dist);
+}
+
+double	obj_dist(t_data *param)
+{
+	double	dist;
+	double	aux;
+
+	dist = sp_dist(param);
+	param->cam.ray.obj_c = param->sp[param->cam.ray.obj_n]->col;
+	aux = pl_dist(param);
+	param->cam.ray.obj_c = (aux < dist) ? param->pl[param->cam.ray.obj_n]->col : param->cam.ray.obj_c;
+	dist = (aux < dist) ? aux : dist;
 }
 
 int		bounce_ray(t_data *param)
@@ -64,8 +99,7 @@ int		bounce_ray(t_data *param)
 	j = -1;
 	while (++j < 3)
 		param->cam.ray.V[j] = param->l[0]->O[j] - param->cam.ray.O[j];
-	param->cam.ray.mod = sqrt(pow(param->cam.ray.V[0], 2) +
-				pow(param->cam.ray.V[1], 2) + pow(param->cam.ray.V[2], 2));
+	param->cam.ray.mod = mod(param->cam.ray.V);
 	j = -1;
 	while (++j < 3)
 		param->cam.ray.V[j] /= param->cam.ray.mod;
@@ -78,10 +112,16 @@ int		bounce_ray(t_data *param)
 			param->cam.ray.O[j] += param->cam.ray.V[j] * dist;
 		tray += dist;
 		if (tray > param->cam.ray.mod)
+		{
+			j = -1;
+			while (++j < 3)
+				param->cam.ray.ray_rgb[j] /= pow(param->cam.ray.mod / 2000, 2);
+			rgb_to_hex(param->cam.ray.ray_rgb, &param->cam.ray.ray_c);
 			return (1);
-		dist = sp_dist(param);
+		}
+		dist = obj_dist(param);
 	}
-	param->cam.ray.ray_c = 0x2B2B2B;
+	param->cam.ray.ray_c = 0;
 	return (0);
 }
 
@@ -96,13 +136,14 @@ int		is_hit(t_data *param)
 	while (dist > 0.001)
 	{
 		tray += dist;
-		if (tray > 20000)
+		if (tray > 2147483)
 			return (0);
 		j = -1;
 		while (++j < 3)
 			param->cam.ray.O[j] += param->cam.ray.V[j] * dist;
-		dist = sp_dist(param);
+		dist = obj_dist(param);
 	}
 	param->cam.ray.ray_c = param->cam.ray.obj_c;
+	hex_to_rgb(param->cam.ray.obj_c, param->cam.ray.ray_rgb);
 	return (1);
 }
