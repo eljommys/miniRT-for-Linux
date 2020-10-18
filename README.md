@@ -13,4 +13,4 @@ cd mk1 && make test
 ```
 ## Preview
 
-![alt text](https://imgur.com/ehlvCTL)
+![Preview](./image.png)
