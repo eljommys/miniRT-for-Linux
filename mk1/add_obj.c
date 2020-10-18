@@ -6,13 +6,13 @@
 /*   By: jserrano <jserrano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/17 13:47:12 by jserrano          #+#    #+#             */
-/*   Updated: 2020/10/17 13:48:00 by jserrano         ###   ########.fr       */
+/*   Updated: 2020/10/17 23:22:13 by jserrano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "raymarching.h"
 
-t_sphere	**add_sp(t_sphere **sp, double *O, double r)
+t_sphere	**add_sp(t_sphere **sp, double *O, double r, int c)
 {
 	t_sphere	**aux;
 	int			len;
@@ -34,12 +34,14 @@ t_sphere	**add_sp(t_sphere **sp, double *O, double r)
 			while (++j < 3)
 				aux[i]->O[j] = sp[i]->O[j];
 			aux[i]->r = sp[i]->r;
+			aux[i]->col = sp[i]->col;
 		}
 		else
 		{
 			while (++j < 3)
 				aux[i]->O[j] = O[j];
 			aux[i]->r = r;
+			aux[i]->col = c;
 		}
 	}
 	aux[i] = 0;
@@ -51,7 +53,7 @@ t_sphere	**add_sp(t_sphere **sp, double *O, double r)
 	return (aux);
 }
 
-t_light		**add_l(t_light **l, double *O)
+t_light		**add_l(t_light **l, double *O, int c)
 {
 	t_light		**aux;
 	int			len;
@@ -69,11 +71,17 @@ t_light		**add_l(t_light **l, double *O)
 		aux[i] = (t_light *)malloc(sizeof(t_light));
 		j = -1;
 		if (i < len)
+		{
 			while (++j < 3)
 				aux[i]->O[j] = l[i]->O[j];
+			aux[i]->col = l[i]->col;
+		}
 		else
+		{
 			while (++j < 3)
 				aux[i]->O[j] = O[j];
+			aux[i]->col = c;
+		}
 	}
 	aux[i] = 0;
 	i = 0;

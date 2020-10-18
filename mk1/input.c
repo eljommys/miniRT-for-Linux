@@ -6,7 +6,7 @@
 /*   By: jserrano <jserrano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/17 13:25:20 by jserrano          #+#    #+#             */
-/*   Updated: 2020/10/17 13:29:48 by jserrano         ###   ########.fr       */
+/*   Updated: 2020/10/17 23:39:03 by jserrano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,9 @@ int		get_pos(int x, int y, t_data *param)
 
 		printf("X: %d, Y: %d\n", param->crd.x, param->crd.y);
 		printf("Screen dist: %f\n", param->scr.dist);
-		printf("Vn[x]: %f, Vn[y]: %f, Vn[z]: %f\n\n\n", param->cam.Vn[0], param->cam.Vn[1], param->cam.Vn[2]);
+		printf("Vn[x]: %f, Vn[y]: %f, Vn[z]: %f\n", param->cam.Vn[0], param->cam.Vn[1], param->cam.Vn[2]);
 		printf("O = (%f, %f, %f)\n", param->cam.O[0], param->cam.O[1], param->cam.O[2]);
+		printf("color bola grande = %x\n\n\n", param->sp[0]->col);
 	}
 	return (0);
 }
@@ -76,6 +77,7 @@ int		key_pressed(int keycode, t_data *param)
 {
 	int	j;
 
+	param->key = keycode;
 	j = -1;
 	if (keycode == KEY_ESC)
 		ft_exit(param->id);
@@ -95,6 +97,9 @@ int		key_pressed(int keycode, t_data *param)
 		param->cam.O[2] += 10;
 	else if (keycode == KEY_CTR)
 		param->cam.O[2] += -10;
+	else if (keycode == KEY_ENT)
+		show_sp(param);
+	printf("key = %x\n", keycode);
 	calculate_rotation(param);
 	calculate_vectors(param);
 	return (0);

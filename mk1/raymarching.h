@@ -36,6 +36,7 @@
 # define KEY_D		0x0064
 # define KEY_SPA	0x0020
 # define KEY_CTR	0xffe3
+# define KEY_ENT	0xff0d
 
 # include <stdlib.h>
 # include <stdio.h>
@@ -63,6 +64,14 @@ typedef struct	s_screen{
 	double	dist;
 }				t_screen;
 
+typedef struct	s_ray{
+	double	V[3];
+	double	O[3];
+	double	mod;
+	int		obj_c;
+	int		ray_c;
+}				t_ray;
+
 typedef struct	s_camera{
 	double	O[3];
 	double	P[3];
@@ -71,9 +80,7 @@ typedef struct	s_camera{
 	double	Vy[3];
 	double	rot_z;
 	double	rot_y;
-	double	ray[3];
-	double	ray_module;
-	double	pixel[3];
+	t_ray	ray;
 }				t_camera;
 
 typedef struct	s_image{
@@ -87,12 +94,12 @@ typedef struct	s_image{
 typedef struct	s_sphere{
 	double	O[3];
 	double	r;
-	int		color;
+	int		col;
 }				t_sphere;
 
 typedef struct	s_light{
 	double	O[3];
-	int		color;
+	int		col;
 }				t_light;
 
 typedef struct	s_data{
@@ -145,8 +152,8 @@ void 	calculate_rotation(t_data *param);
 **	add_obj.c
 */
 
-t_sphere	**add_sp(t_sphere **sp, double *O, double r);
-t_light		**add_l(t_light **l, double *O);
+t_sphere	**add_sp(t_sphere **sp, double *O, double r, int c);
+t_light		**add_l(t_light **l, double *O, int c);
 
 /*
 **	raymarching.c
@@ -154,6 +161,7 @@ t_light		**add_l(t_light **l, double *O);
 
 void	gen_ray(t_data *param, int x, int y, int boolean);
 int		is_hit(t_data *param);
+int		bounce_ray(t_data *param);
 
 /*
 **	test_func.c

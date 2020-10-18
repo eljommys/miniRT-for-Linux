@@ -6,7 +6,7 @@
 /*   By: jserrano <jserrano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/17 13:38:01 by jserrano          #+#    #+#             */
-/*   Updated: 2020/10/17 14:10:44 by jserrano         ###   ########.fr       */
+/*   Updated: 2020/10/17 23:42:53 by jserrano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,22 +77,30 @@ void	ft_init(t_data *param)
 	double p[3];
 	double p1[3];
 	double p2[3];
+	double p3[3];
 
-	p[0] = 1000;
-	p[1] = 0;
+	p[0] = 1500;
+	p[1] = 1500;
 	p[2] = 0;
+
 	p1[0] = 500;
 	p1[1] = 500;
-	p1[2] = 500;
+	p1[2] = 0;
+
 	p2[0] = -500;
 	p2[1] = -500;
-	p2[2] = -500;
+	p2[2] = 0;
+
+	p3[0] = 3500;
+	p3[1] = -3500;
+	p3[2] = -1000;
 
 	mouse_init(param);
 	screen_init(param);
 	vectors_init(param);
 	objs_init(param);
-	param->sp = add_sp(param->sp, p, 500);
-	param->sp = add_sp(param->sp, p1, 250);
-	param->l = add_l(param->l, p2);
+	param->sp = add_sp(param->sp, p, 500, 0xF58C72);
+	param->sp = add_sp(param->sp, p1, 100, 0x85B5E6);
+	param->sp = add_sp(param->sp, p3, 3000, 0xAAF572);
+	param->l = add_l(param->l, p2, 0xFFFFFF);
 }
