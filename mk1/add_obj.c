@@ -73,13 +73,17 @@ t_light		**add_l(t_light **l, double *O, int c)
 		if (i < len)
 		{
 			while (++j < 3)
+			{
 				aux[i]->O[j] = l[i]->O[j];
+				aux[i]->rgb[j] = l[i]->rgb[j];
+			}
 			aux[i]->col = l[i]->col;
 		}
 		else
 		{
 			while (++j < 3)
 				aux[i]->O[j] = O[j];
+			hex_to_rgb(c, (int *)aux[i]->rgb);
 			aux[i]->col = c;
 		}
 	}

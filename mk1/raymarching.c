@@ -90,7 +90,7 @@ double	obj_dist(t_data *param)
 	dist = (aux < dist) ? aux : dist;
 }
 
-int		bounce_ray(t_data *param)
+int		bounce_ray(t_data *param, int i)
 {
 	double	dist;
 	double	tray;
@@ -98,7 +98,10 @@ int		bounce_ray(t_data *param)
 
 	j = -1;
 	while (++j < 3)
-		param->cam.ray.V[j] = param->l[0]->O[j] - param->cam.ray.O[j];
+	{
+		param->cam.ray.O[j] = param->cam.ray.O_prev[j];
+		param->cam.ray.V[j] = param->l[i]->O[j] - param->cam.ray.O[j];
+	}
 	param->cam.ray.mod = mod(param->cam.ray.V);
 	j = -1;
 	while (++j < 3)
@@ -115,13 +118,11 @@ int		bounce_ray(t_data *param)
 		{
 			j = -1;
 			while (++j < 3)
-				param->cam.ray.ray_rgb[j] /= pow(param->cam.ray.mod / 2000, 2);
-			rgb_to_hex(param->cam.ray.ray_rgb, &param->cam.ray.ray_c);
+				param->cam.ray.ray_rgb_l[j] += param->l[i]->rgb[j] / pow(param->cam.ray.mod / 2000, 2);
 			return (1);
 		}
 		dist = obj_dist(param);
 	}
-	param->cam.ray.ray_c = 0;
 	return (0);
 }
 
@@ -133,6 +134,9 @@ int		is_hit(t_data *param)
 
 	dist = 2;
 	tray = 0;
+	j = -1;
+	while (++j < 3)
+		param->cam.ray.ray_rgb_l[j] = 0;
 	while (dist > 0.001)
 	{
 		tray += dist;
@@ -143,7 +147,9 @@ int		is_hit(t_data *param)
 			param->cam.ray.O[j] += param->cam.ray.V[j] * dist;
 		dist = obj_dist(param);
 	}
-	param->cam.ray.ray_c = param->cam.ray.obj_c;
-	hex_to_rgb(param->cam.ray.obj_c, param->cam.ray.ray_rgb);
+	hex_to_rgb(param->cam.ray.obj_c, param->cam.ray.ray_rgb_o);
+	j = -1;
+	while (++j < 3)
+		param->cam.ray.O_prev[j] = param->cam.ray.O[j];
 	return (1);
 }

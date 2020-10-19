@@ -166,6 +166,7 @@ void	show_sp(t_data *param)
 {
 	int x;
 	int y;
+	int i;
 	int step;
 	double dist;
 	int color;
@@ -182,7 +183,13 @@ void	show_sp(t_data *param)
 				gen_ray(param, x, y, 1);
 				if (is_hit(param))
 				{
-					bounce_ray(param);
+					i = -1;
+					while (param->l[++i])
+						bounce_ray(param, i);
+					i = -1;
+					while (++i < 3)
+						param->cam.ray.ray_rgb_o[i] *= (double)param->cam.ray.ray_rgb_l[i] / 255;
+					rgb_to_hex(param->cam.ray.ray_rgb_o, &param->cam.ray.ray_c);
 					my_mlx_pixel_put(param, x, y, param->cam.ray.ray_c);
 				}
 			else

@@ -43,6 +43,11 @@ double	mod(double *v)
 
 void	rgb_to_hex(int *rgb, int *hex)
 {
+	int i;
+
+	i = -1;
+	while (++i < 3)
+		rgb[i] = (rgb[i] > 255) ? 255 : rgb[i];
 	*hex = rgb[0] * 65536 + rgb[1] * 256 + rgb[2];
 }
 

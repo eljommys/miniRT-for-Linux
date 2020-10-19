@@ -45,7 +45,6 @@ void		vectors_init(t_data *param)
 	param->cam.Vn[0] = 1;
 	param->cam.Vn[1] = 0;
 	param->cam.Vn[2] = 0;
-	param->cam.ray.ray_rgb = (int *)malloc(sizeof(int) * 3);
 	module = mod(param->cam.Vn);
 	i = -1;
 	while (++i < 3)
@@ -79,7 +78,8 @@ void	ft_init(t_data *param)
 {
 	double p[3];
 	double p1[3];
-	double p2[3];
+	double l0[3];
+	double l1[3];
 	double p3[3];
 	double v[3];
 
@@ -95,9 +95,13 @@ void	ft_init(t_data *param)
 	p1[1] = 500;
 	p1[2] = 0;
 
-	p2[0] = -500;
-	p2[1] = -500;
-	p2[2] = 1000;
+	l0[0] = -500;
+	l0[1] = -500;
+	l0[2] = 1000;
+
+	l1[0] = -500;
+	l1[1] = 500;
+	l1[2] = 1000;
 
 	p3[0] = 3500;
 	p3[1] = -3500;
@@ -111,5 +115,6 @@ void	ft_init(t_data *param)
 	param->sp = add_sp(param->sp, p, 500, 0x00FF00);
 	param->sp = add_sp(param->sp, p3, 3000, 0xFF0000);
 	param->pl = add_pl(param->pl, p3, v, 0xFFFFFF);
-	param->l = add_l(param->l, p2, 0xFFFFFF);
+	param->l = add_l(param->l, l1, 0xFF00FF);
+	param->l = add_l(param->l, l0, 0xFFFF00);
 }

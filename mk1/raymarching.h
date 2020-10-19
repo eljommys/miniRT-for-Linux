@@ -67,11 +67,14 @@ typedef struct	s_screen{
 typedef struct	s_ray{
 	double	V[3];
 	double	O[3];
+	double	O_prev[3];
 	double	mod;
 	int		obj_c;
 	int		obj_n;
+	int		ray_c_prev;
 	int		ray_c;
-	int		*ray_rgb;
+	int		ray_rgb_l[3];
+	int		ray_rgb_o[3];
 	double	intens;
 }				t_ray;
 
@@ -109,6 +112,7 @@ typedef struct	s_plane{
 typedef struct	s_light{
 	double	O[3];
 	int		col;
+	int		rgb[3];
 }				t_light;
 
 typedef struct	s_data{
@@ -175,7 +179,7 @@ t_light		**add_l(t_light **l, double *O, int c);
 
 void	gen_ray(t_data *param, int x, int y, int boolean);
 int		is_hit(t_data *param);
-int		bounce_ray(t_data *param);
+int		bounce_ray(t_data *param, int i);
 
 /*
 **	test_func.c
