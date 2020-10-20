@@ -6,7 +6,7 @@
 /*   By: jserrano <jserrano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/01 09:38:55 by jserrano          #+#    #+#             */
-/*   Updated: 2020/10/20 11:31:25 by jserrano         ###   ########.fr       */
+/*   Updated: 2020/10/20 23:07:02 by jserrano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ int		is_hit(t_data *param)
 	while (dist > 0.001)
 	{
 		tray += dist;
-		if (tray > 2147483)
+		if (tray > 21474)
 			return (0);
 		j = -1;
 		while (++j < 3)
