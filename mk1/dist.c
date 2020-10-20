@@ -6,7 +6,7 @@
 /*   By: jserrano <jserrano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/20 11:30:12 by jserrano          #+#    #+#             */
-/*   Updated: 2020/10/20 15:52:48 by jserrano         ###   ########.fr       */
+/*   Updated: 2020/10/20 15:53:14 by jserrano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ static double	pl_dist(t_data *param)
 	return (dist);
 }
 
-static double	cy_dist(t_data *param)
+/*static double	cy_dist(t_data *param)
 {
 	double	axis[3];
 	double	axis_d;
@@ -72,7 +72,7 @@ static double	cy_dist(t_data *param)
 		axis[0] = (param->cam.ray.O[0] - param->cy[i]->O[0] - pow(param->cy[i]->v[0], 2) * () //distancia de un punto a una recta
 
 	}
-}
+}*/
 
 double			obj_dist(t_data *param)
 {
