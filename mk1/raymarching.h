@@ -113,6 +113,8 @@ typedef struct	s_plane{
 typedef struct	s_cylinder{
 	double	O[3];
 	double	v[3];
+	double	h;
+	double	d;
 	int		col;
 }				t_cylinder;
 
@@ -159,6 +161,7 @@ void	my_mlx_pixel_put(t_data *param, int x, int y, int color);
 double	mod(double *v);
 void	rgb_to_hex(int *rgb, int *hex);
 void	*hex_to_rgb(int hex, int *rgb);
+double	max(double a, double b);
 
 /*
 **	init.c
@@ -181,6 +184,7 @@ void 	calculate_rotation(t_data *param);
 
 t_sphere	**add_sp(t_sphere **sp, double *O, double r, int c);
 t_plane		**add_pl(t_plane **pl, double *O, double *v, int c);
+t_cylinder	**add_cy(t_cylinder **cy, double *O, double *v, double h, double d, int c);
 t_light		**add_l(t_light **l, double *O, int c);
 
 /*

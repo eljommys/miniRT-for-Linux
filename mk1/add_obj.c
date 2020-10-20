@@ -6,7 +6,7 @@
 /*   By: jserrano <jserrano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/17 13:47:12 by jserrano          #+#    #+#             */
-/*   Updated: 2020/10/20 14:28:42 by jserrano         ###   ########.fr       */
+/*   Updated: 2020/10/20 17:29:51 by jserrano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,7 +145,7 @@ t_plane	**add_pl(t_plane **pl, double *O, double *v, int c)
 	return (aux);
 }
 
-t_cylinder	**add_cy(t_plane **cy, double *O, double *v, int c)
+t_cylinder	**add_cy(t_cylinder **cy, double *O, double *v, double h, double d, int c)
 {
 	t_cylinder	**aux;
 	double		Vn[3];
@@ -174,6 +174,8 @@ t_cylinder	**add_cy(t_plane **cy, double *O, double *v, int c)
 				aux[i]->v[j] = cy[i]->v[j];
 			}
 			aux[i]->col = cy[i]->col;
+			aux[i]->d = cy[i]->d;
+			aux[i]->h = cy[i]->h;
 		}
 		else
 		{
@@ -183,6 +185,8 @@ t_cylinder	**add_cy(t_plane **cy, double *O, double *v, int c)
 				aux[i]->v[j] = Vn[j];
 			}
 			aux[i]->col = c;
+			aux[i]->d = d;
+			aux[i]->h = h;
 		}
 	}
 	aux[i] = 0;

@@ -6,7 +6,7 @@
 /*   By: jserrano <jserrano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/17 13:25:20 by jserrano          #+#    #+#             */
-/*   Updated: 2020/10/20 14:02:40 by jserrano         ###   ########.fr       */
+/*   Updated: 2020/10/20 17:46:25 by jserrano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@ int		get_pos(int x, int y, t_data *param)
 int		button_pressed(int button, int x, int y, t_data *param)
 {
 	param->button = button;
+	if (param->key == KEY_ENT)
+		param->key = 0;
 	if (button == 1)
 	{
 		mlx_mouse_hide(param->id, param->win_id);

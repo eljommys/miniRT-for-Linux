@@ -6,7 +6,7 @@
 /*   By: jserrano <jserrano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/17 13:38:01 by jserrano          #+#    #+#             */
-/*   Updated: 2020/10/20 12:45:48 by jserrano         ###   ########.fr       */
+/*   Updated: 2020/10/20 18:11:27 by jserrano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,30 +70,33 @@ static void		objs_init(t_data *param)
 	param->sp[0] = 0;
 	param->pl = (t_plane **)malloc(sizeof(t_plane *));
 	param->pl[0] = 0;
+	param->cy = (t_cylinder **)malloc(sizeof(t_cylinder *));
+	param->cy[0] = 0;
 	param->l = (t_light **)malloc(sizeof(t_light *));
 	param->l[0] = 0;
 }
 
 void	ft_init(t_data *param)
 {
-	double p[3];
+	double p0[3];
 	double p1[3];
+	double p3[3];
 	double l0[3];
 	double l1[3];
-	double p3[3];
-	double v[3];
+	double v0[3];
+	double v1[3];
 
-	p[0] = 1500;
-	p[1] = 1500;
-	p[2] = 0;
-
-	v[0] = 0;
-	v[1] = 1;
-	v[2] = 1;
+	p0[0] = 1500;
+	p0[1] = 1500;
+	p0[2] = 0;
 
 	p1[0] = 500;
 	p1[1] = 500;
 	p1[2] = 0;
+
+	p3[0] = 3500;
+	p3[1] = -3500;
+	p3[2] = -1000;
 
 	l0[0] = -500;
 	l0[1] = -500;
@@ -103,18 +106,23 @@ void	ft_init(t_data *param)
 	l1[1] = 500;
 	l1[2] = 1000;
 
-	p3[0] = 3500;
-	p3[1] = -3500;
-	p3[2] = -1000;
+	v0[0] = 0;
+	v0[1] = 1;
+	v0[2] = 1;
+
+	v1[0] = 0;
+	v1[1] = 0;
+	v1[2] = 1;
 
 	mouse_init(param);
 	screen_init(param);
 	vectors_init(param);
 	objs_init(param);
-	param->sp = add_sp(param->sp, p1, 100, 0xdc8c2e);
-	param->sp = add_sp(param->sp, p, 500, 0xb15a76);
+	//param->cy = add_cy(param->cy, p1, v1, 200, 300, 0xdc8c2e);
+	param->sp = add_sp(param->sp, p0, 500, 0xb15a76);
 	param->sp = add_sp(param->sp, p3, 3000, 0x8abb76);
-	param->pl = add_pl(param->pl, p3, v, 0xFF00FF);
+	param->pl = add_pl(param->pl, p3, v0, 0xFF00FF);
+	param->pl = add_pl(param->pl, p3, v1, 0xFFFFFF);
 	param->l = add_l(param->l, l1, 0xe6c47c);
 	param->l = add_l(param->l, l0, 0xb3c4bd);
 	param->amb_l = 0x727cbd;
