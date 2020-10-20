@@ -65,14 +65,15 @@ typedef struct	s_screen{
 }				t_screen;
 
 typedef struct	s_ray{
-	double	V[3];
+	double	V_o[3];
+	double	V_l[3];
 	double	O[3];
 	double	O_prev[3];
 	double	mod;
 	int		obj_c;
 	int		obj_n;
-	int		ray_c_prev;
 	int		ray_c;
+	int		ray_rgb[3];
 	int		ray_rgb_l[3];
 	int		ray_rgb_o[3];
 	double	intens;
@@ -109,6 +110,12 @@ typedef struct	s_plane{
 	int		col;
 }				t_plane;
 
+typedef struct	s_cylinder{
+	double	O[3];
+	double	v[3];
+	int		col;
+}				t_cylinder;
+
 typedef struct	s_light{
 	double	O[3];
 	int		col;
@@ -127,7 +134,10 @@ typedef struct	s_data{
 	t_image		img;
 	t_sphere	**sp;
 	t_plane		**pl;
+	t_cylinder	**cy;
 	t_light		**l;
+	int			amb_l;
+	int			amb_l_rgb[3];
 }				t_data;
 
 /*
@@ -187,6 +197,12 @@ int		bounce_ray(t_data *param, int i);
 
 void	show_camera(t_data *param);
 void	show_pov(t_data *param);
-void	show_sp(t_data *param);
+void	show_obj(t_data *param);
+
+/*
+**	dist.c
+*/
+
+double	obj_dist(t_data *param);
 
 #endif

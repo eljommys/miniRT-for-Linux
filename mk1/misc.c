@@ -6,7 +6,7 @@
 /*   By: jserrano <jserrano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/17 13:34:14 by jserrano          #+#    #+#             */
-/*   Updated: 2020/10/18 16:43:35 by jserrano         ###   ########.fr       */
+/*   Updated: 2020/10/20 14:01:38 by jserrano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int ft_loop(t_data *param)
 {
-	show_sp(param);
+	show_obj(param);
 	//show_pov(param);
 	//show_camera(param);
 	return (0);
@@ -59,7 +59,13 @@ void	*hex_to_rgb(int hex, int *rgb)
 	while (--i >= 0)
 	{
 		rgb[i] = hex % 256;
-		//rgb[i] = (rgb[i] < 1) ? 0 : rgb[i];
 		hex /= 256;
 	}
+}
+
+double	max(double a, double b)
+{
+	if (a < b)
+		return (b);
+	return (a);
 }

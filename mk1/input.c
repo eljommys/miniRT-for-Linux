@@ -6,7 +6,7 @@
 /*   By: jserrano <jserrano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/17 13:25:20 by jserrano          #+#    #+#             */
-/*   Updated: 2020/10/17 23:39:03 by jserrano         ###   ########.fr       */
+/*   Updated: 2020/10/20 14:02:40 by jserrano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ int		key_pressed(int keycode, t_data *param)
 	else if (keycode == KEY_CTR)
 		param->cam.O[2] += -10;
 	else if (keycode == KEY_ENT)
-		show_sp(param);
+		show_obj(param);
 	printf("key = %x\n", keycode);
 	calculate_rotation(param);
 	calculate_vectors(param);

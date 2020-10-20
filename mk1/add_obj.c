@@ -6,7 +6,7 @@
 /*   By: jserrano <jserrano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/17 13:47:12 by jserrano          #+#    #+#             */
-/*   Updated: 2020/10/18 12:52:45 by jserrano         ###   ########.fr       */
+/*   Updated: 2020/10/20 14:28:42 by jserrano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,7 @@ t_light		**add_l(t_light **l, double *O, int c)
 t_plane	**add_pl(t_plane **pl, double *O, double *v, int c)
 {
 	t_plane		**aux;
+	double		Vn[3];
 	int			len;
 	int			i;
 	int			j;
@@ -108,6 +109,9 @@ t_plane	**add_pl(t_plane **pl, double *O, double *v, int c)
 		len++;
 	if (!(aux = (t_plane **)malloc(sizeof(t_plane *) * (len + 2))))
 		return (pl);
+	i = -1;
+	while (++i < 3)
+		Vn[i] = v[i] / mod(v);
 	i = -1;
 	while(++i < len + 1)
 	{
@@ -127,7 +131,7 @@ t_plane	**add_pl(t_plane **pl, double *O, double *v, int c)
 			while (++j < 3)
 			{
 				aux[i]->O[j] = O[j];
-				aux[i]->v[j] = v[j];
+				aux[i]->v[j] = Vn[j];
 			}
 			aux[i]->col = c;
 		}
@@ -138,5 +142,54 @@ t_plane	**add_pl(t_plane **pl, double *O, double *v, int c)
 		while (pl[i])
 			free(pl[i++]);
 	free(pl);
+	return (aux);
+}
+
+t_cylinder	**add_cy(t_plane **cy, double *O, double *v, int c)
+{
+	t_cylinder	**aux;
+	double		Vn[3];
+	int			len;
+	int			i;
+	int			j;
+
+	len = 0;
+	while (cy[len])
+		len++;
+	if (!(aux = (t_cylinder **)malloc(sizeof(t_cylinder *) * (len + 2))))
+		return (cy);
+	i = -1;
+	while (++i < 3)
+		Vn[i] = v[i] / mod(v);
+	i = -1;
+	while(++i < len + 1)
+	{
+		aux[i] = (t_cylinder *)malloc(sizeof(t_cylinder));
+		j = -1;
+		if (i < len)
+		{
+			while (++j < 3)
+			{
+				aux[i]->O[j] = cy[i]->O[j];
+				aux[i]->v[j] = cy[i]->v[j];
+			}
+			aux[i]->col = cy[i]->col;
+		}
+		else
+		{
+			while (++j < 3)
+			{
+				aux[i]->O[j] = O[j];
+				aux[i]->v[j] = Vn[j];
+			}
+			aux[i]->col = c;
+		}
+	}
+	aux[i] = 0;
+	i = 0;
+	if (len)
+		while (cy[i])
+			free(cy[i++]);
+	free(cy);
 	return (aux);
 }

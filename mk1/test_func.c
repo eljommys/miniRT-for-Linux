@@ -6,7 +6,7 @@
 /*   By: jserrano <jserrano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/17 13:45:20 by jserrano          #+#    #+#             */
-/*   Updated: 2020/10/18 11:21:26 by jserrano         ###   ########.fr       */
+/*   Updated: 2020/10/20 14:01:52 by jserrano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,18 +121,18 @@ void	show_pov(t_data *param)
 		while (x < param->scr.x)
 		{
 			gen_ray(param, x, y, 0);
-			if (param->cam.ray.V[2] < 0)
+			if (param->cam.ray.V_o[2] < 0)
 			{
-				if (param->cam.ray.V[1] < 0)
+				if (param->cam.ray.V_o[1] < 0)
 				{
-					if (param->cam.ray.V[0] < 0)
+					if (param->cam.ray.V_o[0] < 0)
 						my_mlx_pixel_put(param, x, y, 0x864545);
 					else
 						my_mlx_pixel_put(param, x, y, 0x858645);
 				}
 				else
 				{
-					if (param->cam.ray.V[0] < 0)
+					if (param->cam.ray.V_o[0] < 0)
 						my_mlx_pixel_put(param, x, y, 0x458686);
 					else
 						my_mlx_pixel_put(param, x, y, 0x864581);
@@ -140,16 +140,16 @@ void	show_pov(t_data *param)
 			}
 			else
 			{
-				if (param->cam.ray.V[1] < 0)
+				if (param->cam.ray.V_o[1] < 0)
 				{
-					if (param->cam.ray.V[0] < 0)
+					if (param->cam.ray.V_o[0] < 0)
 						my_mlx_pixel_put(param, x, y, 0xFF5A5A);
 					else
 						my_mlx_pixel_put(param, x, y, 0xFFFF5A);
 				}
 				else
 				{
-					if (param->cam.ray.V[0] < 0)
+					if (param->cam.ray.V_o[0] < 0)
 						my_mlx_pixel_put(param, x, y, 0x5AFAFF);
 					else
 						my_mlx_pixel_put(param, x, y, 0xFF5AFF);
@@ -162,7 +162,7 @@ void	show_pov(t_data *param)
 	mlx_put_image_to_window(param->id, param->win_id, param->img.img, 0, 0);
 }
 
-void	show_sp(t_data *param)
+void	show_obj(t_data *param)
 {
 	int x;
 	int y;
@@ -171,7 +171,7 @@ void	show_sp(t_data *param)
 	double dist;
 	int color;
 
-	step = (param->key == KEY_ENT) ? 1 : 8;
+	step = (param->key == KEY_ENT) ? 1 : 15;
 	y = -1;
 	while (++y < param->scr.y)
 	{
@@ -181,6 +181,7 @@ void	show_sp(t_data *param)
 			if (!(x % step) && !(y % step))
 			{
 				gen_ray(param, x, y, 1);
+				param->cam.ray.ray_c = param->amb_l;
 				if (is_hit(param))
 				{
 					i = -1;
@@ -188,12 +189,11 @@ void	show_sp(t_data *param)
 						bounce_ray(param, i);
 					i = -1;
 					while (++i < 3)
-						param->cam.ray.ray_rgb_o[i] *= (double)param->cam.ray.ray_rgb_l[i] / 255;
-					rgb_to_hex(param->cam.ray.ray_rgb_o, &param->cam.ray.ray_c);
-					my_mlx_pixel_put(param, x, y, param->cam.ray.ray_c);
+						param->cam.ray.ray_rgb[i] = (param->cam.ray.ray_rgb_o[i] * (double)param->cam.ray.ray_rgb_l[i] / 255) +
+													(param->cam.ray.ray_rgb_o[i] * (double)param->amb_l_rgb[i] / 255);
+					rgb_to_hex(param->cam.ray.ray_rgb, &param->cam.ray.ray_c);
 				}
-			else
-				my_mlx_pixel_put(param, x, y, 0);
+				my_mlx_pixel_put(param, x, y, param->cam.ray.ray_c);
 			}
 			else
 				my_mlx_pixel_put(param, x, y, 0);

@@ -6,7 +6,7 @@
 /*   By: jserrano <jserrano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/17 13:38:01 by jserrano          #+#    #+#             */
-/*   Updated: 2020/10/18 17:05:56 by jserrano         ###   ########.fr       */
+/*   Updated: 2020/10/20 12:45:48 by jserrano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ void	ft_init(t_data *param)
 	p[2] = 0;
 
 	v[0] = 0;
-	v[1] = 0;
+	v[1] = 1;
 	v[2] = 1;
 
 	p1[0] = 500;
@@ -111,10 +111,12 @@ void	ft_init(t_data *param)
 	screen_init(param);
 	vectors_init(param);
 	objs_init(param);
-	param->sp = add_sp(param->sp, p1, 100, 0x0000FF);
-	param->sp = add_sp(param->sp, p, 500, 0x00FF00);
-	param->sp = add_sp(param->sp, p3, 3000, 0xFF0000);
-	param->pl = add_pl(param->pl, p3, v, 0xFFFFFF);
-	param->l = add_l(param->l, l1, 0xFF00FF);
-	param->l = add_l(param->l, l0, 0xFFFF00);
+	param->sp = add_sp(param->sp, p1, 100, 0xdc8c2e);
+	param->sp = add_sp(param->sp, p, 500, 0xb15a76);
+	param->sp = add_sp(param->sp, p3, 3000, 0x8abb76);
+	param->pl = add_pl(param->pl, p3, v, 0xFF00FF);
+	param->l = add_l(param->l, l1, 0xe6c47c);
+	param->l = add_l(param->l, l0, 0xb3c4bd);
+	param->amb_l = 0x727cbd;
+	hex_to_rgb(param->amb_l, param->amb_l_rgb);
 }

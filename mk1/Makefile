@@ -1,5 +1,6 @@
 SRC	=	add_obj.c\
 		cam_calc.c\
+		dist.c\
 		init.c\
 		input.c\
 		misc.c\
@@ -8,6 +9,7 @@ SRC	=	add_obj.c\
 
 OBJ	=	add_obj.o\
 		cam_calc.o\
+		dist.o\
 		init.o\
 		input.o\
 		misc.o\
