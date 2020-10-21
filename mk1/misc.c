@@ -6,7 +6,7 @@
 /*   By: jserrano <jserrano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/17 13:34:14 by jserrano          #+#    #+#             */
-/*   Updated: 2020/10/20 14:01:38 by jserrano         ###   ########.fr       */
+/*   Updated: 2020/10/21 11:24:47 by jserrano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,3 +69,10 @@ double	max(double a, double b)
 		return (b);
 	return (a);
 }
+
+/*double	cross_prod(double *u, double *v, int i)
+{
+	double w[3];
+
+	w[0] =
+}*/

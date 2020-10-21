@@ -6,7 +6,7 @@
 /*   By: jserrano <jserrano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/20 11:30:12 by jserrano          #+#    #+#             */
-/*   Updated: 2020/10/21 01:28:27 by jserrano         ###   ########.fr       */
+/*   Updated: 2020/10/21 11:25:21 by jserrano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ static double	cy_dist(t_data *param) // me hace un prisma infinito. hacer una fu
 					(param->cam.ray.O[0] - param->cy[i]->O[0]) * param->cy[i]->v[2];
 		dy_v[2] =	(param->cam.ray.O[0] - param->cy[i]->O[0]) * param->cy[i]->v[1] -
 					(param->cam.ray.O[1] - param->cy[i]->O[1]) * param->cy[i]->v[0];
-		dy = 	mod(dy_v);
+		dy = 	mod(dy_v) / mod(param->cy[i]->v);
 		dx =	fabs(param->cy[i]->v[0] * param->cam.ray.O[0] +
 				param->cy[i]->v[1] * param->cam.ray.O[1] +
 				param->cy[i]->v[2] * param->cam.ray.O[2] -
