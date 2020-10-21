@@ -118,6 +118,13 @@ typedef struct	s_cylinder{
 	int		col;
 }				t_cylinder;
 
+typedef struct	s_square{
+	double	O[3];
+	double	v[3];
+	double	h;
+	int		col;
+}				t_square;
+
 typedef struct	s_light{
 	double	O[3];
 	int		col;
@@ -137,6 +144,7 @@ typedef struct	s_data{
 	t_sphere	**sp;
 	t_plane		**pl;
 	t_cylinder	**cy;
+	t_square	**sq;
 	t_light		**l;
 	int			amb_l;
 	int			amb_l_rgb[3];
@@ -162,6 +170,7 @@ double	mod(double *v);
 void	rgb_to_hex(int *rgb, int *hex);
 void	*hex_to_rgb(int hex, int *rgb);
 double	max(double a, double b);
+double	cross_prod(double *u, double *v, int i);
 
 /*
 **	init.c
@@ -186,6 +195,7 @@ t_sphere	**add_sp(t_sphere **sp, double *O, double r, int c);
 t_plane		**add_pl(t_plane **pl, double *O, double *v, int c);
 t_cylinder	**add_cy(t_cylinder **cy, double *O, double *v, double h, double d, int c);
 t_light		**add_l(t_light **l, double *O, int c);
+t_square	**add_sq(t_square **sq, double *O, double *v, double h, int c);
 
 /*
 **	raymarching.c

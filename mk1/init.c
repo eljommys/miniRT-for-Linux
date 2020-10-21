@@ -6,7 +6,7 @@
 /*   By: jserrano <jserrano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/17 13:38:01 by jserrano          #+#    #+#             */
-/*   Updated: 2020/10/20 23:24:57 by jserrano         ###   ########.fr       */
+/*   Updated: 2020/10/21 16:05:05 by jserrano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,8 @@ static void		objs_init(t_data *param)
 	param->pl[0] = 0;
 	param->cy = (t_cylinder **)malloc(sizeof(t_cylinder *));
 	param->cy[0] = 0;
+	param->sq = (t_square **)malloc(sizeof(t_square *));
+	param->sq[0] = 0;
 	param->l = (t_light **)malloc(sizeof(t_light *));
 	param->l[0] = 0;
 }
@@ -118,11 +120,11 @@ void	ft_init(t_data *param)
 	screen_init(param);
 	vectors_init(param);
 	objs_init(param);
-	param->cy = add_cy(param->cy, p1, v1, 200, 300, 0xdc8c2e);
+	param->cy = add_cy(param->cy, p1, v0, 200, 300, 0xdc8c2e);
 	param->sp = add_sp(param->sp, p0, 500, 0xb15a76);
 	param->sp = add_sp(param->sp, p3, 3000, 0x8abb76);
-	param->pl = add_pl(param->pl, p3, v0, 0xFF00FF);
-	param->pl = add_pl(param->pl, p3, v1, 0x101010);
+	param->pl = add_pl(param->pl, p3, v0, 0xCA8778);
+	param->pl = add_pl(param->pl, p3, v1, 0xC2E680);
 	param->l = add_l(param->l, l1, 0xe6c47c);
 	param->l = add_l(param->l, l0, 0xb3c4bd);
 	param->amb_l = 0x727cbd;

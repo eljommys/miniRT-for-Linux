@@ -6,7 +6,7 @@
 /*   By: jserrano <jserrano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/17 13:47:12 by jserrano          #+#    #+#             */
-/*   Updated: 2020/10/20 17:29:51 by jserrano         ###   ########.fr       */
+/*   Updated: 2020/10/21 15:27:02 by jserrano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,6 +145,57 @@ t_plane	**add_pl(t_plane **pl, double *O, double *v, int c)
 	return (aux);
 }
 
+t_square	**add_sq(t_square **sq, double *O, double *v, double h, int c)
+{
+	t_square	**aux;
+	double		Vn[3];
+	int			len;
+	int			i;
+	int			j;
+
+	len = 0;
+	while (sq[len])
+		len++;
+	if (!(aux = (t_square **)malloc(sizeof(t_square *) * (len + 2))))
+		return (sq);
+	i = -1;
+	while (++i < 3)
+		Vn[i] = v[i] / mod(v);
+	i = -1;
+	while(++i < len + 1)
+	{
+		aux[i] = (t_square *)malloc(sizeof(t_square));
+		j = -1;
+		if (i < len)
+		{
+			while (++j < 3)
+			{
+				aux[i]->O[j] = sq[i]->O[j];
+				aux[i]->v[j] = sq[i]->v[j];
+			}
+			aux[i]->h = sq[i]->h;
+			aux[i]->col = sq[i]->col;
+		}
+		else
+		{
+			while (++j < 3)
+			{
+				aux[i]->O[j] = O[j];
+				aux[i]->v[j] = Vn[j];
+			}
+			aux[i]->h = h;
+			aux[i]->col = c;
+		}
+	}
+	aux[i] = 0;
+	i = 0;
+	if (len)
+		while (sq[i])
+			free(sq[i++]);
+	free(sq);
+	return (aux);
+}
+
 t_cylinder	**add_cy(t_cylinder **cy, double *O, double *v, double h, double d, int c)
 {
 	t_cylinder	**aux;
@@ -197,3 +248,4 @@ t_cylinder	**add_cy(t_cylinder **cy, double *O, double *v, double h, double d, i
 	free(cy);
 	return (aux);
 }
+

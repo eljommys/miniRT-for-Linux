@@ -6,7 +6,7 @@
 /*   By: jserrano <jserrano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/20 11:30:12 by jserrano          #+#    #+#             */
-/*   Updated: 2020/10/21 11:25:21 by jserrano         ###   ########.fr       */
+/*   Updated: 2020/10/21 15:53:02 by jserrano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,40 +59,42 @@ static double	pl_dist(t_data *param)
 	return (dist);
 }
 
-static double	cy_dist(t_data *param) // me hace un prisma infinito. hacer una funcion que sea "double cross_prod(double *u, double *v, int i)" y devuelva el valor i de w
+static double	sq_dist(t_data *param)
 {
-	double	dy_v[3];
-	double	dy;
-	double	dx;
-	double	aux;
-	double	dist;
-	int		i;
-	int		j;
 
-	dist = 2147483647;
-	i = 0;
-	while (param->cy[i])
+}
+
+static double	cy_dist(t_data *param)
+{
+	double	PX[3];
+	double	dy_v[3];
+	double	d_xy[2];
+	double	a_d[2];
+	int		ij[2];
+
+	a_d[1] = 2147483647;
+	ij[0] = -1;
+	while (param->cy[++ij[0]])
 	{
-		dy_v[0] =	(param->cam.ray.O[1] - param->cy[i]->O[1]) * param->cy[i]->v[0] -
-					(param->cam.ray.O[2] - param->cy[i]->O[1]) * param->cy[i]->v[1];
-		dy_v[1] =	(param->cam.ray.O[2] - param->cy[i]->O[2]) * param->cy[i]->v[0] -
-					(param->cam.ray.O[0] - param->cy[i]->O[0]) * param->cy[i]->v[2];
-		dy_v[2] =	(param->cam.ray.O[0] - param->cy[i]->O[0]) * param->cy[i]->v[1] -
-					(param->cam.ray.O[1] - param->cy[i]->O[1]) * param->cy[i]->v[0];
-		dy = 	mod(dy_v) / mod(param->cy[i]->v);
-		dx =	fabs(param->cy[i]->v[0] * param->cam.ray.O[0] +
-				param->cy[i]->v[1] * param->cam.ray.O[1] +
-				param->cy[i]->v[2] * param->cam.ray.O[2] -
-				(param->cy[i]->v[0] * param->cy[i]->O[0] +
-				param->cy[i]->v[1] * param->cy[i]->O[1] +
-				param->cy[i]->v[2] * param->cy[i]->O[2]));
-		aux = sqrt(pow(max(dx - param->cy[i]->h / 2, 0), 2) +
-				pow(max(dy - param->cy[i]->d / 2, 0), 2));
-		param->cam.ray.obj_n = (aux < dist) ? i : param->cam.ray.obj_n;
-		dist = (aux < dist) ? aux : dist;
-		i++;
+		ij[1] = -1;
+		while (++ij[1] < 3)
+			PX[ij[1]] = param->cam.ray.O[ij[1]] - param->cy[ij[0]]->O[ij[1]];
+		ij[1] = -1;
+		while (++ij[1] < 3)
+			dy_v[ij[1]] = cross_prod(PX, param->cy[ij[0]]->v, ij[1]);
+		d_xy[1] = 	mod(dy_v) / mod(param->cy[ij[0]]->v);
+		d_xy[0] = fabs(param->cy[ij[0]]->v[0] * param->cam.ray.O[0] +
+				param->cy[ij[0]]->v[1] * param->cam.ray.O[1] +
+				param->cy[ij[0]]->v[2] * param->cam.ray.O[2] -
+				(param->cy[ij[0]]->v[0] * param->cy[ij[0]]->O[0] +
+				param->cy[ij[0]]->v[1] * param->cy[ij[0]]->O[1] +
+				param->cy[ij[0]]->v[2] * param->cy[ij[0]]->O[2]));
+		a_d[0] = sqrt(pow(max(d_xy[0] - param->cy[ij[0]]->h / 2, 0), 2) +
+				pow(max(d_xy[1] - param->cy[ij[0]]->d / 2, 0), 2));
+		param->cam.ray.obj_n = (a_d[0] < a_d[1]) ? ij[0] : param->cam.ray.obj_n;
+		a_d[1] = (a_d[0] < a_d[1]) ? a_d[0] : a_d[1];
 	}
-	return (dist);
+	return (a_d[1]);
 }
 
 double			obj_dist(t_data *param)
