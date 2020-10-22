@@ -6,7 +6,7 @@
 /*   By: jserrano <jserrano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/17 13:47:12 by jserrano          #+#    #+#             */
-/*   Updated: 2020/10/21 15:27:02 by jserrano         ###   ########.fr       */
+/*   Updated: 2020/10/22 16:25:58 by jserrano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -172,6 +172,8 @@ t_square	**add_sq(t_square **sq, double *O, double *v, double h, int c)
 			{
 				aux[i]->O[j] = sq[i]->O[j];
 				aux[i]->v[j] = sq[i]->v[j];
+				aux[i]->x[j] = sq[i]->x[j];
+				aux[i]->y[j] = sq[i]->y[j];
 			}
 			aux[i]->h = sq[i]->h;
 			aux[i]->col = sq[i]->col;
@@ -183,6 +185,15 @@ t_square	**add_sq(t_square **sq, double *O, double *v, double h, int c)
 				aux[i]->O[j] = O[j];
 				aux[i]->v[j] = Vn[j];
 			}
+			aux[i]->x[0] = 0;
+			aux[i]->x[1] = -Vn[2];
+			aux[i]->x[2] = Vn[1];
+			j = -1;
+			while (++j < 3)
+				aux[i]->y[j] = cross_prod(Vn, aux[i]->x, j);
+			j = -1;
+			while (++j < 3)
+				aux[i]->y[j] /= mod(aux[i]->y);
 			aux[i]->h = h;
 			aux[i]->col = c;
 		}
@@ -196,7 +207,8 @@ t_square	**add_sq(t_square **sq, double *O, double *v, double h, int c)
 	return (aux);
 }
 
-t_cylinder	**add_cy(t_cylinder **cy, double *O, double *v, double h, double d, int c)
+t_cylinder	**add_cy(t_cylinder **cy, double *O, double *v, double h, double d,
+					int c)
 {
 	t_cylinder	**aux;
 	double		Vn[3];
@@ -249,3 +261,64 @@ t_cylinder	**add_cy(t_cylinder **cy, double *O, double *v, double h, double d, i
 	return (aux);
 }
 
+t_box	**add_bx(t_box **bx, double *O, double *v, double h, int c)
+{
+	t_box		**aux;
+	double		Vn[3];
+	int			len;
+	int			i;
+	int			j;
+
+	len = 0;
+	while (bx[len])
+		len++;
+	if (!(aux = (t_box **)malloc(sizeof(t_box *) * (len + 2))))
+		return (bx);
+	i = -1;
+	while (++i < 3)
+		Vn[i] = v[i] / mod(v);
+	i = -1;
+	while(++i < len + 1)
+	{
+		aux[i] = (t_box *)malloc(sizeof(t_box));
+		j = -1;
+		if (i < len)
+		{
+			while (++j < 3)
+			{
+				aux[i]->O[j] = bx[i]->O[j];
+				aux[i]->v[j] = bx[i]->v[j];
+				aux[i]->x[j] = bx[i]->x[j];
+				aux[i]->y[j] = bx[i]->y[j];
+			}
+			aux[i]->h = bx[i]->h;
+			aux[i]->col = bx[i]->col;
+		}
+		else
+		{
+			while (++j < 3)
+			{
+				aux[i]->O[j] = O[j];
+				aux[i]->v[j] = Vn[j];
+			}
+			aux[i]->x[0] = 0;
+			aux[i]->x[1] = -Vn[2];
+			aux[i]->x[2] = Vn[1];
+			j = -1;
+			while (++j < 3)
+				aux[i]->y[j] = cross_prod(Vn, aux[i]->x, j);
+			j = -1;
+			while (++j < 3)
+				aux[i]->y[j] /= mod(aux[i]->y);
+			aux[i]->h = h;
+			aux[i]->col = c;
+		}
+	}
+	aux[i] = 0;
+	i = 0;
+	if (len)
+		while (bx[i])
+			free(bx[i++]);
+	free(bx);
+	return (aux);
+}

@@ -6,7 +6,7 @@
 /*   By: jserrano <jserrano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/17 13:45:20 by jserrano          #+#    #+#             */
-/*   Updated: 2020/10/20 14:01:52 by jserrano         ###   ########.fr       */
+/*   Updated: 2020/10/22 15:29:07 by jserrano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -171,7 +171,7 @@ void	show_obj(t_data *param)
 	double dist;
 	int color;
 
-	step = (param->key == KEY_ENT) ? 1 : 15;
+	step = (param->key == KEY_ENT) ? 1 : 8;
 	y = -1;
 	while (++y < param->scr.y)
 	{

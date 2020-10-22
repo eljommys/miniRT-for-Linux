@@ -6,7 +6,7 @@
 /*   By: jserrano <jserrano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/01 09:38:55 by jserrano          #+#    #+#             */
-/*   Updated: 2020/10/20 23:07:02 by jserrano         ###   ########.fr       */
+/*   Updated: 2020/10/22 16:10:47 by jserrano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int		bounce_ray(t_data *param, int i)
 		param->cam.ray.V_l[j] /= param->cam.ray.mod;
 	dist = 2;
 	tray = 0;
-	while (dist > 0.001)
+	while (dist > 0.0001)
 	{
 		j = -1;
 		while (++j < 3)
@@ -78,10 +78,10 @@ int		is_hit(t_data *param)
 	j = -1;
 	while (++j < 3)
 		param->cam.ray.ray_rgb_l[j] = 0;
-	while (dist > 0.001)
+	while (dist > 0.0001)
 	{
 		tray += dist;
-		if (tray > 21474)
+		if (tray > 214747)
 			return (0);
 		j = -1;
 		while (++j < 3)

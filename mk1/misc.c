@@ -6,7 +6,7 @@
 /*   By: jserrano <jserrano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/17 13:34:14 by jserrano          #+#    #+#             */
-/*   Updated: 2020/10/21 11:30:19 by jserrano         ###   ########.fr       */
+/*   Updated: 2020/10/21 21:48:36 by jserrano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,4 +80,10 @@ double	cross_prod(double *u, double *v, int i)
 		return (u[0] * v[1] - u[1] * v[0]);
 	else
 		return (0);
+}
+
+double	plane_dist(double *v, double *o, double *p)
+{
+	return (fabs(v[0] * p[0] + v[1] * p[1] + v[2] * p[2] -
+				(v[0] * o[0] + v[1] * o[1] + v[2] * o[2])));
 }
