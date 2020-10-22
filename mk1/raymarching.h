@@ -136,6 +136,13 @@ typedef struct	s_box{
 	int		col;
 }				t_box;
 
+typedef struct	s_triangle{
+	double	A[3];
+	double	B[3];
+	double	C[3];
+	int		col;
+}				t_triangle;
+
 typedef struct	s_light{
 	double	O[3];
 	int		col;
@@ -157,6 +164,7 @@ typedef struct	s_data{
 	t_cylinder	**cy;
 	t_square	**sq;
 	t_box		**bx;
+	t_triangle	**tr;
 	t_light		**l;
 	int			amb_l;
 	int			amb_l_rgb[3];
@@ -183,6 +191,7 @@ void	rgb_to_hex(int *rgb, int *hex);
 void	*hex_to_rgb(int hex, int *rgb);
 double	max(double a, double b);
 double	cross_prod(double *u, double *v, int i);
+double	dot_prod(double *u, double *v);
 double	plane_dist(double *v, double *o, double *p);
 
 /*
@@ -210,6 +219,7 @@ t_cylinder	**add_cy(t_cylinder **cy, double *O, double *v, double h, double d, i
 t_light		**add_l(t_light **l, double *O, int c);
 t_square	**add_sq(t_square **sq, double *O, double *v, double h, int c);
 t_box		**add_bx(t_box **bx, double *O, double *v, double h, int c);
+t_triangle	**add_tr(t_triangle **tr, double *A, double *B, double *C, int c);
 
 /*
 **	raymarching.c

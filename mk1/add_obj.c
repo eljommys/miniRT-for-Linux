@@ -6,7 +6,7 @@
 /*   By: jserrano <jserrano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/17 13:47:12 by jserrano          #+#    #+#             */
-/*   Updated: 2020/10/22 16:25:58 by jserrano         ###   ########.fr       */
+/*   Updated: 2020/10/22 21:11:30 by jserrano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -320,5 +320,52 @@ t_box	**add_bx(t_box **bx, double *O, double *v, double h, int c)
 		while (bx[i])
 			free(bx[i++]);
 	free(bx);
+	return (aux);
+}
+
+t_triangle	**add_tr(t_triangle **tr, double *A, double *B, double *C, int c)
+{
+	t_triangle	**aux;
+	int			len;
+	int			i;
+	int			j;
+
+	len = 0;
+	while (tr[len])
+		len++;
+	if (!(aux = (t_triangle **)malloc(sizeof(t_triangle *) * (len + 2))))
+		return (tr);
+	i = -1;
+	while(++i < len + 1)
+	{
+		aux[i] = (t_triangle *)malloc(sizeof(t_triangle));
+		j = -1;
+		if (i < len)
+		{
+			while (++j < 3)
+			{
+				aux[i]->A[j] = tr[i]->A[j];
+				aux[i]->B[j] = tr[i]->B[j];
+				aux[i]->C[j] = tr[i]->C[j];
+			}
+			aux[i]->col = tr[i]->col;
+		}
+		else
+		{
+			while (++j < 3)
+			{
+				aux[i]->A[j] = A[j];
+				aux[i]->B[j] = B[j];
+				aux[i]->C[j] = C[j];
+			}
+			aux[i]->col = c;
+		}
+	}
+	aux[i] = 0;
+	i = 0;
+	if (len)
+		while (tr[i])
+			free(tr[i++]);
+	free(tr);
 	return (aux);
 }

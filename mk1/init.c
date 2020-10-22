@@ -6,7 +6,7 @@
 /*   By: jserrano <jserrano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/17 13:38:01 by jserrano          #+#    #+#             */
-/*   Updated: 2020/10/22 16:26:45 by jserrano         ###   ########.fr       */
+/*   Updated: 2020/10/22 22:41:26 by jserrano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,8 @@ static void		objs_init(t_data *param)
 	param->sq[0] = 0;
 	param->bx = (t_box **)malloc(sizeof(t_box *));
 	param->bx[0] = 0;
+	param->tr = (t_triangle **)malloc(sizeof(t_triangle *));
+	param->tr[0] = 0;
 }
 
 void	ft_init(t_data *param)
@@ -122,10 +124,12 @@ void	ft_init(t_data *param)
 	screen_init(param);
 	vectors_init(param);
 	objs_init(param);
-	//param->cy = add_cy(param->cy, p1, v0, 200, 300, 0xdc8c2e);
+	param->cy = add_cy(param->cy, p1, v0, 200, 300, 0xdc8c2e);
 	param->sp = add_sp(param->sp, p0, 500, 0xb15a76);
-	//param->sp = add_sp(param->sp, p3, 3000, 0x8abb76);
+	param->sp = add_sp(param->sp, p3, 3000, 0x8abb76);
 	param->sq = add_sq(param->sq, p1, v0, 500, 0xC2E680);
+	param->pl = add_pl(param->pl, p3, v1, 0xD2C9C3);
+	//param->tr = add_tr(param->tr, p0, p1, p3, 0xb15a76);
 	param->l = add_l(param->l, l1, 0xe6c47c);
 	param->l = add_l(param->l, l0, 0xb3c4bd);
 	param->amb_l = 0x727cbd;
