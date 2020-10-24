@@ -6,7 +6,7 @@
 /*   By: jserrano <jserrano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/17 13:47:12 by jserrano          #+#    #+#             */
-/*   Updated: 2020/10/22 21:11:30 by jserrano         ###   ########.fr       */
+/*   Updated: 2020/10/24 12:57:50 by jserrano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -347,6 +347,10 @@ t_triangle	**add_tr(t_triangle **tr, double *A, double *B, double *C, int c)
 				aux[i]->A[j] = tr[i]->A[j];
 				aux[i]->B[j] = tr[i]->B[j];
 				aux[i]->C[j] = tr[i]->C[j];
+				aux[i]->ba[j] = tr[i]->ba[j];
+				aux[i]->cb[j] = tr[i]->cb[j];
+				aux[i]->ac[j] = tr[i]->ac[j];
+				aux[i]->nor[j] = tr[i]->nor[j];
 			}
 			aux[i]->col = tr[i]->col;
 		}
@@ -357,7 +361,13 @@ t_triangle	**add_tr(t_triangle **tr, double *A, double *B, double *C, int c)
 				aux[i]->A[j] = A[j];
 				aux[i]->B[j] = B[j];
 				aux[i]->C[j] = C[j];
+				aux[i]->ba[j] = A[j] - B[j];
+				aux[i]->cb[j] = B[j] - C[j];
+				aux[i]->ac[j] = C[j] - A[j];
 			}
+			j = -1;
+			while (j < 3)
+				aux[i]->nor[j] = cross_prod(aux[i]->ba, aux[i]->ac, j);
 			aux[i]->col = c;
 		}
 	}

@@ -6,7 +6,7 @@
 /*   By: jserrano <jserrano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/17 13:34:14 by jserrano          #+#    #+#             */
-/*   Updated: 2020/10/22 20:49:55 by jserrano         ###   ########.fr       */
+/*   Updated: 2020/10/24 13:18:25 by jserrano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,13 @@ double	max(double a, double b)
 	return (a);
 }
 
+double	min(double a, double b)
+{
+	if (a < b)
+		return (a);
+	return (b);
+}
+
 double	cross_prod(double *u, double *v, int i)
 {
 	if (i == 0)
@@ -85,6 +92,11 @@ double	cross_prod(double *u, double *v, int i)
 double	dot_prod(double *u, double *v)
 {
 	return (u[0] * v[0] + u[1] * v[1] + u[2] * v[2]);
+}
+
+double	dot2_prod(double *u)
+{
+	return (dot_prod(u, u));
 }
 
 double	plane_dist(double *v, double *o, double *p)

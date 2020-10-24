@@ -6,23 +6,20 @@ SRC	=	add_obj.c\
 		misc.c\
 		raymarching.c\
 		test_func.c\
-
-OBJ	=	add_obj.o\
-		cam_calc.o\
-		dist.o\
-		init.o\
-		input.o\
-		misc.o\
-		raymarching.o\
-		test_func.o\
+		dist/bx.c\
+		dist/cy.c\
+		dist/pl.c\
+		dist/sp.c\
+		dist/sq.c\
 
 FLAGS =	-Wall -Werror -Wextra
 
 all:
 	gcc -c $(SRC)
+	mv *.o comp
 
 clean:
-	rm -rf $(OBJ)
+	rm -rf comp/*.o
 
 fclean: clean
 	rm -rf test
@@ -30,6 +27,6 @@ fclean: clean
 re: fclean all
 
 test: all
-	gcc main.c $(OBJ) ../minilibx-linux-master/*.a -L.. -lmlx -lXext -lX11 -lm -lbsd -o test && ./test
+	gcc main.c comp/*.o ../minilibx-linux-master/*.a -L.. -lmlx -lXext -lX11 -lm -lbsd -o test && ./test
 
 .PHONY: all clean fclean re test
