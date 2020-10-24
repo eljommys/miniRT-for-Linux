@@ -6,16 +6,11 @@
 /*   By: jserrano <jserrano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/20 11:30:12 by jserrano          #+#    #+#             */
-/*   Updated: 2020/10/24 13:16:02 by jserrano         ###   ########.fr       */
+/*   Updated: 2020/10/24 21:00:13 by jserrano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "dist/dist.h"
-
-static double 	tr_dist(t_data *param)
-{
-
-}
 
 double			obj_dist(t_data *param)
 {
