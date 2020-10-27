@@ -140,8 +140,7 @@ typedef struct	s_triangle{
 	double	A[3];
 	double	B[3];
 	double	C[3];
-	double	ba[3];
-	double	cb[3];
+	double	ab[3];
 	double	ac[3];
 	double	nor[3];
 	int		col;
@@ -197,8 +196,11 @@ double	max(double a, double b);
 double	cross_prod(double *u, double *v, int i);
 double	dot_prod(double *u, double *v);
 double	plane_dist(double *v, double *o, double *p);
+double	segment_dist(double *A, double *B, double *p);
 double	min(double a, double b);
 double	dot2_prod(double *u);
+double	dot_2d(double *u, double *v, int x, int y);
+void	norm(double *u, double *v);
 
 /*
 **	init.c

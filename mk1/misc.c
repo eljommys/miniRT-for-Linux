@@ -6,7 +6,7 @@
 /*   By: jserrano <jserrano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/17 13:34:14 by jserrano          #+#    #+#             */
-/*   Updated: 2020/10/24 13:18:25 by jserrano         ###   ########.fr       */
+/*   Updated: 2020/10/27 17:16:54 by jserrano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,4 +103,41 @@ double	plane_dist(double *v, double *o, double *p)
 {
 	return (fabs(v[0] * p[0] + v[1] * p[1] + v[2] * p[2] -
 				(v[0] * o[0] + v[1] * o[1] + v[2] * o[2])));
+}
+
+double	segment_dist(double *A, double *B, double *p)
+{
+	double	h;
+	double	d[3];
+	double	pa[3];
+	double	ba[3];
+	int		j;
+
+	j = -1;
+	while (++j < 3)
+	{
+		pa[j] = A[j] - p[j];
+		ba[j] = A[j] - B[j];
+	}
+	h = min(1, max(0, dot_prod(pa, ba) / pow(mod(ba), 2)));
+	j = -1;
+	while (++j < 3)
+		d[j] = pa[j] - h * ba[j];
+	return (mod(d));
+}
+
+double	dot_2d(double *u, double *v, int x, int y)
+{
+	return (u[x] * v[x] + u[y] * v[y]);
+}
+
+void	norm(double *u, double *v)
+{
+	int	j;
+	int	module;
+
+	j = -1;
+	module = mod(u);
+	while(++j < 3)
+		v[j] = u[j] / module;
 }

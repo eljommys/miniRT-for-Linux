@@ -6,7 +6,7 @@
 /*   By: jserrano <jserrano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/20 11:30:12 by jserrano          #+#    #+#             */
-/*   Updated: 2020/10/24 21:00:13 by jserrano         ###   ########.fr       */
+/*   Updated: 2020/10/26 10:00:54 by jserrano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,10 @@ double			obj_dist(t_data *param)
 	aux = bx_dist(param);
 	param->cam.ray.obj_c = (aux < dist) ?
 		param->bx[param->cam.ray.obj_n]->col : param->cam.ray.obj_c;
+	dist = (aux < dist) ? aux : dist;
+	aux = tr_dist(param);
+	param->cam.ray.obj_c = (aux < dist) ?
+		param->tr[param->cam.ray.obj_n]->col : param->cam.ray.obj_c;
 	dist = (aux < dist) ? aux : dist;
 	return (dist);
 }

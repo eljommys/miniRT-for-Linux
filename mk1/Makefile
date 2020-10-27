@@ -11,6 +11,7 @@ SRC	=	add_obj.c\
 		dist/pl.c\
 		dist/sp.c\
 		dist/sq.c\
+		dist/tr.c\
 
 FLAGS =	-Wall -Werror -Wextra
 
@@ -27,6 +28,6 @@ fclean: clean
 re: fclean all
 
 test: all
-	gcc main.c comp/*.o ../minilibx-linux-master/*.a -L.. -lmlx -lXext -lX11 -lm -lbsd -o test && ./test
+	gcc $(FLAGS) main.c comp/*.o ../minilibx-linux-master/*.a -L.. -lmlx -lXext -lX11 -lm -lbsd -o test && ./test
 
 .PHONY: all clean fclean re test
