@@ -6,7 +6,7 @@
 /*   By: jserrano <jserrano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/27 16:42:18 by jserrano          #+#    #+#             */
-/*   Updated: 2020/10/27 17:56:23 by jserrano         ###   ########.fr       */
+/*   Updated: 2020/10/27 22:49:14 by jserrano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,14 +49,16 @@ static void new_sq(t_square **aux, double *O, double *v, double h, int *var)
 	aux[var[0]]->col = var[1];
 }
 
-static int init_sq(t_square **sq, t_square **aux, int *var)
+static t_square **init_sq(t_square **sq, int *var)
 {
+	t_square **aux;
+
 	var[2] = 0;
 	while (sq[var[2]])
 		var[2]++;
 	if (!(aux = (t_square **)malloc(sizeof(t_square *) * (var[2] + 2))))
 		return (0);
-	return (1);
+	return (aux);
 }
 
 /*
@@ -69,7 +71,7 @@ t_square	**add_sq(t_square **sq, double *O, double *v, double h, int c)
 	double		Vn[3];
 	int			var[3];
 
-	if (!init_sq(sq, aux, var))
+	if (!(aux = init_sq(sq, var)))
 		return (sq);
 	var[1] = c;
 	norm(v, Vn);

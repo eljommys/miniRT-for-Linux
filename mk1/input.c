@@ -6,7 +6,7 @@
 /*   By: jserrano <jserrano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/17 13:25:20 by jserrano          #+#    #+#             */
-/*   Updated: 2020/10/27 15:44:40 by jserrano         ###   ########.fr       */
+/*   Updated: 2020/10/28 13:53:39 by jserrano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ int		get_pos(int x, int y, t_data *param)
 {
 	if (param->button == 1)
 	{
+		param->reload = 1;
 		param->crd.x = param->mou.x + x - param->scr.x / 2;
 		param->crd.y = -(param->mou.y + y - param->scr.y / 2);
 		if (param->crd.y > 249)
@@ -62,6 +63,7 @@ int		button_pressed(int button, int x, int y, t_data *param)
 		mouse_init(param);
 		calculate_rotation(param);
 		calculate_vectors(param);
+		param->reload = 1;
 	}
 	return (0);
 }
@@ -85,11 +87,12 @@ int		key_pressed(int keycode, t_data *param)
 	int	j;
 
 	param->key = keycode;
+	param->reload = 1;
 	j = -1;
 	if (keycode == KEY_ESC)
 		ft_exit(param->id);
 	else if (keycode == KEY_W)
-		while(++j < 2)
+		while(++j < 3)
 			param->cam.O[j] += param->cam.Vn[j] * 20;
 	else if (keycode == KEY_A)
 		while(++j < 3)

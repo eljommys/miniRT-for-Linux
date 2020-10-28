@@ -1,9 +1,7 @@
-SRC	=	add_obj.c\
-		cam_calc.c\
+SRC	=	cam_calc.c\
 		dist.c\
 		init.c\
 		input.c\
-		misc.c\
 		raymarching.c\
 		test_func.c\
 		dist/bx.c\
@@ -12,6 +10,21 @@ SRC	=	add_obj.c\
 		dist/sp.c\
 		dist/sq.c\
 		dist/tr.c\
+		obj/add_bx.c\
+		obj/add_cy.c\
+		obj/add_l.c\
+		obj/add_pl.c\
+		obj/add_sp.c\
+		obj/add_sq.c\
+		obj/add_tr.c\
+		misc/geo_op.c\
+		misc/mlx_comp.c\
+		misc/operators.c\
+		misc/rgb_hex.c\
+		misc/vectors_0.c\
+		misc/vectors_1.c\
+		gnl/get_next_line_bonus.c\
+		gnl/get_next_line_utils_bonus.c\
 
 FLAGS =	-Wall -Werror -Wextra
 

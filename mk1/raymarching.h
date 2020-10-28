@@ -43,6 +43,7 @@
 # include <unistd.h>
 # include <math.h>
 # include "../minilibx-linux-master/mlx.h"
+# include "gnl/get_next_line_bonus.h"
 
 typedef struct	s_mouse{
 	int		x;
@@ -157,6 +158,7 @@ typedef struct	s_data{
 	void		*win_id;
 	int			key;
 	int			button;
+	int			reload;
 	t_mouse		mou;
 	t_coord		crd;
 	t_screen	scr;
@@ -183,7 +185,7 @@ int		button_released(int button, int x, int y, t_data *param);
 int		key_pressed(int keycode, t_data *param);
 
 /*
-**	misc.c
+**	misc/
 */
 
 int		ft_loop(t_data *param);
@@ -218,7 +220,7 @@ void	calculate_vectors(t_data *def);
 void 	calculate_rotation(t_data *param);
 
 /*
-**	add_obj.c
+**	add_obj/
 */
 
 t_sphere	**add_sp(t_sphere **sp, double *O, double r, int c);

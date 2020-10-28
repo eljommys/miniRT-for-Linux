@@ -6,7 +6,7 @@
 /*   By: jserrano <jserrano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/17 13:38:01 by jserrano          #+#    #+#             */
-/*   Updated: 2020/10/27 18:35:16 by jserrano         ###   ########.fr       */
+/*   Updated: 2020/10/28 13:29:16 by jserrano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,14 +34,18 @@ static void		screen_init(t_data *param)
 	&param->img.bits_per_pixel, &param->img.line_length, &param->img.endian);
 }
 
+void		pos_init(t_data *param)
+{
+	param->cam.O[0] = 0;
+	param->cam.O[1] = 0;
+	param->cam.O[2] = 0;
+}
+
 void		vectors_init(t_data *param)
 {
 	int		i;
 	double	module;
 
-	param->cam.O[0] = 0;
-	param->cam.O[1] = 0;
-	param->cam.O[2] = 0;
 	param->cam.Vn[0] = 1;
 	param->cam.Vn[1] = 0;
 	param->cam.Vn[2] = 0;
@@ -122,6 +126,7 @@ void	ft_init(t_data *param)
 
 	mouse_init(param);
 	screen_init(param);
+	pos_init(param);
 	vectors_init(param);
 	objs_init(param);
 	param->cy = add_cy(param->cy, p1, v0, 200, 300, 0xdc8c2e);

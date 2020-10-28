@@ -6,7 +6,7 @@
 /*   By: jserrano <jserrano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/24 21:00:17 by jserrano          #+#    #+#             */
-/*   Updated: 2020/10/27 14:08:16 by jserrano         ###   ########.fr       */
+/*   Updated: 2020/10/27 23:49:11 by jserrano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,9 +83,6 @@ static int	is_inside(t_data *param, double *P1, int i)
 		ap[j] = param->cam.ray.O[j] - param->tr[i]->A[j];
 		A[j] = param->tr[i]->A[j];
 	}
-	/*w[0] = (ac[x] * (A[y] - P1[y]) + ac[y] * (P1[x] - A[x])) /
-			(ab[x] * ac[y] + ab[y] * ac[x]);
-	w[1] = (P1[y] - A[y] - w[0] * ab[y]) / ac[y];*/
 	w[1] = (dot_2d(ap, ac, x, y) * dot_2d(ac, ab, x, y) - dot_2d(ap, ab, x, y) * dot_2d(ac, ac, x, y)) /
 			(dot_2d(ab, ac, x, y) * dot_2d(ac, ab, x, y) - dot_2d(ab, ab, x, y) * dot_2d(ac, ac, x, y));
 	w[0] = (dot_2d(ap, ac, x, y) - w[1] * dot_2d(ab, ac, x, y)) /
@@ -124,7 +121,6 @@ double 		tr_dist(t_data *param)
 		aux = (is_inside(param, P1, i)) ?
 			plane_dist(param->tr[i]->nor, param->tr[i]->A, param->cam.ray.O) :
 			contour_dist(param, i);
-		//aux = contour_dist(param, i);
 		param->cam.ray.obj_n = (aux < dist) ? i : param->cam.ray.obj_n;
 		dist = (aux < dist) ? aux : dist;
 	}

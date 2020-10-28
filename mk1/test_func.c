@@ -6,7 +6,7 @@
 /*   By: jserrano <jserrano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/17 13:45:20 by jserrano          #+#    #+#             */
-/*   Updated: 2020/10/22 15:29:07 by jserrano         ###   ########.fr       */
+/*   Updated: 2020/10/28 14:00:33 by jserrano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -168,36 +168,38 @@ void	show_obj(t_data *param)
 	int y;
 	int i;
 	int step;
-	double dist;
-	int color;
 
-	step = (param->key == KEY_ENT) ? 1 : 8;
-	y = -1;
-	while (++y < param->scr.y)
+	if (param->reload = 1)
 	{
-		x = -1;
-		while (++x < param->scr.x)
+		step = (param->key == KEY_ENT) ? 1 : 8;
+		y = -1;
+		while (++y < param->scr.y)
 		{
-			if (!(x % step) && !(y % step))
+			x = -1;
+			while (++x < param->scr.x)
 			{
-				gen_ray(param, x, y, 1);
-				param->cam.ray.ray_c = param->amb_l;
-				if (is_hit(param))
+				if (!(x % step) && !(y % step))
 				{
-					i = -1;
-					while (param->l[++i])
-						bounce_ray(param, i);
-					i = -1;
-					while (++i < 3)
-						param->cam.ray.ray_rgb[i] = (param->cam.ray.ray_rgb_o[i] * (double)param->cam.ray.ray_rgb_l[i] / 255) +
-													(param->cam.ray.ray_rgb_o[i] * (double)param->amb_l_rgb[i] / 255);
-					rgb_to_hex(param->cam.ray.ray_rgb, &param->cam.ray.ray_c);
+					gen_ray(param, x, y, 1);
+					param->cam.ray.ray_c = param->amb_l;
+					if (is_hit(param))
+					{
+						i = -1;
+						while (param->l[++i])
+							bounce_ray(param, i);
+						i = -1;
+						while (++i < 3)
+							param->cam.ray.ray_rgb[i] = (param->cam.ray.ray_rgb_o[i] * (double)param->cam.ray.ray_rgb_l[i] / 255) +
+														(param->cam.ray.ray_rgb_o[i] * (double)param->amb_l_rgb[i] / 255);
+						rgb_to_hex(param->cam.ray.ray_rgb, &param->cam.ray.ray_c);
+					}
+					my_mlx_pixel_put(param, x, y, param->cam.ray.ray_c);
 				}
-				my_mlx_pixel_put(param, x, y, param->cam.ray.ray_c);
+				else
+					my_mlx_pixel_put(param, x, y, 0);
 			}
-			else
-				my_mlx_pixel_put(param, x, y, 0);
 		}
+		mlx_put_image_to_window(param->id, param->win_id, param->img.img, 0, 0);
+		param->reload = 0;
 	}
-	mlx_put_image_to_window(param->id, param->win_id, param->img.img, 0, 0);
 }
