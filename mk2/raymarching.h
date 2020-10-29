@@ -254,4 +254,10 @@ void	show_obj(t_data *param);
 
 double	obj_dist(t_data *param);
 
+/*
+**	parse
+*/
+
+void set_settings(t_data *param, char *line);
+
 #endif
