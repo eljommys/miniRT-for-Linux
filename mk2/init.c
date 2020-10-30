@@ -6,7 +6,7 @@
 /*   By: jserrano <jserrano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/17 13:38:01 by jserrano          #+#    #+#             */
-/*   Updated: 2020/10/29 12:37:47 by jserrano         ###   ########.fr       */
+/*   Updated: 2020/10/30 11:17:49 by jserrano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,55 +88,9 @@ static void		objs_init(t_data *param)
 
 void	ft_init(t_data *param)
 {
-	double p0[3];
-	double p1[3];
-	double p3[3];
-	double l0[3];
-	double l1[3];
-	double v0[3];
-	double v1[3];
-
-	p0[0] = 1500;
-	p0[1] = 1500;
-	p0[2] = 0;
-
-	p1[0] = 500;
-	p1[1] = 500;
-	p1[2] = 1;
-
-	p3[0] = 3500;
-	p3[1] = -3500;
-	p3[2] = -1000;
-
-	l0[0] = -500;
-	l0[1] = -500;
-	l0[2] = 1000;
-
-	l1[0] = -500;
-	l1[1] = 500;
-	l1[2] = 1000;
-
-	v0[0] = 0;
-	v0[1] = 1;
-	v0[2] = 1;
-
-	v1[0] = 0;
-	v1[1] = 0;
-	v1[2] = 1;
-
 	mouse_init(param);
 	screen_init(param);
 	pos_init(param);
 	vectors_init(param);
 	objs_init(param);
-	param->cy = add_cy(param->cy, p1, v0, 200, 300, 0xdc8c2e);
-	param->sp = add_sp(param->sp, p0, 500, 0xb15a76);
-	param->sp = add_sp(param->sp, p3, 3000, 0x8abb76);
-	param->sq = add_sq(param->sq, p1, v0, 500, 0xC2E680);
-	param->pl = add_pl(param->pl, p3, v1, 0xD2C9C3);
-	//param->tr = add_tr(param->tr, p0, p1, p3, 0xb15a76);
-	param->l = add_l(param->l, l1, 0xe6c47c);
-	param->l = add_l(param->l, l0, 0xb3c4bd);
-	param->amb_l = 0x727cbd;
-	hex_to_rgb(param->amb_l, param->amb_l_rgb);
 }

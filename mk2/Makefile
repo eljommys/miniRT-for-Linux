@@ -25,6 +25,9 @@ SRC	=	cam_calc.c\
 		misc/vectors_1.c\
 		gnl/get_next_line_bonus.c\
 		parse/settings.c\
+		parse/def_obj.c\
+		parse/def_sp.c\
+		parse/def_pl.c\
 
 OBJ =	cam_calc.o\
 		dist.o\
@@ -53,6 +56,9 @@ OBJ =	cam_calc.o\
 		vectors_1.o\
 		get_next_line_bonus.o\
 		settings.o\
+		def_obj.o\
+		def_sp.o\
+		def_pl.o\
 
 MLX =	../minilibx-linux-master/*.a
 

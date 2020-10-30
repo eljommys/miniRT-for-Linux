@@ -6,16 +6,24 @@
 /*   By: jserrano <jserrano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/29 13:40:28 by jserrano          #+#    #+#             */
-/*   Updated: 2020/10/29 19:56:27 by jserrano         ###   ########.fr       */
+/*   Updated: 2020/10/30 12:29:59 by jserrano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "raymarching.h"
 
-static void	set_param(t_data *param, char *line)
+static void 	print_scene(t_data *param)
 {
-	set_settings(param, line);
-	//set_obj(param, line);
+	int n;
+	int i;
+	int j;
+
+	n = ;
+	i = -1;
+	while (param->sp[++i])
+	{
+		printf("%d. sp: P(%.1f %.1f %.1f) d(%.1f) ")
+	}
 }
 
 static void		parse(t_data *param, char **argv)
@@ -25,7 +33,8 @@ static void		parse(t_data *param, char **argv)
 	fd = open(argv[1], O_RDONLY);
 	while (get_next_line(fd, &line) > 0)
 	{
-		set_param(param, line);
+		def_settings(param, line);
+		def_obj(param, line);
 		free(line);
 	}
 }
@@ -35,8 +44,7 @@ int		main(int argc, char **argv)
 	t_data *param;
 
 	param = (t_data *)malloc(sizeof(t_data));
+	ft_init(param);
 	parse(param, argv);
-	printf("resolution = %d x %d\n", param->scr.x, param->scr.y);
-	printf("amb: %d, %d, %d\n", param->amb_l_rgb[0], param->amb_l_rgb[1], param->amb_l_rgb[2]);
 	return (0);
 }

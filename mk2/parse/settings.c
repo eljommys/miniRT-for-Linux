@@ -6,30 +6,30 @@
 /*   By: jserrano <jserrano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/29 19:18:02 by jserrano          #+#    #+#             */
-/*   Updated: 2020/10/29 19:44:01 by jserrano         ###   ########.fr       */
+/*   Updated: 2020/10/30 11:36:57 by jserrano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../raymarching.h"
 
-static void set_res(t_data *param, char *line, int *i)
+static void def_res(t_data *param, char *line, int *i)
 {
 	int num_len;
 
 	(*i)++;
-	while (line[*i] == ' ')
+	while (line[*i] == ' ' || line[*i] == '\t')
 		(*i)++;
 	param->scr.x = (int)ft_atoi(line + *i);
 	num_len = 0;
 	while ('0' <= line[*i + num_len] && line[*i + num_len] <= '9')
 		num_len++;
 	*i += num_len;
-	while (line[*i] != ' ')
+	while (line[*i] != ' ' || line[*i] == '\t')
 		(*i)++;
 	param->scr.y = (int)ft_atoi(line + *i);
 }
 
-static void set_alpha(char *line, int *i, double *alpha)
+static void def_alpha(char *line, int *i, double *alpha)
 {
 	int	num_len;
 
@@ -55,30 +55,28 @@ static void set_alpha(char *line, int *i, double *alpha)
 	}
 }
 
-static void	set_amb(t_data *param, char *line, int *i)
+static void	def_amb(t_data *param, char *line, int *i)
 {
 	int 	j;
-	int		num_len;
 	double	alpha;
 
 	(*i)++;
-	while (line[*i] == ' ')
+	while (line[*i] == ' ' || line[*i] == '\t')
 		(*i)++;
-	set_alpha(line, i, &alpha);
-	while (line[*i] == ' ')
+	def_alpha(line, i, &alpha);
+	while (line[*i] == ' ' || line[*i] == '\t')
 		(*i)++;
 	j = -1;
 	while (++j < 3)
 	{
 		param->amb_l_rgb[j] = ft_atoi(line + *i) * alpha;
-		num_len = 0;
-		while ('0' <= line[*i + num_len] && line[*i + num_len] <= '9')
-			num_len++;
-		*i += num_len + 1;;
+		while ('0' <= line[*i] && line[*i] <= '9')
+			(*i)++;
+		(*i)++;
 	}
 }
 
-void		set_settings(t_data *param, char *line)
+void		def_settings(t_data *param, char *line)
 {
 	int		i;
 	double	alpha;
@@ -86,9 +84,7 @@ void		set_settings(t_data *param, char *line)
 	i = 0;
 	alpha = -1;
 	if (line[i] == 'R')
-		set_res(param, line, &i);
+		def_res(param, line, &i);
 	else if (line[i] == 'A')
-	{
-		set_amb(param, line, &i);
-	}
+		def_amb(param, line, &i);
 }
