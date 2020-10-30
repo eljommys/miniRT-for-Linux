@@ -6,7 +6,7 @@
 /*   By: jserrano <jserrano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/29 19:18:02 by jserrano          #+#    #+#             */
-/*   Updated: 2020/10/30 11:36:57 by jserrano         ###   ########.fr       */
+/*   Updated: 2020/10/30 17:38:40 by jserrano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,17 +74,16 @@ static void	def_amb(t_data *param, char *line, int *i)
 			(*i)++;
 		(*i)++;
 	}
+	rgb_to_hex(param->amb_l_rgb, &(param->amb_l));
 }
 
 void		def_settings(t_data *param, char *line)
 {
 	int		i;
-	double	alpha;
 
 	i = 0;
-	alpha = -1;
-	if (line[i] == 'R')
+	if (line[i] == 'R' && param->scr.x == -1 && param->scr.y == -1)
 		def_res(param, line, &i);
-	else if (line[i] == 'A')
+	else if (line[i] == 'A' && param->amb_l == -1)
 		def_amb(param, line, &i);
 }

@@ -211,7 +211,7 @@ void	norm(double *u, double *v);
 
 void	mouse_init(t_data *param);
 void	vectors_init(t_data *param);
-void	ft_init(t_data *param);
+void	ft_init(t_data *param, char **argv);
 
 /*
 **	cam_calc.c
@@ -258,9 +258,20 @@ double	obj_dist(t_data *param);
 **	parse
 */
 
-void def_settings(t_data *param, char *line);
-void def_sp(t_data *param, char *line);
-void def_pl(t_data *param, char *line);
-void def_obj(t_data *param, char *line);
+void	def_settings(t_data *param, char *line);
+void	def_sp(t_data *param, char *line);
+void	def_pl(t_data *param, char *line);
+void	def_cy(t_data *param, char *line);
+void	def_sq(t_data *param, char *line);
+void	def_tr(t_data *param, char *line);
+void	def_bx(t_data *param, char *line);
+void	def_obj(t_data *param, char *line);
+void	def_elm(t_data *param, char *line);
+
+/*
+**	parser.c
+*/
+
+void	parse(t_data *param, char **argv);
 
 #endif

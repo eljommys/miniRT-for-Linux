@@ -6,7 +6,7 @@
 /*   By: jserrano <jserrano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/30 10:12:24 by jserrano          #+#    #+#             */
-/*   Updated: 2020/10/30 12:10:08 by jserrano         ###   ########.fr       */
+/*   Updated: 2020/10/30 15:43:53 by jserrano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,10 @@ void 		def_obj(t_data *param, char *line)
 		def_pl(param, line);
 	else if (!ft_memcmp(line, "cy", 2))
 		def_cy(param, line);
-	/*else if (!ft_memcmp(line, "sq", 2))
+	else if (!ft_memcmp(line, "sq", 2))
 		def_sq(param, line);
 	else if (!ft_memcmp(line, "tr", 2))
 		def_tr(param, line);
 	else if (!ft_memcmp(line, "bx", 2))
-		def_bx(param, line);*/
+		def_bx(param, line);
 }

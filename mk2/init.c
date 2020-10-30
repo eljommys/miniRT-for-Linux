@@ -6,7 +6,7 @@
 /*   By: jserrano <jserrano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/17 13:38:01 by jserrano          #+#    #+#             */
-/*   Updated: 2020/10/30 11:17:49 by jserrano         ###   ########.fr       */
+/*   Updated: 2020/10/30 16:00:25 by jserrano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,9 @@ void		vectors_init(t_data *param)
 
 static void		objs_init(t_data *param)
 {
+	param->scr.x = -1;
+	param->scr.y = -1;
+	param->amb_l = -1;
 	param->l = (t_light **)malloc(sizeof(t_light *));
 	param->l[0] = 0;
 	param->sp = (t_sphere **)malloc(sizeof(t_sphere *));
@@ -86,11 +89,12 @@ static void		objs_init(t_data *param)
 	param->tr[0] = 0;
 }
 
-void	ft_init(t_data *param)
+void	ft_init(t_data *param, char **argv)
 {
 	mouse_init(param);
 	screen_init(param);
 	pos_init(param);
 	vectors_init(param);
 	objs_init(param);
+	parse(param, argv);
 }

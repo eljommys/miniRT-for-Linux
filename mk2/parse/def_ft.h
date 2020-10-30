@@ -1,27 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser.c                                           :+:      :+:    :+:   */
+/*   def_ft.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jserrano <jserrano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/10/29 13:40:28 by jserrano          #+#    #+#             */
-/*   Updated: 2020/10/30 16:58:56 by jserrano         ###   ########.fr       */
+/*   Created: 2020/10/30 16:14:39 by jserrano          #+#    #+#             */
+/*   Updated: 2020/10/30 16:17:06 by jserrano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "raymarching.h"
+#ifndef DEF_FT_C
+# define DEF_FT_C
 
-void			parse(t_data *param, char **argv)
-{
-	int		fd;
-	char	*line;
-	fd = open(argv[1], O_RDONLY);
-	while (get_next_line(fd, &line) > 0)
-	{
-		def_settings(param, line);
-		def_obj(param, line);
-		def_elm(param, line);
-		free(line);
-	}
-}
+# include "../raymarching.h"
+
+void	def_P(char *line, int *i, double *P);
+void	def_d(char *line, int *i, double *d);
+void	def_rgb(char *line, int *i, int *rgb);
+
+#endif

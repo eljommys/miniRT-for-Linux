@@ -6,7 +6,7 @@
 /*   By: jserrano <jserrano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/17 13:25:20 by jserrano          #+#    #+#             */
-/*   Updated: 2020/10/29 16:40:27 by jserrano         ###   ########.fr       */
+/*   Updated: 2020/10/30 18:42:37 by jserrano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ int		get_pos(int x, int y, t_data *param)
 						param->scr.y / 2 - param->crd.y);
 		}
 		calculate_rotation(param);
+		printf("despues\n");
 		calculate_vectors(param);
 
 		printf("X: %d, Y: %d\n", param->crd.x, param->crd.y);
@@ -62,8 +63,8 @@ int		button_pressed(int button, int x, int y, t_data *param)
 		vectors_init(param);
 		mouse_init(param);
 		calculate_rotation(param);
+		printf("despues\n");
 		calculate_vectors(param);
-		param->reload = 1;
 	}
 	return (0);
 }
@@ -111,6 +112,7 @@ int		key_pressed(int keycode, t_data *param)
 		show_obj(param);
 	printf("key = %x\n", keycode);
 	calculate_rotation(param);
+	printf("despues\n");
 	calculate_vectors(param);
 	return (0);
 }

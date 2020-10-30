@@ -25,9 +25,16 @@ SRC	=	cam_calc.c\
 		misc/vectors_1.c\
 		gnl/get_next_line_bonus.c\
 		parse/settings.c\
+		parse/def_ft.c\
 		parse/def_obj.c\
 		parse/def_sp.c\
 		parse/def_pl.c\
+		parse/def_cy.c\
+		parse/def_sq.c\
+		parse/def_tr.c\
+		parse/def_bx.c\
+		parse/elements.c\
+		parser.c\
 
 OBJ =	cam_calc.o\
 		dist.o\
@@ -56,9 +63,16 @@ OBJ =	cam_calc.o\
 		vectors_1.o\
 		get_next_line_bonus.o\
 		settings.o\
+		def_ft.o\
 		def_obj.o\
 		def_sp.o\
 		def_pl.o\
+		def_cy.o\
+		def_sq.o\
+		def_tr.o\
+		def_bx.o\
+		elements.o\
+		parser.o\
 
 MLX =	../minilibx-linux-master/*.a
 
@@ -83,9 +97,9 @@ fclean: clean
 re: fclean all
 
 test: all
-	gcc $(CFLAGS) main.c $(OBJ) $(LFT) $(MLX) $(LFLAGS) -o test && ./test
+	gcc $(CFLAGS) main_test.c $(OBJ) $(LFT) $(MLX) $(LFLAGS) -o test && ./test "../default.rt"
 
 parser: all
-	gcc parser.c $(OBJ) $(LFT) $(MLX) $(LFLAGS) -o parser && ./parser "../../hola.rt"
+	gcc main_parser.c $(OBJ) $(LFT) $(MLX) $(LFLAGS) -o parser && ./parser "../default.rt"
 
 .PHONY: all clean fclean re test
