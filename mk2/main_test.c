@@ -6,7 +6,7 @@
 /*   By: jserrano <jserrano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/17 13:30:40 by jserrano          #+#    #+#             */
-/*   Updated: 2020/10/30 17:44:26 by jserrano         ###   ########.fr       */
+/*   Updated: 2020/10/31 23:03:38 by jserrano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,14 @@ static void 	print_scene(t_data *param)
 		printf("%d. l: P(%.1f %.1f %.1f) rgb(%03d %03d %03d)\n",
 			++n, param->l[i]->O[0], param->l[i]->O[1], param->l[i]->O[2],
 			rgb[0], rgb[1], rgb[2]);
+	}
+	i = -1;
+	while (param->c[++i])
+	{
+		printf("%d. c: P(%.1f %.1f %.1f) v(%.1f %.1f %.1f) fov(%d)\n",
+			++n, param->c[i]->O[0], param->c[i]->O[1], param->c[i]->O[2],
+			param->c[i]->v[0], param->c[i]->v[1], param->c[i]->v[2],
+			param->c[i]->fov);
 	}
 	i = -1;
 	while (param->sp[++i])
@@ -80,20 +88,20 @@ int		main(int argc, char **argv)
 {
 	t_data *param;
 
-	if (argc != 2)
+	if (argc == 2)
 	{
-		write(1, "Wrong number of arguments!\n", 28);
-		return (-1);
+		param = (t_data *)malloc(sizeof(t_data));
+		ft_init(param, argv);
+		print_scene(param);
+		mlx_hook(param->win_id, KEY_PR, MK_KEY_PR, key_pressed, param);
+		mlx_hook(param->win_id, BUT_PR, MK_BUT_PR, button_pressed, param);
+		mlx_hook(param->win_id, BUT_RE, MK_BUT_RE, button_released, param);
+		mlx_hook(param->win_id, MOT_NT, MK_PTR_MO, get_pos, param);
+		mlx_hook(param->win_id, CLI_MG, CL_CLOSE, ft_exit, param);
+		mlx_loop_hook(param->id, ft_loop, param);
+		mlx_loop(param->id);
 	}
-	param = (t_data *)malloc(sizeof(t_data));
-	ft_init(param, argv);
-	print_scene(param);
-	mlx_hook(param->win_id, KEY_PR, MK_KEY_PR, key_pressed, param);
-	mlx_hook(param->win_id, BUT_PR, MK_BUT_PR, button_pressed, param);
-	mlx_hook(param->win_id, BUT_RE, MK_BUT_RE, button_released, param);
-	mlx_hook(param->win_id, MOT_NT, MK_PTR_MO, get_pos, param);
-	mlx_hook(param->win_id, CLI_MG, CL_CLOSE, ft_exit, param);
-	mlx_loop_hook(param->id, ft_loop, param);
-	mlx_loop(param->id);
+	else
+		write(1, "Wrong number of arguments!\n", 28);
 	return (0);
 }

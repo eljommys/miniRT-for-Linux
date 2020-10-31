@@ -37,6 +37,7 @@
 # define KEY_SPA	0x0020
 # define KEY_CTR	0xffe3
 # define KEY_ENT	0xff0d
+# define KEY_V		0x0076
 
 # include <stdlib.h>
 # include <stdio.h>
@@ -82,6 +83,8 @@ typedef struct	s_ray{
 }				t_ray;
 
 typedef struct	s_camera{
+	int		i;
+	int		n;
 	double	O[3];
 	double	P[3];
 	double	Vn[3];
@@ -91,6 +94,12 @@ typedef struct	s_camera{
 	double	rot_y;
 	t_ray	ray;
 }				t_camera;
+
+typedef struct	s_cams{
+	double	O[3];
+	double	v[3];
+	int		fov;
+}				t_cams;
 
 typedef struct	s_image{
 	void	*img;
@@ -172,6 +181,7 @@ typedef struct	s_data{
 	t_box		**bx;
 	t_triangle	**tr;
 	t_light		**l;
+	t_cams		**c;
 	int			amb_l;
 	int			amb_l_rgb[3];
 }				t_data;
@@ -210,7 +220,8 @@ void	norm(double *u, double *v);
 */
 
 void	mouse_init(t_data *param);
-void	vectors_init(t_data *param);
+void	pos_init(t_data *param, int i);
+void	vectors_init(t_data *param, int i);
 void	ft_init(t_data *param, char **argv);
 
 /*
@@ -218,7 +229,8 @@ void	ft_init(t_data *param, char **argv);
 */
 
 void	calculate_vectors(t_data *def);
-void 	calculate_rotation(t_data *param);
+void	calculate_rotation(t_data *param);
+void	copy_cam(t_data *param);
 
 /*
 **	add_obj/
@@ -228,6 +240,7 @@ t_sphere	**add_sp(t_sphere **sp, double *O, double r, int c);
 t_plane		**add_pl(t_plane **pl, double *O, double *v, int c);
 t_cylinder	**add_cy(t_cylinder **cy, double *O, double *v, double h, double d, int c);
 t_light		**add_l(t_light **l, double *O, int c);
+t_cams		**add_c(t_cams **c, double *O, double *v, int fov);
 t_square	**add_sq(t_square **sq, double *O, double *v, double h, int c);
 t_box		**add_bx(t_box **bx, double *O, double *v, double h, int c);
 t_triangle	**add_tr(t_triangle **tr, double *A, double *B, double *C, int c);

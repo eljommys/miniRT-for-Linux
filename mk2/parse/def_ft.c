@@ -6,7 +6,7 @@
 /*   By: jserrano <jserrano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/30 16:15:51 by jserrano          #+#    #+#             */
-/*   Updated: 2020/10/30 17:16:13 by jserrano         ###   ########.fr       */
+/*   Updated: 2020/10/31 13:50:45 by jserrano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,12 @@ void def_P(char *line, int *i, double *P)
 	while (++j < 3)
 	{
 		P[j] = (double)ft_atoi(line + *i);
-		while ('0' <= line[*i] && line[*i] <= '9')
+		while ('0' <= line[*i] && line[*i] <= '9' ||
+				line[*i] == '-')
 			(*i)++;
 		(*i)++;
 		num_len = 0;
-		while ('0' <= line[*i + num_len] && line[*i + num_len] <= '9' ||
-				line[*i + num_len] == '-')
+		while ('0' <= line[*i + num_len] && line[*i + num_len] <= '9')
 			num_len++;
 		P[j] += (double)ft_atoi(line + *i) / pow(10, num_len);
 		*i += num_len + 1;

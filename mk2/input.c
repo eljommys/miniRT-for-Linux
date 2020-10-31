@@ -6,7 +6,7 @@
 /*   By: jserrano <jserrano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/17 13:25:20 by jserrano          #+#    #+#             */
-/*   Updated: 2020/10/30 18:42:37 by jserrano         ###   ########.fr       */
+/*   Updated: 2020/10/31 17:02:19 by jserrano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ int		get_pos(int x, int y, t_data *param)
 						param->scr.y / 2 - param->crd.y);
 		}
 		calculate_rotation(param);
-		printf("despues\n");
 		calculate_vectors(param);
+		copy_cam(param);
 
 		printf("X: %d, Y: %d\n", param->crd.x, param->crd.y);
 		printf("Screen dist: %f\n", param->scr.dist);
@@ -60,11 +60,12 @@ int		button_pressed(int button, int x, int y, t_data *param)
 	}
 	else if (button == 3)
 	{
-		vectors_init(param);
+		vectors_init(param, param->cam.i);
 		mouse_init(param);
 		calculate_rotation(param);
-		printf("despues\n");
 		calculate_vectors(param);
+		copy_cam(param);
+		printf("RESET\n");
 	}
 	return (0);
 }
@@ -81,6 +82,16 @@ int		button_released(int button, int x, int y, t_data *param)
 	}
 	param->button = 0;
 	return (0);
+}
+
+static void change_cam(t_data *param)
+{
+	if (param->cam.i + 1 == param->cam.n)
+		param->cam.i = 0;
+	else
+		param->cam.i++;
+	pos_init(param, param->cam.i);
+	vectors_init(param, param->cam.i);
 }
 
 int		key_pressed(int keycode, t_data *param)
@@ -110,9 +121,11 @@ int		key_pressed(int keycode, t_data *param)
 		param->cam.O[2] += -10;
 	else if (keycode == KEY_ENT)
 		show_obj(param);
+	else if (keycode == KEY_V)
+		change_cam(param);
 	printf("key = %x\n", keycode);
 	calculate_rotation(param);
-	printf("despues\n");
 	calculate_vectors(param);
+	copy_cam(param);
 	return (0);
 }

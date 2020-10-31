@@ -6,7 +6,7 @@
 /*   By: jserrano <jserrano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/17 13:49:25 by jserrano          #+#    #+#             */
-/*   Updated: 2020/10/17 13:49:42 by jserrano         ###   ########.fr       */
+/*   Updated: 2020/10/31 17:00:32 by jserrano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,18 @@ void	calculate_vectors(t_data *param)
 	i = -1;
 	while (++i < 3)
 		param->cam.Vy[i] /= module;
+}
+
+void	copy_cam(t_data *param)
+{
+	int j;
+
+	j = -1;
+	while (++j < 3)
+	{
+		param->c[param->cam.i]->O[j] = param->cam.O[j];
+		param->c[param->cam.i]->v[j] = param->cam.Vn[j];
+	}
 }
 
 void	calculate_rotation(t_data *param)

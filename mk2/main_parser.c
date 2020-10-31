@@ -6,7 +6,7 @@
 /*   By: jserrano <jserrano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/30 15:56:46 by jserrano          #+#    #+#             */
-/*   Updated: 2020/10/30 17:23:41 by jserrano         ###   ########.fr       */
+/*   Updated: 2020/10/31 16:23:44 by jserrano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,14 @@ static void 	print_scene(t_data *param)
 		printf("%d. l: P(%.1f %.1f %.1f) rgb(%03d %03d %03d)\n",
 			++n, param->l[i]->O[0], param->l[i]->O[1], param->l[i]->O[2],
 			rgb[0], rgb[1], rgb[2]);
+	}
+	i = -1;
+	while (param->c[++i])
+	{
+		printf("%d. c: P(%.1f %.1f %.1f) v(%.1f %.1f %.1f) fov(%d)\n",
+			++n, param->c[i]->O[0], param->c[i]->O[1], param->c[i]->O[2],
+			param->c[i]->v[0], param->c[i]->v[1], param->c[i]->v[2],
+			param->c[i]->fov);
 	}
 	i = -1;
 	while (param->sp[++i])

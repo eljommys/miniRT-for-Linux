@@ -6,7 +6,7 @@
 /*   By: jserrano <jserrano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/29 13:40:28 by jserrano          #+#    #+#             */
-/*   Updated: 2020/10/30 16:58:56 by jserrano         ###   ########.fr       */
+/*   Updated: 2020/10/31 12:12:01 by jserrano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,4 +24,5 @@ void			parse(t_data *param, char **argv)
 		def_elm(param, line);
 		free(line);
 	}
+	close(fd);
 }

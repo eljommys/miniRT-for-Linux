@@ -13,6 +13,7 @@ SRC	=	cam_calc.c\
 		obj/add_bx.c\
 		obj/add_cy.c\
 		obj/add_l.c\
+		obj/add_c.c\
 		obj/add_pl.c\
 		obj/add_sp.c\
 		obj/add_sq.c\
@@ -51,6 +52,7 @@ OBJ =	cam_calc.o\
 		add_bx.o\
 		add_cy.o\
 		add_l.o\
+		add_c.o\
 		add_pl.o\
 		add_sp.o\
 		add_sq.o\

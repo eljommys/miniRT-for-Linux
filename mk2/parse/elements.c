@@ -6,7 +6,7 @@
 /*   By: jserrano <jserrano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/30 16:04:14 by jserrano          #+#    #+#             */
-/*   Updated: 2020/10/30 17:29:20 by jserrano         ###   ########.fr       */
+/*   Updated: 2020/10/31 16:47:33 by jserrano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static void	def_cam(t_data *param, char *line, int *i)
 	double	v[3];
 	int		fov;
 
-	*i = 2;
+	*i = 1;
 	while (line[*i] == ' ' || line[*i] == '\t')
 		(*i)++;
 	def_P(line, i, P);
@@ -31,7 +31,8 @@ static void	def_cam(t_data *param, char *line, int *i)
 	fov = ft_atoi(line + *i);
 	while ('0' <= line[*i] && line[*i] <= '9')
 		(*i)++;
-	//implementar varias camaras
+	param->c = add_c(param->c, P, v, fov);
+	param->cam.n++;
 }
 
 static void		def_light(t_data *param, char *line, int *i)
@@ -42,7 +43,7 @@ static void		def_light(t_data *param, char *line, int *i)
 	int		rgb[3];
 	int		c;
 
-	*i = 2;
+	*i = 1;
 	while (line[*i] == ' ' || line[*i] == '\t')
 		(*i)++;
 	def_P(line, i, P);
@@ -64,8 +65,8 @@ void		def_elm(t_data *param, char *line)
 	int		i;
 
 	i = 0;
-	/*if (line[i] == 'c')
+	if (!ft_memcmp(line, "c ", 2) || !ft_memcmp(line, "c\t", 2))
 		def_cam(param, line, &i);
-	else */if (line[i] == 'l')
+	else if (!ft_memcmp(line, "l ", 2) || !ft_memcmp(line, "l\t", 2))
 		def_light(param, line, &i);
 }

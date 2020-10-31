@@ -6,7 +6,7 @@
 /*   By: jserrano <jserrano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/17 13:38:01 by jserrano          #+#    #+#             */
-/*   Updated: 2020/10/29 12:37:47 by jserrano         ###   ########.fr       */
+/*   Updated: 2020/10/31 12:27:45 by jserrano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,6 +128,8 @@ void	ft_init(t_data *param)
 	screen_init(param);
 	pos_init(param);
 	vectors_init(param);
+	calculate_rotation(param);
+	calculate_vectors(param);
 	objs_init(param);
 	param->cy = add_cy(param->cy, p1, v0, 200, 300, 0xdc8c2e);
 	param->sp = add_sp(param->sp, p0, 500, 0xb15a76);

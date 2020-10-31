@@ -6,7 +6,7 @@
 /*   By: jserrano <jserrano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/17 13:38:01 by jserrano          #+#    #+#             */
-/*   Updated: 2020/10/30 16:00:25 by jserrano         ###   ########.fr       */
+/*   Updated: 2020/10/31 16:38:18 by jserrano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,6 @@ void		mouse_init(t_data *param)
 
 static void		screen_init(t_data *param)
 {
-	param->scr.x = 1240;
-	param->scr.y = 720;
 	param->id = mlx_init();
 	param->win_id = mlx_new_window(param->id, param->scr.x,
 								param->scr.y, "hola");
@@ -34,25 +32,21 @@ static void		screen_init(t_data *param)
 	&param->img.bits_per_pixel, &param->img.line_length, &param->img.endian);
 }
 
-void		pos_init(t_data *param)
+void		pos_init(t_data *param, int i)
 {
-	param->cam.O[0] = 0;
-	param->cam.O[1] = 0;
-	param->cam.O[2] = 0;
+	param->cam.O[0] = param->c[i]->O[0];
+	param->cam.O[1] = param->c[i]->O[1];
+	param->cam.O[2] = param->c[i]->O[2];
 }
 
-void		vectors_init(t_data *param)
+void		vectors_init(t_data *param, int j)
 {
 	int		i;
 	double	module;
 
-	param->cam.Vn[0] = 1;
-	param->cam.Vn[1] = 0;
-	param->cam.Vn[2] = 0;
-	module = mod(param->cam.Vn);
 	i = -1;
 	while (++i < 3)
-		param->cam.Vn[i] /= module;
+		param->cam.Vn[i] = param->c[j]->v[i];
 	if (param->cam.Vn[0] >= 0 && param->cam.Vn[1] >= 0)
 		param->cam.rot_z = asin(param->cam.Vn[1]);
 	else if (param->cam.Vn[0] < 0 && param->cam.Vn[1] >= 0)
@@ -63,7 +57,7 @@ void		vectors_init(t_data *param)
 		param->cam.rot_z = 2 * M_PI - asin(param->cam.Vn[1]);
 	param->cam.rot_y = (param->cam.Vn[2] >= 0) ? asin(param->cam.Vn[2]) :
 			2 * M_PI - asin(param->cam.Vn[2]);
-	param->scr.fov = 90;
+	param->scr.fov = param->c[j]->fov;
 	param->scr.dist = (param->scr.x / 2) /
 						tan((param->scr.fov / 2) * M_PI / 180);
 }
@@ -73,8 +67,12 @@ static void		objs_init(t_data *param)
 	param->scr.x = -1;
 	param->scr.y = -1;
 	param->amb_l = -1;
+	param->cam.n = 0;
+	param->cam.i = 0;
 	param->l = (t_light **)malloc(sizeof(t_light *));
 	param->l[0] = 0;
+	param->c = (t_cams **)malloc(sizeof(t_cams *));
+	param->c[0] = 0;
 	param->sp = (t_sphere **)malloc(sizeof(t_sphere *));
 	param->sp[0] = 0;
 	param->pl = (t_plane **)malloc(sizeof(t_plane *));
@@ -91,10 +89,12 @@ static void		objs_init(t_data *param)
 
 void	ft_init(t_data *param, char **argv)
 {
-	mouse_init(param);
-	screen_init(param);
-	pos_init(param);
-	vectors_init(param);
 	objs_init(param);
 	parse(param, argv);
+	mouse_init(param);
+	screen_init(param);
+	pos_init(param, 0);
+	vectors_init(param, 0);
+	calculate_rotation(param);
+	calculate_vectors(param);
 }

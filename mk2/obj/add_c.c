@@ -1,35 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   add_pl.c                                           :+:      :+:    :+:   */
+/*   add_c.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jserrano <jserrano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/10/27 16:33:45 by jserrano          #+#    #+#             */
-/*   Updated: 2020/10/31 15:24:53 by jserrano         ###   ########.fr       */
+/*   Created: 2020/10/31 15:16:32 by jserrano          #+#    #+#             */
+/*   Updated: 2020/10/31 15:40:43 by jserrano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../raymarching.h"
 
-static void set_pl(t_plane **pl, t_plane **aux, double *O, double *v, int *var)
+static void	set_c(t_cams **c, t_cams **aux, double *O, double *v, int fov)
 {
-	int	i;
-	int	j;
+	int i;
+	int len;
+	int j;
 
+	len = 0;
+	while (c[len])
+		len++;
 	i = -1;
-	while(++i < var[0] + 1)
+	while (++i < len + 1)
 	{
-		aux[i] = (t_plane *)malloc(sizeof(t_plane));
+		aux[i] = (t_cams *)malloc(sizeof(t_cams));
 		j = -1;
-		if (i < var[0])
+		if (i < len)
 		{
 			while (++j < 3)
 			{
-				aux[i]->O[j] = pl[i]->O[j];
-				aux[i]->v[j] = pl[i]->v[j];
+				aux[i]->O[j] = c[i]->O[j];
+				aux[i]->v[j] = c[i]->v[j];
 			}
-			aux[i]->col = pl[i]->col;
+			aux[i]->fov = c[i]->fov;
 		}
 		else
 		{
@@ -38,31 +42,31 @@ static void set_pl(t_plane **pl, t_plane **aux, double *O, double *v, int *var)
 				aux[i]->O[j] = O[j];
 				aux[i]->v[j] = v[j];
 			}
-			aux[i]->col = var[1];
+			aux[i]->fov = fov;
 		}
 	}
 	aux[i] = 0;
 }
 
-t_plane		**add_pl(t_plane **pl, double *O, double *v, int c)
+t_cams		**add_c(t_cams **c, double *O, double *v, int fov)
 {
-	t_plane		**aux;
-	double		Vn[3];
-	int			var[2];
-	int			i;
+	int		i;
+	int		len;
+	int		j;
+	double	Vn[3];
+	t_cams	**aux;
 
-	var[0] = 0;
-	var[1] = c;
-	while (pl[var[0]])
-		var[0]++;
-	if (!(aux = (t_plane **)malloc(sizeof(t_plane *) * (var[0] + 2))))
-		return (pl);
+	len = 0;
+	while (c[len])
+		len++;
+	if (!(aux = (t_cams **)malloc(sizeof(t_cams *) * len)))
+		return (c);
 	norm(v, Vn);
-	set_pl(pl, aux, O, Vn, var);
+	set_c(c, aux, O, v, fov);
 	i = 0;
-	if (var[0])
-		while (pl[i])
-			free(pl[i++]);
-	free(pl);
+	if (len)
+		while (c[i])
+			free(c[i++]);
+	free(c);
 	return (aux);
 }
