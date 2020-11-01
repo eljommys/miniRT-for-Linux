@@ -6,7 +6,7 @@
 /*   By: jserrano <jserrano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/28 12:57:37 by jserrano          #+#    #+#             */
-/*   Updated: 2020/10/29 12:40:31 by jserrano         ###   ########.fr       */
+/*   Updated: 2020/11/01 14:40:44 by jserrano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,29 +25,37 @@ void	ft_free(t_data *param)
 	int	i;
 
 	i = -1;
-	while (param->bx[++i])
-		free(param->bx[i]);
-	free(param->bx);
-	i = -1;
-	while (param->cy[++i])
-		free(param->cy[i]);
-	free(param->cy);
-	i = -1;
 	while (param->l[++i])
+	{
+		printf("i = %d, param->l = %x\n", i, param->l);
 		free(param->l[i]);
+		printf("mmmmmmen");
+	}
 	free(param->l);
 	i = -1;
-	while (param->pl[++i])
-		free(param->pl[i]);
-	free(param->pl);
+	while (param->c[++i])
+		free(param->c[i]);
+	free(param->c);
 	i = -1;
 	while (param->sp[++i])
 		free(param->sp[i]);
 	free(param->sp);
 	i = -1;
+	while (param->pl[++i])
+		free(param->pl[i]);
+	free(param->pl);
+	i = -1;
+	while (param->cy[++i])
+		free(param->cy[i]);
+	free(param->cy);
+	i = -1;
 	while (param->sq[++i])
 		free(param->sq[i]);
 	free(param->sq);
+	i = -1;
+	while (param->bx[++i])
+		free(param->bx[i]);
+	free(param->bx);
 	i = -1;
 	while (param->tr[++i])
 		free(param->tr[i]);
@@ -56,7 +64,8 @@ void	ft_free(t_data *param)
 
 int		ft_exit(t_data *param)
 {
-	//ft_free(param);
+	/*printf("param->l = %x\n", param->l);
+	ft_free(param);*/
 	free(param);
 	exit(0);
 	return (0);

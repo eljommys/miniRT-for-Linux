@@ -6,7 +6,7 @@
 /*   By: jserrano <jserrano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/30 16:04:14 by jserrano          #+#    #+#             */
-/*   Updated: 2020/10/31 16:47:33 by jserrano         ###   ########.fr       */
+/*   Updated: 2020/11/01 13:54:37 by jserrano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ static void		def_light(t_data *param, char *line, int *i)
 		rgb[j] *= alpha;
 	rgb_to_hex(rgb, &c);
 	param->l = add_l(param->l, P, c);
+	printf("param->l = %x\n", param->l);
 }
 
 void		def_elm(t_data *param, char *line)

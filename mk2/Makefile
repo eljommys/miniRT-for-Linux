@@ -99,7 +99,7 @@ fclean: clean
 re: fclean all
 
 test: all
-	gcc $(CFLAGS) main_test.c $(OBJ) $(LFT) $(MLX) $(LFLAGS) -o test && ./test "../default.rt"
+	gcc main_test.c $(OBJ) $(LFT) $(MLX) $(LFLAGS) -o test && ./test "../default.rt"
 
 parser: all
 	gcc main_parser.c $(OBJ) $(LFT) $(MLX) $(LFLAGS) -o parser && ./parser "../default.rt"
