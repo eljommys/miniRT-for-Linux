@@ -6,7 +6,7 @@
 /*   By: jserrano <jserrano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/17 13:38:01 by jserrano          #+#    #+#             */
-/*   Updated: 2020/11/01 13:40:36 by jserrano         ###   ########.fr       */
+/*   Updated: 2020/11/01 22:09:40 by jserrano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static void		screen_init(t_data *param)
 {
 	param->id = mlx_init();
 	param->win_id = mlx_new_window(param->id, param->scr.x,
-								param->scr.y, "hola");
+								param->scr.y, "miniRT");
 	param->img.img = mlx_new_image(param->id, param->scr.x,
 								param->scr.y);
 	param->img.addr = mlx_get_data_addr(param->img.img,

@@ -6,7 +6,7 @@
 /*   By: jserrano <jserrano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/17 13:25:20 by jserrano          #+#    #+#             */
-/*   Updated: 2020/10/31 17:02:19 by jserrano         ###   ########.fr       */
+/*   Updated: 2020/11/01 22:37:19 by jserrano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ int		key_pressed(int keycode, t_data *param)
 	param->reload = 1;
 	j = -1;
 	if (keycode == KEY_ESC)
-		ft_exit(param->id);
+		ft_exit(param);
 	else if (keycode == KEY_W)
 		while(++j < 3)
 			param->cam.O[j] += param->cam.Vn[j] * 20;
