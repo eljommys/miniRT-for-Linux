@@ -6,7 +6,7 @@
 /*   By: jserrano <jserrano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/17 13:30:40 by jserrano          #+#    #+#             */
-/*   Updated: 2020/11/01 22:56:15 by jserrano         ###   ########.fr       */
+/*   Updated: 2020/11/02 15:07:27 by jserrano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,28 +92,30 @@ int		main(int argc, char **argv)
 	if (argc == 2 || argc == 3)
 	{
 		i = ft_strlen(argv[1]);
-		if (ft_memcmp(argv[1] + i - 2, ".rt", 3))
+		if (ft_memcmp(argv[1] + i - 3, ".rt", 3))
+		{
 			write(1, "Please insert correct .rt file\n", 32);
+			return (-1);
+		}
 		param = (t_data *)malloc(sizeof(t_data));
 		ft_init(param, argv);
 		print_scene(param);
-		if (argc == 2)
+		mlx_hook(param->win_id, KEY_PR, MK_KEY_PR, key_pressed, param);
+		mlx_hook(param->win_id, BUT_PR, MK_BUT_PR, button_pressed, param);
+		mlx_hook(param->win_id, BUT_RE, MK_BUT_RE, button_released, param);
+		mlx_hook(param->win_id, MOT_NT, MK_PTR_MO, get_pos, param);
+		mlx_hook(param->win_id, CLI_MG, CL_CLOSE, ft_exit, param);
+		mlx_loop_hook(param->id, ft_loop, param);
+		if (argc == 3)
 		{
-			mlx_hook(param->win_id, KEY_PR, MK_KEY_PR, key_pressed, param);
-			mlx_hook(param->win_id, BUT_PR, MK_BUT_PR, button_pressed, param);
-			mlx_hook(param->win_id, BUT_RE, MK_BUT_RE, button_released, param);
-			mlx_hook(param->win_id, MOT_NT, MK_PTR_MO, get_pos, param);
-			mlx_hook(param->win_id, CLI_MG, CL_CLOSE, ft_exit, param);
-			mlx_loop_hook(param->id, ft_loop, param);
-			mlx_loop(param->id);
-		}
-		else if (!ft_memcmp(argv[2], "--save", 7))
-		{
-			//save_scr(param); //entra en test_func pero no imprime ninguna imagen sino que solamente la guarda en un archivo
+			if (!ft_memcmp(argv[2], "--save", 7))
+				save_scr(param);
+			else
+				write(1, "Enter --save if you want to save a screenshot\n", 47);
 			ft_exit(param);
+			return (-1);
 		}
-		else
-			write(1, "Enter --save if you want to save a screenshot\n", 47);
+		mlx_loop(param->id);
 	}
 	else
 		write(1, "Wrong number of arguments!\n", 28);

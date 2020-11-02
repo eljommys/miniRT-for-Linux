@@ -287,4 +287,10 @@ void	def_elm(t_data *param, char *line);
 
 void	parse(t_data *param, char **argv);
 
+/*
+**	save.c
+*/
+
+void	save_scr(t_data *param);
+
 #endif

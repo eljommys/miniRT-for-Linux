@@ -36,6 +36,7 @@ SRC	=	cam_calc.c\
 		parse/def_bx.c\
 		parse/elements.c\
 		parser.c\
+		save.c\
 
 OBJ =	cam_calc.o\
 		dist.o\
@@ -75,6 +76,7 @@ OBJ =	cam_calc.o\
 		def_bx.o\
 		elements.o\
 		parser.o\
+		save.o\
 
 MLX =	../minilibx-linux-master/*.a
 
