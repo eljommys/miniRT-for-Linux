@@ -6,7 +6,7 @@
 /*   By: jserrano <jserrano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/17 13:30:40 by jserrano          #+#    #+#             */
-/*   Updated: 2020/11/03 18:10:43 by jserrano         ###   ########.fr       */
+/*   Updated: 2020/11/03 18:12:49 by jserrano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,7 @@ static void	ft_hooks(t_data *param)
 **	-	el tamaño maximo de resolucion es el del display
 **	-	los floats estan separados por puntos solamente
 **	-	los rgb estan separados por comas solamente
+**	-	el fov de camara tiene que estar entre 0 y 179
 */
 
 int			main(int argc, char **argv)
