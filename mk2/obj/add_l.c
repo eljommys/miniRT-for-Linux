@@ -6,7 +6,7 @@
 /*   By: jserrano <jserrano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/27 16:23:06 by jserrano          #+#    #+#             */
-/*   Updated: 2020/11/01 13:54:20 by jserrano         ###   ########.fr       */
+/*   Updated: 2020/11/03 17:54:37 by jserrano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,32 +14,31 @@
 
 static void	set_l(t_light **l, t_light **aux, double *O, int *var)
 {
-	int	i;
-	int	j;
+	int	i_j[2];
 
-	i = -1;
-	while(++i < var[0] + 1)
+	i_j[0] = -1;
+	while(++i_j[0] < var[0] + 1)
 	{
-		aux[i] = (t_light *)malloc(sizeof(t_light));
-		j = -1;
-		if (i < var[0])
+		aux[i_j[0]] = (t_light *)malloc(sizeof(t_light));
+		i_j[1] = -1;
+		if (i_j[0] < var[0])
 		{
-			while (++j < 3)
+			while (++i_j[1] < 3)
 			{
-				aux[i]->O[j] = l[i]->O[j];
-				aux[i]->rgb[j] = l[i]->rgb[j];
+				aux[i_j[0]]->O[i_j[1]] = l[i_j[0]]->O[i_j[1]];
+				aux[i_j[0]]->rgb[i_j[1]] = l[i_j[0]]->rgb[i_j[1]];
 			}
-			aux[i]->col = l[i]->col;
+			aux[i_j[0]]->col = l[i_j[0]]->col;
 		}
 		else
 		{
-			while (++j < 3)
-				aux[i]->O[j] = O[j];
-			hex_to_rgb(var[1], (int *)aux[i]->rgb);
-			aux[i]->col = var[1];
+			while (++i_j[1] < 3)
+				aux[i_j[0]]->O[i_j[1]] = O[i_j[1]];
+			hex_to_rgb(var[1], (int *)aux[i_j[0]]->rgb);
+			aux[i_j[0]]->col = var[1];
 		}
 	}
-	aux[i] = 0;
+	aux[i_j[0]] = 0;
 }
 
 t_light		**add_l(t_light **l, double *O, int c)

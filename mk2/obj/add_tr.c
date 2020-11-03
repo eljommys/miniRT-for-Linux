@@ -6,7 +6,7 @@
 /*   By: jserrano <jserrano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/27 18:48:44 by jserrano          #+#    #+#             */
-/*   Updated: 2020/10/28 00:08:04 by jserrano         ###   ########.fr       */
+/*   Updated: 2020/11/03 15:47:57 by jserrano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,6 @@ t_triangle	**add_tr(t_triangle **tr, double *A, double *B, double *C, int c)
 {
 	t_triangle	**aux;
 	int			var[3];
-	int			len;
 
 	var[2] = 0;
 	while (tr[var[2]])

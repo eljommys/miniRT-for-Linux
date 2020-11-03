@@ -6,7 +6,7 @@
 /*   By: jserrano <jserrano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/28 13:23:47 by jserrano          #+#    #+#             */
-/*   Updated: 2020/10/28 13:23:57 by jserrano         ###   ########.fr       */
+/*   Updated: 2020/11/03 15:48:22 by jserrano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	rgb_to_hex(int *rgb, int *hex)
 	*hex = rgb[0] * 65536 + rgb[1] * 256 + rgb[2];
 }
 
-void	*hex_to_rgb(int hex, int *rgb)
+void	hex_to_rgb(int hex, int *rgb)
 {
 	int i;
 

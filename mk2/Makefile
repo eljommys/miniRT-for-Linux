@@ -1,6 +1,7 @@
 SRC	=	cam_calc.c\
 		dist.c\
 		init.c\
+		ft_init.c\
 		input.c\
 		raymarching.c\
 		test_func.c\
@@ -41,6 +42,7 @@ SRC	=	cam_calc.c\
 OBJ =	cam_calc.o\
 		dist.o\
 		init.o\
+		ft_init.o\
 		input.o\
 		raymarching.o\
 		test_func.o\
@@ -88,7 +90,7 @@ LFLAGS =	-L.. -lmlx -lXext -lX11 -lm -lbsd
 
 all:
 	make -C libft
-	gcc -c $(SRC)
+	gcc $(CFLAGS) -c $(SRC)
 
 clean:
 	make -C libft clean
@@ -101,7 +103,7 @@ fclean: clean
 re: fclean all
 
 test: all
-	gcc main_test.c $(OBJ) $(LFT) $(MLX) $(LFLAGS) -o test && ./test "../default.rt"
+	gcc $(CFLAGS) main_test.c $(OBJ) $(LFT) $(MLX) $(LFLAGS) -o test && ./test "../default.rt"
 
 parser: all
 	gcc main_parser.c $(OBJ) $(LFT) $(MLX) $(LFLAGS) -o parser && ./parser "../default.rt"

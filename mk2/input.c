@@ -6,7 +6,7 @@
 /*   By: jserrano <jserrano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/17 13:25:20 by jserrano          #+#    #+#             */
-/*   Updated: 2020/11/01 22:37:19 by jserrano         ###   ########.fr       */
+/*   Updated: 2020/11/03 18:01:29 by jserrano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,13 +34,6 @@ int		get_pos(int x, int y, t_data *param)
 		calculate_rotation(param);
 		calculate_vectors(param);
 		copy_cam(param);
-
-		printf("X: %d, Y: %d\n", param->crd.x, param->crd.y);
-		printf("Screen dist: %f\n", param->scr.dist);
-		printf("Vn[x]: %f, Vn[y]: %f, Vn[z]: %f\n", param->cam.Vn[0],
-									param->cam.Vn[1], param->cam.Vn[2]);
-		printf("O = (%f, %f, %f)\n\n\n", param->cam.O[0], param->cam.O[1],
-										param->cam.O[2]);
 	}
 	return (0);
 }
@@ -65,14 +58,13 @@ int		button_pressed(int button, int x, int y, t_data *param)
 		calculate_rotation(param);
 		calculate_vectors(param);
 		copy_cam(param);
-		printf("RESET\n");
 	}
 	return (0);
 }
 
 int		button_released(int button, int x, int y, t_data *param)
 {
-	if (param->button == 1)
+	if (button == 1)
 	{
 		param->mou.x += (x - param->scr.x / 2);
 		param->mou.y += (y - param->scr.y / 2);
@@ -99,7 +91,6 @@ int		key_pressed(int keycode, t_data *param)
 	int	j;
 
 	param->key = keycode;
-	param->reload = 1;
 	j = -1;
 	if (keycode == KEY_ESC)
 		ft_exit(param);
@@ -120,10 +111,9 @@ int		key_pressed(int keycode, t_data *param)
 	else if (keycode == KEY_CTR)
 		param->cam.O[2] += -10;
 	else if (keycode == KEY_ENT)
-		show_obj(param);
+		save_scr(param);
 	else if (keycode == KEY_V)
 		change_cam(param);
-	printf("key = %x\n", keycode);
 	calculate_rotation(param);
 	calculate_vectors(param);
 	copy_cam(param);

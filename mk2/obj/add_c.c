@@ -6,7 +6,7 @@
 /*   By: jserrano <jserrano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/31 15:16:32 by jserrano          #+#    #+#             */
-/*   Updated: 2020/10/31 15:40:43 by jserrano         ###   ########.fr       */
+/*   Updated: 2020/11/03 15:47:20 by jserrano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ t_cams		**add_c(t_cams **c, double *O, double *v, int fov)
 {
 	int		i;
 	int		len;
-	int		j;
 	double	Vn[3];
 	t_cams	**aux;
 

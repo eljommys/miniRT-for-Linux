@@ -6,13 +6,13 @@
 /*   By: jserrano <jserrano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/17 13:30:40 by jserrano          #+#    #+#             */
-/*   Updated: 2020/11/02 15:07:27 by jserrano         ###   ########.fr       */
+/*   Updated: 2020/11/03 18:10:43 by jserrano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "raymarching.h"
 
-static void 	print_scene(t_data *param)
+static void		print_scene(t_data *param)
 {
 	int n;
 	int i;
@@ -84,7 +84,27 @@ static void 	print_scene(t_data *param)
 	}
 }
 
-int		main(int argc, char **argv)
+static void	ft_hooks(t_data *param)
+{
+	mlx_hook(param->win_id, KEY_PR, MK_KEY_PR, key_pressed, param);
+	mlx_hook(param->win_id, BUT_PR, MK_BUT_PR, button_pressed, param);
+	mlx_hook(param->win_id, BUT_RE, MK_BUT_RE, button_released, param);
+	mlx_hook(param->win_id, MOT_NT, MK_PTR_MO, get_pos, param);
+	mlx_hook(param->win_id, CLI_MG, CL_CLOSE, ft_exit, param);
+	mlx_loop_hook(param->id, show_obj, param);
+}
+
+/*
+**	queda gestionar errores de archivo
+**	-	solo se puede declarar una vez R y A
+**	-	la resolucion, los rgb, la intensidad, altura y diametro
+**			no pueden ser negativos
+**	-	el tamaño maximo de resolucion es el del display
+**	-	los floats estan separados por puntos solamente
+**	-	los rgb estan separados por comas solamente
+*/
+
+int			main(int argc, char **argv)
 {
 	t_data *param;
 	int		i;
@@ -100,12 +120,7 @@ int		main(int argc, char **argv)
 		param = (t_data *)malloc(sizeof(t_data));
 		ft_init(param, argv);
 		print_scene(param);
-		mlx_hook(param->win_id, KEY_PR, MK_KEY_PR, key_pressed, param);
-		mlx_hook(param->win_id, BUT_PR, MK_BUT_PR, button_pressed, param);
-		mlx_hook(param->win_id, BUT_RE, MK_BUT_RE, button_released, param);
-		mlx_hook(param->win_id, MOT_NT, MK_PTR_MO, get_pos, param);
-		mlx_hook(param->win_id, CLI_MG, CL_CLOSE, ft_exit, param);
-		mlx_loop_hook(param->id, ft_loop, param);
+		ft_hooks(param);
 		if (argc == 3)
 		{
 			if (!ft_memcmp(argv[2], "--save", 7))
@@ -113,7 +128,6 @@ int		main(int argc, char **argv)
 			else
 				write(1, "Enter --save if you want to save a screenshot\n", 47);
 			ft_exit(param);
-			return (-1);
 		}
 		mlx_loop(param->id);
 	}

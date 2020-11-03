@@ -6,13 +6,13 @@
 /*   By: jserrano <jserrano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/28 12:57:37 by jserrano          #+#    #+#             */
-/*   Updated: 2020/11/01 22:38:27 by jserrano         ###   ########.fr       */
+/*   Updated: 2020/11/03 16:03:24 by jserrano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../raymarching.h"
 
-int ft_loop(t_data *param)
+int 		ft_loop(t_data *param)
 {
 	show_obj(param);
 	//show_pov(param);
@@ -20,7 +20,7 @@ int ft_loop(t_data *param)
 	return (0);
 }
 
-void	ft_free(t_data *param)
+static void	free_elm(t_data *param)
 {
 	int	i;
 
@@ -32,6 +32,12 @@ void	ft_free(t_data *param)
 	while (param->c[++i])
 		free(param->c[i]);
 	free(param->c);
+}
+
+static void	free_obj(t_data *param)
+{
+	int i;
+
 	i = -1;
 	while (param->sp[++i])
 		free(param->sp[i]);
@@ -58,16 +64,19 @@ void	ft_free(t_data *param)
 	free(param->tr);
 }
 
-int		ft_exit(t_data *param)
+int			ft_exit(t_data *param)
 {
 	free(param->id);
-	ft_free(param);
+	free(param->win_id);
+	free(param->img.img);
+	free_elm(param);
+	free_obj(param);
 	free(param);
 	exit(0);
 	return (0);
 }
 
-void	my_mlx_pixel_put(t_data *param, int x, int y, int color)
+void		my_mlx_pixel_put(t_data *param, int x, int y, int color)
 {
 	char	*dst;
 

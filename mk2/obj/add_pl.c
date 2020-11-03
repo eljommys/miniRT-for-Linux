@@ -6,13 +6,26 @@
 /*   By: jserrano <jserrano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/27 16:33:45 by jserrano          #+#    #+#             */
-/*   Updated: 2020/10/31 15:24:53 by jserrano         ###   ########.fr       */
+/*   Updated: 2020/11/03 17:57:35 by jserrano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../raymarching.h"
 
-static void set_pl(t_plane **pl, t_plane **aux, double *O, double *v, int *var)
+static void	cpy_pl(t_plane **pl, t_plane **aux, int i)
+{
+	int j;
+
+	j = -1;
+	while (++j < 3)
+	{
+		aux[i]->O[j] = pl[i]->O[j];
+		aux[i]->v[j] = pl[i]->v[j];
+	}
+	aux[i]->col = pl[i]->col;
+}
+
+static void	set_pl(t_plane **pl, t_plane **aux, double *O, double *v, int *var)
 {
 	int	i;
 	int	j;
@@ -21,18 +34,11 @@ static void set_pl(t_plane **pl, t_plane **aux, double *O, double *v, int *var)
 	while(++i < var[0] + 1)
 	{
 		aux[i] = (t_plane *)malloc(sizeof(t_plane));
-		j = -1;
 		if (i < var[0])
-		{
-			while (++j < 3)
-			{
-				aux[i]->O[j] = pl[i]->O[j];
-				aux[i]->v[j] = pl[i]->v[j];
-			}
-			aux[i]->col = pl[i]->col;
-		}
+			cpy_pl(pl, aux, i);
 		else
 		{
+			j = -1;
 			while (++j < 3)
 			{
 				aux[i]->O[j] = O[j];

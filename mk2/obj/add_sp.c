@@ -6,7 +6,7 @@
 /*   By: jserrano <jserrano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/27 15:48:06 by jserrano          #+#    #+#             */
-/*   Updated: 2020/10/30 11:15:52 by jserrano         ###   ########.fr       */
+/*   Updated: 2020/11/03 15:47:44 by jserrano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ t_sphere	**add_sp(t_sphere **sp, double *O, double r, int c)
 	t_sphere	**aux;
 	int			var[2];
 	int			i;
-	int			j;
 
 	var[0] = 0;
 	var[1] = c;

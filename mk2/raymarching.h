@@ -204,7 +204,7 @@ int		ft_exit(t_data *param);
 void	my_mlx_pixel_put(t_data *param, int x, int y, int color);
 double	mod(double *v);
 void	rgb_to_hex(int *rgb, int *hex);
-void	*hex_to_rgb(int hex, int *rgb);
+void	hex_to_rgb(int hex, int *rgb);
 double	max(double a, double b);
 double	cross_prod(double *u, double *v, int i);
 double	dot_prod(double *u, double *v);
@@ -259,7 +259,7 @@ int		bounce_ray(t_data *param, int i);
 
 void	show_camera(t_data *param);
 void	show_pov(t_data *param);
-void	show_obj(t_data *param);
+int		show_obj(t_data *param);
 
 /*
 **	dist.c
