@@ -6,13 +6,13 @@
 /*   By: jserrano <jserrano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/27 15:48:06 by jserrano          #+#    #+#             */
-/*   Updated: 2020/11/04 17:20:36 by jserrano         ###   ########.fr       */
+/*   Updated: 2020/11/04 17:22:04 by jserrano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../raymarching.h"
 
-static void	cpy_sp(t_sphere  **sp, t_sphere **aux, int i)
+static void	cpy_sp(t_sphere **sp, t_sphere **aux, int i)
 {
 	int j;
 
@@ -57,7 +57,7 @@ t_sphere	**add_sp(t_sphere **sp, double *o, double r, int c)
 	if (sp_init(sp, &aux, var, c))
 		return (sp);
 	var[2] = -1;
-	while(++var[2] < var[0] + 1)
+	while (++var[2] < var[0] + 1)
 	{
 		aux[var[2]] = (t_sphere *)malloc(sizeof(t_sphere));
 		if (var[2] < var[0])

@@ -6,7 +6,7 @@
 /*   By: jserrano <jserrano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/27 18:48:44 by jserrano          #+#    #+#             */
-/*   Updated: 2020/11/04 16:55:37 by jserrano         ###   ########.fr       */
+/*   Updated: 2020/11/04 17:22:11 by jserrano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ t_triangle	**add_tr(t_triangle **tr, double **abc, int c)
 		return (tr);
 	var[1] = c;
 	var[0] = -1;
-	while(++var[0] < var[2] + 1)
+	while (++var[0] < var[2] + 1)
 	{
 		aux[var[0]] = (t_triangle *)malloc(sizeof(t_triangle));
 		if (var[0] < var[2])
