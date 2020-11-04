@@ -6,84 +6,88 @@
 /*   By: jserrano <jserrano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/29 19:18:02 by jserrano          #+#    #+#             */
-/*   Updated: 2020/10/30 17:38:40 by jserrano         ###   ########.fr       */
+/*   Updated: 2020/11/04 01:49:57 by jserrano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../raymarching.h"
+#include "def_ft.h"
 
-static void def_res(t_data *param, char *line, int *i)
+static int def_res(t_data *param, char *line, int *i)
 {
 	int num_len;
 
 	(*i)++;
 	while (line[*i] == ' ' || line[*i] == '\t')
 		(*i)++;
+	if (line[*i] < '0' && '9' < line[*i])
+		return (1);
 	param->scr.x = (int)ft_atoi(line + *i);
 	num_len = 0;
 	while ('0' <= line[*i + num_len] && line[*i + num_len] <= '9')
 		num_len++;
 	*i += num_len;
-	while (line[*i] != ' ' || line[*i] == '\t')
+	while (line[*i] == ' ' || line[*i] == '\t')
 		(*i)++;
+	if (line[*i] < '0' && '9' < line[*i])
+		return (1);
 	param->scr.y = (int)ft_atoi(line + *i);
+	num_len = 0;
+	while ('0' <= line[*i + num_len] && line[*i + num_len] <= '9')
+		num_len++;
+	*i += num_len;
+	while (line[*i] == ' ' || line[*i] == '\t')
+		(*i)++;
+	if (line[*i])
+		return (1);
+	return (0);
 }
 
-static void def_alpha(char *line, int *i, double *alpha)
+static int	def_amb(t_data *param, char *line, int *i)
 {
-	int	num_len;
-
-	if (line[*i] == '1')
-	{
-		*alpha = 1;
-		(*i)++;
-	}
-	else if (line[*i] == '0')
-	{
-		(*i)++;
-		if (line[*i] == '.')
-		{
-			(*i)++;
-			num_len = 0;
-			while ('0' <= line[*i + num_len] && line[*i + num_len] <= '9')
-				num_len++;
-			*alpha = (double)ft_atoi(line + *i) / pow(10, num_len);
-			*i += num_len;
-		}
-		else
-			*alpha = 0;
-	}
-}
-
-static void	def_amb(t_data *param, char *line, int *i)
-{
-	int 	j;
 	double	alpha;
 
 	(*i)++;
 	while (line[*i] == ' ' || line[*i] == '\t')
 		(*i)++;
-	def_alpha(line, i, &alpha);
+	if (def_d(line, i, &alpha))
+		return (1);
 	while (line[*i] == ' ' || line[*i] == '\t')
 		(*i)++;
-	j = -1;
-	while (++j < 3)
-	{
-		param->amb_l_rgb[j] = ft_atoi(line + *i) * alpha;
-		while ('0' <= line[*i] && line[*i] <= '9')
-			(*i)++;
-		(*i)++;
-	}
+	if (line[*i] < '0' && '9' < line[*i])
+		return (1);
+	if (def_rgb(line, i, param->amb_l_rgb, alpha))
+		return (1);
 	rgb_to_hex(param->amb_l_rgb, &(param->amb_l));
+	while (line[*i] == ' ' || line[*i] == '\t')
+		(*i)++;
+	if (line[*i])
+		return (1);
+	return (0);
 }
 
-void		def_settings(t_data *param, char *line)
+int		def_settings(t_data *param, char *line)
 {
 	int		i;
+	int		error;
 
 	i = 0;
-	if (line[i] == 'R' && param->scr.x == -1 && param->scr.y == -1)
-		def_res(param, line, &i);
-	else if (line[i] == 'A' && param->amb_l == -1)
-		def_amb(param, line, &i);
+	error = 0;
+	if (line[i] == 'R')
+	{
+		if (param->scr.x == -1 && param->scr.y == -1)
+			error += def_res(param, line, &i);
+		else
+			return (1);
+	}
+	else if (line[i] == 'A')
+	{
+		if (param->amb_l == -1)
+			error += def_amb(param, line, &i);
+		else
+			return (1);
+	}
+	if (error)
+		return (1);
+	return (0);
 }

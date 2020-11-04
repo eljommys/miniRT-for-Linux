@@ -6,67 +6,86 @@
 /*   By: jserrano <jserrano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/30 16:04:14 by jserrano          #+#    #+#             */
-/*   Updated: 2020/11/01 22:25:13 by jserrano         ###   ########.fr       */
+/*   Updated: 2020/11/04 01:53:47 by jserrano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../raymarching.h"
 #include "def_ft.h"
 
-static void	def_cam(t_data *param, char *line, int *i)
+static int	def_cam(t_data *param, char *line, int *i)
 {
 	double	P[3];
 	double	v[3];
 	int		fov;
+	int		error;
 
+	error = 0;
 	*i = 1;
 	while (line[*i] == ' ' || line[*i] == '\t')
 		(*i)++;
-	def_P(line, i, P);
+	error += def_P(line, i, P);
 	while (line[*i] == ' ' || line[*i] == '\t')
 		(*i)++;
-	def_P(line, i, v);
+	error +=def_P(line, i, v);
 	while (line[*i] == ' ' || line[*i] == '\t')
 		(*i)++;
 	fov = ft_atoi(line + *i);
-	while ('0' <= line[*i] && line[*i] <= '9')
+	if (fov < 0 || fov > 179)
+		return (1);
+	while (ft_isdigit(line[*i]))
 		(*i)++;
+	while (line[*i] == ' ' || line[*i] == '\t')
+		(*i)++;
+	if (line[*i])
+		return (1);
 	param->c = add_c(param->c, P, v, fov);
 	param->cam.n++;
+	return (0);
 }
 
-static void		def_light(t_data *param, char *line, int *i)
+static int	def_light(t_data *param, char *line, int *i)
 {
-	int		j;
 	double	P[3];
 	double	alpha;
 	int		rgb[3];
 	int		c;
+	int		error;
 
+	error = 0;
 	*i = 1;
 	while (line[*i] == ' ' || line[*i] == '\t')
 		(*i)++;
-	def_P(line, i, P);
+	error += def_P(line, i, P);
 	while (line[*i] == ' ' || line[*i] == '\t')
 		(*i)++;
-	def_d(line, i, &alpha);
+	error += def_d(line, i, &alpha);
+	if (alpha < 0 || alpha > 1)
+		return (1);
 	while (line[*i] == ' ' || line[*i] == '\t')
 		(*i)++;
-	def_rgb(line, i, rgb);
-	j = -1;
-	while (++j < 3)
-		rgb[j] *= alpha;
+	error += def_rgb(line, i, rgb, alpha);
 	rgb_to_hex(rgb, &c);
 	param->l = add_l(param->l, P, c);
+	while (line[*i] == ' ' || line[*i] == '\t')
+		(*i)++;
+	if (error || line[*i])
+		return (1);
+	return (0);
 }
 
-void		def_elm(t_data *param, char *line)
+int 		def_elm(t_data *param, char *line)
 {
 	int		i;
+	int		error;
 
 	i = 0;
+	error = 0;
 	if (!ft_memcmp(line, "c ", 2) || !ft_memcmp(line, "c\t", 2))
-		def_cam(param, line, &i);
+		error += def_cam(param, line, &i);
 	else if (!ft_memcmp(line, "l ", 2) || !ft_memcmp(line, "l\t", 2))
-		def_light(param, line, &i);
+		error += def_light(param, line, &i);
+	if (error)
+		return (1);
+	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: jserrano <jserrano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/30 16:14:39 by jserrano          #+#    #+#             */
-/*   Updated: 2020/10/30 16:17:06 by jserrano         ###   ########.fr       */
+/*   Updated: 2020/11/03 23:12:58 by jserrano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 
 # include "../raymarching.h"
 
-void	def_P(char *line, int *i, double *P);
-void	def_d(char *line, int *i, double *d);
-void	def_rgb(char *line, int *i, int *rgb);
+int	def_P(char *line, int *i, double *P);
+int	def_d(char *line, int *i, double *d);
+int	def_rgb(char *line, int *i, int *rgb, double alpha);
 
 #endif

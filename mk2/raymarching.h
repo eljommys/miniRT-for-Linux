@@ -271,15 +271,15 @@ double	obj_dist(t_data *param);
 **	parse
 */
 
-void	def_settings(t_data *param, char *line);
-void	def_sp(t_data *param, char *line);
-void	def_pl(t_data *param, char *line);
-void	def_cy(t_data *param, char *line);
-void	def_sq(t_data *param, char *line);
-void	def_tr(t_data *param, char *line);
-void	def_bx(t_data *param, char *line);
-void	def_obj(t_data *param, char *line);
-void	def_elm(t_data *param, char *line);
+int		def_settings(t_data *param, char *line);
+int		def_sp(t_data *param, char *line);
+int		def_pl(t_data *param, char *line);
+int		def_cy(t_data *param, char *line);
+int		def_sq(t_data *param, char *line);
+int		def_tr(t_data *param, char *line);
+int		def_bx(t_data *param, char *line);
+int		def_obj(t_data *param, char *line);
+int		def_elm(t_data *param, char *line);
 
 /*
 **	parser.c
