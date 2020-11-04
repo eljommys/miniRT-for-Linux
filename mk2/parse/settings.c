@@ -6,7 +6,7 @@
 /*   By: jserrano <jserrano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/29 19:18:02 by jserrano          #+#    #+#             */
-/*   Updated: 2020/11/04 18:40:21 by jserrano         ###   ########.fr       */
+/*   Updated: 2020/11/05 00:32:41 by jserrano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,6 @@ static int	def_res(t_data *param, char *line, int *i)
 	return (0);
 }
 
-
 static int	def_amb(t_data *param, char *line, int *i)
 {
 	double	alpha;
@@ -87,7 +86,7 @@ static int	def_amb(t_data *param, char *line, int *i)
 	return (0);
 }
 
-int		def_settings(t_data *param, char *line)
+int			def_settings(t_data *param, char *line)
 {
 	int		i;
 	int		error;

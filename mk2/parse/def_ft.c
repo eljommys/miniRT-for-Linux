@@ -6,13 +6,13 @@
 /*   By: jserrano <jserrano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/30 16:15:51 by jserrano          #+#    #+#             */
-/*   Updated: 2020/11/04 23:56:23 by jserrano         ###   ########.fr       */
+/*   Updated: 2020/11/05 00:02:45 by jserrano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "def_ft.h"
 
-int	def_p(char *line, int *i, double *P)
+int	def_p(char	*line, int *i, double *p)
 {
 	int j;
 
@@ -21,7 +21,7 @@ int	def_p(char *line, int *i, double *P)
 	j = -1;
 	while (++j < 3)
 	{
-		if (def_d(line, i, P + j))
+		if (def_d(line, i, p + j))
 			return (1);
 		if (j < 2)
 		{
@@ -37,7 +37,7 @@ int	def_p(char *line, int *i, double *P)
 	return (0);
 }
 
-int def_d(char *line, int *i, double *d)
+int	def_d(char *line, int *i, double *d)
 {
 	int num_len;
 
