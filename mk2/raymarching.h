@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jserrano <jserrano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/10/17 13:42:54 by jserrano          #+#    #+#             */
-/*   Updated: 2020/10/17 13:42:54 by jserrano         ###   ########.fr       */
+/*   Created: 2020/11/04 13:53:47 by jserrano          #+#    #+#             */
+/*   Updated: 2020/11/04 13:53:47 by jserrano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -238,7 +238,8 @@ void	copy_cam(t_data *param);
 
 t_sphere	**add_sp(t_sphere **sp, double *O, double r, int c);
 t_plane		**add_pl(t_plane **pl, double *O, double *v, int c);
-t_cylinder	**add_cy(t_cylinder **cy, double *O, double *v, double h, double d, int c);
+t_cylinder	**add_cy(t_cylinder **cy, double *O, double *v, double h, double d,
+					int c);
 t_light		**add_l(t_light **l, double *O, int c);
 t_cams		**add_c(t_cams **c, double *O, double *v, int fov);
 t_square	**add_sq(t_square **sq, double *O, double *v, double h, int c);

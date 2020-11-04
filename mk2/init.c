@@ -6,7 +6,7 @@
 /*   By: jserrano <jserrano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/17 13:38:01 by jserrano          #+#    #+#             */
-/*   Updated: 2020/11/03 17:31:06 by jserrano         ###   ########.fr       */
+/*   Updated: 2020/11/04 13:50:48 by jserrano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,4 +49,3 @@ void		vectors_init(t_data *param, int j)
 	param->scr.dist = (param->scr.x / 2) /
 						tan((param->scr.fov / 2) * M_PI / 180);
 }
-

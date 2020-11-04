@@ -6,7 +6,7 @@
 /*   By: jserrano <jserrano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/02 14:19:38 by jserrano          #+#    #+#             */
-/*   Updated: 2020/11/03 12:03:04 by jserrano         ###   ########.fr       */
+/*   Updated: 2020/11/04 13:51:19 by jserrano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static void	dec_hex_endian(int len, unsigned char *size)
 static void	write_header(t_data *param, int fd)
 {
 	unsigned char	bytes[4];
-	int 			len;
+	int				len;
 
 	len = param->scr.y * param->img.line_length +
 			param->scr.x * (param->img.bits_per_pixel / 8);
