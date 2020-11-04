@@ -6,7 +6,7 @@
 /*   By: jserrano <jserrano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/30 12:07:29 by jserrano          #+#    #+#             */
-/*   Updated: 2020/11/03 23:55:05 by jserrano         ###   ########.fr       */
+/*   Updated: 2020/11/04 16:13:00 by jserrano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,35 +15,36 @@
 
 int		def_cy(t_data *param, char *line)
 {
-	int		i;
-	double	P[3];
-	double	v[3];
-	double	d;
-	double	h;
+	double	*p_v[2];
+	double	d_h[2];
 	int		rgb[3];
-	int		c;
-	int		error;
+	int		i_c_error[3];
 
-	error = 0;
-	i = 2;
-	while (line[i] == ' ' || line[i] == '\t')
-		i++;
-	error += def_P(line, &i, P);
-	while (line[i] == ' ' || line[i] == '\t')
-		i++;
-	error += def_P(line, &i, v);
-	while (line[i] == ' ' || line[i] == '\t')
-		i++;
-	error += def_rgb(line, &i, rgb, 1);
-	while (line[i] == ' ' || line[i] == '\t')
-		i++;
-	error += def_d(line, &i, &h);
-	while (line[i] == ' ' || line[i] == '\t')
-		i++;
-	error += def_d(line, &i, &d);
-	rgb_to_hex(rgb, &c);
-	param->cy = add_cy(param->cy, P, v, h, d, c);
-	if (error)
+
+	i_c_error[0] = 2;
+	i_c_error[2] = 0;
+	p_v[0] = (double *)malloc(sizeof(double) * 2);
+	p_v[1] = (double *)malloc(sizeof(double) * 2);
+	while (line[i_c_error[0]] == ' ' || line[i_c_error[0]] == '\t')
+		i_c_error[0]++;
+	i_c_error[2] += def_P(line, &i_c_error[0], p_v[0]);
+	while (line[i_c_error[0]] == ' ' || line[i_c_error[0]] == '\t')
+		i_c_error[0]++;
+	i_c_error[2] += def_P(line, &i_c_error[0], p_v[1]);
+	while (line[i_c_error[0]] == ' ' || line[i_c_error[0]] == '\t')
+		i_c_error[0]++;
+	i_c_error[2] += def_rgb(line, &i_c_error[0], rgb, 1);
+	while (line[i_c_error[0]] == ' ' || line[i_c_error[0]] == '\t')
+		i_c_error[0]++;
+	i_c_error[2] += def_d(line, &i_c_error[0], &d_h[0]);
+	while (line[i_c_error[0]] == ' ' || line[i_c_error[0]] == '\t')
+		i_c_error[0]++;
+	i_c_error[2] += def_d(line, &i_c_error[0], &d_h[1]);
+	rgb_to_hex(rgb, &i_c_error[1]);
+	param->cy = add_cy(param->cy, p_v, d_h, i_c_error[1]);
+	free(p_v[0]);
+	free(p_v[1]);
+	if (i_c_error[2])
 		return (1);
 	return (0);
 }

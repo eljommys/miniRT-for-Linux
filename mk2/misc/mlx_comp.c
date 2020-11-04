@@ -6,7 +6,7 @@
 /*   By: jserrano <jserrano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/28 12:57:37 by jserrano          #+#    #+#             */
-/*   Updated: 2020/11/04 14:56:39 by jserrano         ###   ########.fr       */
+/*   Updated: 2020/11/04 15:03:57 by jserrano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static void	free_obj_1(t_data *param)
 	int i;
 
 	i = -1;
-	while (param->sp[i])
+	while (param->sp[++i])
 		free(param->sp[i]);
 	free(param->sp);
 	i = -1;

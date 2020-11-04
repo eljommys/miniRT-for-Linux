@@ -6,13 +6,13 @@
 /*   By: jserrano <jserrano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/27 18:48:44 by jserrano          #+#    #+#             */
-/*   Updated: 2020/11/04 14:14:44 by jserrano         ###   ########.fr       */
+/*   Updated: 2020/11/04 16:55:37 by jserrano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../raymarching.h"
 
-static void cpy_tr(t_triangle **tr, t_triangle **aux, int i)
+static void	cpy_tr(t_triangle **tr, t_triangle **aux, int i)
 {
 	int j;
 
@@ -29,18 +29,18 @@ static void cpy_tr(t_triangle **tr, t_triangle **aux, int i)
 	aux[i]->col = tr[i]->col;
 }
 
-static void new_tr(t_triangle **aux, double *A, double *B, double *C, int *var)
+static void	new_tr(t_triangle **aux, double **abc, int *var)
 {
 	int j;
 
 	j = -1;
 	while (++j < 3)
 	{
-		aux[var[0]]->a[j] = A[j];
-		aux[var[0]]->b[j] = B[j];
-		aux[var[0]]->c[j] = C[j];
-		aux[var[0]]->ab[j] = B[j] - A[j];
-		aux[var[0]]->ac[j] = C[j] - A[j];
+		aux[var[0]]->a[j] = abc[0][j];
+		aux[var[0]]->b[j] = abc[1][j];
+		aux[var[0]]->c[j] = abc[2][j];
+		aux[var[0]]->ab[j] = abc[1][j] - abc[0][j];
+		aux[var[0]]->ac[j] = abc[2][j] - abc[0][j];
 	}
 	j = -1;
 	while (++j < 3)
@@ -53,7 +53,7 @@ static void new_tr(t_triangle **aux, double *A, double *B, double *C, int *var)
 **	var[3] = i, c, len
 */
 
-t_triangle	**add_tr(t_triangle **tr, double *A, double *B, double *C, int c)
+t_triangle	**add_tr(t_triangle **tr, double **abc, int c)
 {
 	t_triangle	**aux;
 	int			var[3];
@@ -71,7 +71,7 @@ t_triangle	**add_tr(t_triangle **tr, double *A, double *B, double *C, int c)
 		if (var[0] < var[2])
 			cpy_tr(tr, aux, var[1]);
 		else
-			new_tr(aux, A, B, C, var);
+			new_tr(aux, abc, var);
 	}
 	aux[var[0]] = 0;
 	var[0] = 0;

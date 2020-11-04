@@ -6,7 +6,7 @@
 /*   By: jserrano <jserrano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/30 16:04:14 by jserrano          #+#    #+#             */
-/*   Updated: 2020/11/04 01:53:47 by jserrano         ###   ########.fr       */
+/*   Updated: 2020/11/04 16:35:23 by jserrano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,19 +15,20 @@
 
 static int	def_cam(t_data *param, char *line, int *i)
 {
-	double	P[3];
-	double	v[3];
+	double	*p_v[2];
 	int		fov;
 	int		error;
 
+	p_v[0] = (double *)malloc(sizeof(double) * 3);
+	p_v[1] = (double *)malloc(sizeof(double) * 3);
 	error = 0;
 	*i = 1;
 	while (line[*i] == ' ' || line[*i] == '\t')
 		(*i)++;
-	error += def_P(line, i, P);
+	error += def_P(line, i, p_v[0]);
 	while (line[*i] == ' ' || line[*i] == '\t')
 		(*i)++;
-	error +=def_P(line, i, v);
+	error +=def_P(line, i, p_v[1]);
 	while (line[*i] == ' ' || line[*i] == '\t')
 		(*i)++;
 	fov = ft_atoi(line + *i);
@@ -39,8 +40,10 @@ static int	def_cam(t_data *param, char *line, int *i)
 		(*i)++;
 	if (line[*i])
 		return (1);
-	param->c = add_c(param->c, P, v, fov);
+	param->c = add_c(param->c, p_v, fov);
 	param->cam.n++;
+	free(p_v[0]);
+	free(p_v[1]);
 	return (0);
 }
 

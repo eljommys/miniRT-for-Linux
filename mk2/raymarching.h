@@ -187,7 +187,7 @@ typedef struct	s_data{
 }				t_data;
 
 /*
-**	input.c
+**	mouse.c && keyboard.c
 */
 
 int		get_pos(int x, int y, t_data *param);
@@ -238,13 +238,12 @@ void	copy_cam(t_data *param);
 
 t_sphere	**add_sp(t_sphere **sp, double *o, double r, int c);
 t_plane		**add_pl(t_plane **pl, double *o, double *v, int c);
-t_cylinder	**add_cy(t_cylinder **cy, double *o, double *v, double h, double d,
-					int c);
+t_cylinder	**add_cy(t_cylinder **cy, double **o_v, double *h_d, int c);
 t_light		**add_l(t_light **l, double *o, int c);
-t_cams		**add_c(t_cams **c, double *o, double *v, int fov);
-t_square	**add_sq(t_square **sq, double *o, double *v, double h, int c);
-t_box		**add_bx(t_box **bx, double *o, double *v, double h, int c);
-t_triangle	**add_tr(t_triangle **tr, double *a, double *b, double *c, int col);
+t_cams		**add_c(t_cams **c, double **o_v, int fov);
+t_square	**add_sq(t_square **sq, double **o_v, double h, int c);
+t_box		**add_bx(t_box **bx, double **o_v, double h, int c);
+t_triangle	**add_tr(t_triangle **tr, double **abc, int col);
 
 /*
 **	raymarching.c

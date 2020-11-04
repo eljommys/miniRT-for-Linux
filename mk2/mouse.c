@@ -6,7 +6,7 @@
 /*   By: jserrano <jserrano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/17 13:25:20 by jserrano          #+#    #+#             */
-/*   Updated: 2020/11/04 14:35:24 by jserrano         ###   ########.fr       */
+/*   Updated: 2020/11/04 14:58:48 by jserrano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,49 +73,5 @@ int			button_released(int button, int x, int y, t_data *param)
 		mlx_mouse_show(param->id, param->win_id);
 	}
 	param->button = 0;
-	return (0);
-}
-
-static void	change_cam(t_data *param)
-{
-	if (param->cam.i + 1 == param->cam.n)
-		param->cam.i = 0;
-	else
-		param->cam.i++;
-	pos_init(param, param->cam.i);
-	vectors_init(param, param->cam.i);
-}
-
-int			key_pressed(int keycode, t_data *param)
-{
-	int	j;
-
-	param->key = keycode;
-	j = -1;
-	if (keycode == KEY_ESC)
-		ft_exit(param);
-	else if (keycode == KEY_W)
-		while (++j < 3)
-			param->cam.o[j] += param->cam.vn[j] * 20;
-	else if (keycode == KEY_A)
-		while (++j < 3)
-			param->cam.o[j] += param->cam.vx[j] * -20;
-	else if (keycode == KEY_S)
-		while (++j < 3)
-			param->cam.o[j] += param->cam.vn[j] * -20;
-	else if (keycode == KEY_D)
-		while (++j < 3)
-			param->cam.o[j] += param->cam.vx[j] * 20;
-	else if (keycode == KEY_SPA)
-		param->cam.o[2] += 10;
-	else if (keycode == KEY_CTR)
-		param->cam.o[2] += -10;
-	else if (keycode == KEY_ENT)
-		save_scr(param);
-	else if (keycode == KEY_V)
-		change_cam(param);
-	calculate_rotation(param);
-	calculate_vectors(param);
-	copy_cam(param);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: jserrano <jserrano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/24 21:00:17 by jserrano          #+#    #+#             */
-/*   Updated: 2020/11/04 14:11:16 by jserrano         ###   ########.fr       */
+/*   Updated: 2020/11/04 15:32:12 by jserrano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 **	var[3] = j, x, y
 */
 
-static void	is_inside_ifs(t_data *param, int *var, int i)
+static void		is_inside_ifs(t_data *param, int *var, int i)
 {
 	if (!param->tr[i]->nor[2])
 	{
@@ -33,7 +33,7 @@ static void	is_inside_ifs(t_data *param, int *var, int i)
 	}
 }
 
-static int	is_inside(t_data *param, int i)
+static int		is_inside(t_data *param, int i)
 {
 	double	w[2];
 	double	ac[3];
@@ -74,9 +74,9 @@ static double	contour_dist(t_data *param, int i)
 	return (dist);
 }
 
-double 		tr_dist(t_data *param)
+double			tr_dist(t_data *param)
 {
-	int i;
+	int		i;
 	double	aux;
 	double	dist;
 

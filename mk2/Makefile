@@ -2,7 +2,8 @@ SRC	=	cam_calc.c\
 		dist.c\
 		init.c\
 		ft_init.c\
-		input.c\
+		mouse.c\
+		keyboard.c\
 		raymarching.c\
 		test_func.c\
 		dist/bx.c\
@@ -43,7 +44,8 @@ OBJ =	cam_calc.o\
 		dist.o\
 		init.o\
 		ft_init.o\
-		input.o\
+		mouse.o\
+		keyboard.o\
 		raymarching.o\
 		test_func.o\
 		bx.o\
@@ -90,7 +92,7 @@ LFLAGS =	-L.. -lmlx -lXext -lX11 -lm -lbsd
 
 all:
 	make -C libft
-	gcc $(CFLAGS) -c $(SRC)
+	gcc -c $(SRC)
 
 clean:
 	make -C libft clean
