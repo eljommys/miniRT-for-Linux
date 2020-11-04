@@ -6,13 +6,13 @@
 /*   By: jserrano <jserrano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/27 17:51:46 by jserrano          #+#    #+#             */
-/*   Updated: 2020/11/04 16:02:38 by jserrano         ###   ########.fr       */
+/*   Updated: 2020/11/04 17:04:01 by jserrano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../raymarching.h"
 
-static void		cpy_cy(t_cylinder **cy, t_cylinder **aux, int i)
+static void			cpy_cy(t_cylinder **cy, t_cylinder **aux, int i)
 {
 	int	j;
 
@@ -27,7 +27,8 @@ static void		cpy_cy(t_cylinder **cy, t_cylinder **aux, int i)
 	aux[i]->h = cy[i]->h;
 }
 
-static void		new_cy(t_cylinder **aux, double **o_v, double *dim, int *var)
+static void			new_cy(t_cylinder **aux, double **o_v, double *dim,
+							int *var)
 {
 	int		j;
 	double	vn[3];
@@ -60,7 +61,7 @@ static t_cylinder	**init_sq(t_cylinder **cy, int *var)
 **	var = i, c, len
 */
 
-t_cylinder		**add_cy(t_cylinder **cy, double **o_v, double *d_h, int c)
+t_cylinder			**add_cy(t_cylinder **cy, double **o_v, double *d_h, int c)
 {
 	t_cylinder	**aux;
 	int			var[3];
