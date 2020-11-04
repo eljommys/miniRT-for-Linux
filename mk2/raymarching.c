@@ -6,13 +6,13 @@
 /*   By: jserrano <jserrano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/01 09:38:55 by jserrano          #+#    #+#             */
-/*   Updated: 2020/11/04 17:26:41 by jserrano         ###   ########.fr       */
+/*   Updated: 2020/11/04 17:30:07 by jserrano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "raymarching.h"
 
-void	gen_ray(t_data *param, int x, int y, int boolean)
+void		gen_ray(t_data *param, int x, int y, int boolean)
 {
 	int		i;
 
@@ -30,7 +30,7 @@ void	gen_ray(t_data *param, int x, int y, int boolean)
 		param->cam.ray.v_o[i] /= param->cam.ray.mod;
 }
 
-static int is_bounce(t_data *param, int i)
+static int	is_bounce(t_data *param, int i)
 {
 	double	dist;
 	double	tray;
@@ -57,7 +57,7 @@ static int is_bounce(t_data *param, int i)
 	return (0);
 }
 
-int		bounce_ray(t_data *param, int i)
+int			bounce_ray(t_data *param, int i)
 {
 	double	dist;
 	double	tray;
@@ -76,7 +76,7 @@ int		bounce_ray(t_data *param, int i)
 	return (is_bounce(param, i));
 }
 
-int		is_hit(t_data *param)
+int			is_hit(t_data *param)
 {
 	double	dist;
 	double	tray;
