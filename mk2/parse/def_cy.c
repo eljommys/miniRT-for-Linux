@@ -6,7 +6,7 @@
 /*   By: jserrano <jserrano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/30 12:07:29 by jserrano          #+#    #+#             */
-/*   Updated: 2020/11/05 00:05:49 by jserrano         ###   ########.fr       */
+/*   Updated: 2020/11/05 00:34:12 by jserrano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,11 @@ static void	cy_points(char *line, int *i_c_error, double **p_v)
 	while (line[i_c_error[0]] == ' ' || line[i_c_error[0]] == '\t')
 		i_c_error[0]++;
 	i_c_error[2] += def_p(line, &i_c_error[0], p_v[1]);
+	while (line[i_c_error[0]] == ' ' || line[i_c_error[0]] == '\t')
+		i_c_error[0]++;
 }
 
-int		def_cy(t_data *param, char *line)
+int			def_cy(t_data *param, char *line)
 {
 	double	*p_v[2];
 	double	d_h[2];
@@ -35,8 +37,6 @@ int		def_cy(t_data *param, char *line)
 	p_v[0] = (double *)malloc(sizeof(double) * 2);
 	p_v[1] = (double *)malloc(sizeof(double) * 2);
 	cy_points(line, i_c_error, p_v);
-	while (line[i_c_error[0]] == ' ' || line[i_c_error[0]] == '\t')
-		i_c_error[0]++;
 	i_c_error[2] += def_rgb(line, &i_c_error[0], rgb, 1);
 	while (line[i_c_error[0]] == ' ' || line[i_c_error[0]] == '\t')
 		i_c_error[0]++;
