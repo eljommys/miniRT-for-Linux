@@ -6,7 +6,7 @@
 /*   By: jserrano <jserrano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/24 11:02:30 by jserrano          #+#    #+#             */
-/*   Updated: 2020/10/24 11:20:26 by jserrano         ###   ########.fr       */
+/*   Updated: 2020/11/04 14:09:10 by jserrano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,13 @@ double	cy_dist(t_data *param)
 	{
 		ij[1] = -1;
 		while (++ij[1] < 3)
-			PX[ij[1]] = param->cam.ray.O[ij[1]] - param->cy[ij[0]]->O[ij[1]];
+			PX[ij[1]] = param->cam.ray.o[ij[1]] - param->cy[ij[0]]->o[ij[1]];
 		ij[1] = -1;
 		while (++ij[1] < 3)
 			dy_v[ij[1]] = cross_prod(PX, param->cy[ij[0]]->v, ij[1]);
 		d_xy[1] = mod(dy_v);
-		d_xy[0] = plane_dist(param->cy[ij[0]]->v, param->cy[ij[0]]->O,
-				param->cam.ray.O);
+		d_xy[0] = plane_dist(param->cy[ij[0]]->v, param->cy[ij[0]]->o,
+				param->cam.ray.o);
 		a_d[0] = sqrt(pow(max(d_xy[0] - param->cy[ij[0]]->h / 2, 0), 2) +
 				pow(max(d_xy[1] - param->cy[ij[0]]->d / 2, 0), 2));
 		param->cam.ray.obj_n = (a_d[0] < a_d[1]) ? ij[0] : param->cam.ray.obj_n;

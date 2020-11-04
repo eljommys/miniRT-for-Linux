@@ -6,7 +6,7 @@
 /*   By: jserrano <jserrano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/27 15:48:06 by jserrano          #+#    #+#             */
-/*   Updated: 2020/11/03 15:47:44 by jserrano         ###   ########.fr       */
+/*   Updated: 2020/11/04 14:13:51 by jserrano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,14 +25,14 @@ static void	set_sp(t_sphere **sp, t_sphere **aux, double *O, double r, int *var)
 		if (i < var[0])
 		{
 			while (++j < 3)
-				aux[i]->O[j] = sp[i]->O[j];
+				aux[i]->o[j] = sp[i]->o[j];
 			aux[i]->r = sp[i]->r;
 			aux[i]->col = sp[i]->col;
 		}
 		else
 		{
 			while (++j < 3)
-				aux[i]->O[j] = O[j];
+				aux[i]->o[j] = O[j];
 			aux[i]->r = r;
 			aux[i]->col = var[1];
 		}

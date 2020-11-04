@@ -68,10 +68,10 @@ typedef struct	s_screen{
 }				t_screen;
 
 typedef struct	s_ray{
-	double	V_o[3];
-	double	V_l[3];
-	double	O[3];
-	double	O_prev[3];
+	double	v_o[3];
+	double	v_l[3];
+	double	o[3];
+	double	o_prev[3];
 	double	mod;
 	int		obj_c;
 	int		obj_n;
@@ -85,18 +85,18 @@ typedef struct	s_ray{
 typedef struct	s_camera{
 	int		i;
 	int		n;
-	double	O[3];
-	double	P[3];
-	double	Vn[3];
-	double	Vx[3];
-	double	Vy[3];
+	double	o[3];
+	double	p[3];
+	double	vn[3];
+	double	vx[3];
+	double	vy[3];
 	double	rot_z;
 	double	rot_y;
 	t_ray	ray;
 }				t_camera;
 
 typedef struct	s_cams{
-	double	O[3];
+	double	o[3];
 	double	v[3];
 	int		fov;
 }				t_cams;
@@ -110,19 +110,19 @@ typedef struct	s_image{
 }				t_image;
 
 typedef struct	s_sphere{
-	double	O[3];
+	double	o[3];
 	double	r;
 	int		col;
 }				t_sphere;
 
 typedef struct	s_plane{
-	double	O[3];
+	double	o[3];
 	double	v[3];
 	int		col;
 }				t_plane;
 
 typedef struct	s_cylinder{
-	double	O[3];
+	double	o[3];
 	double	v[3];
 	double	h;
 	double	d;
@@ -130,7 +130,7 @@ typedef struct	s_cylinder{
 }				t_cylinder;
 
 typedef struct	s_square{
-	double	O[3];
+	double	o[3];
 	double	v[3];
 	double	x[3];
 	double	y[3];
@@ -139,7 +139,7 @@ typedef struct	s_square{
 }				t_square;
 
 typedef struct	s_box{
-	double	O[3];
+	double	o[3];
 	double	v[3];
 	double	x[3];
 	double	y[3];
@@ -148,9 +148,9 @@ typedef struct	s_box{
 }				t_box;
 
 typedef struct	s_triangle{
-	double	A[3];
-	double	B[3];
-	double	C[3];
+	double	a[3];
+	double	b[3];
+	double	c[3];
 	double	ab[3];
 	double	ac[3];
 	double	nor[3];
@@ -158,7 +158,7 @@ typedef struct	s_triangle{
 }				t_triangle;
 
 typedef struct	s_light{
-	double	O[3];
+	double	o[3];
 	int		col;
 	int		rgb[3];
 }				t_light;
@@ -209,7 +209,7 @@ double	max(double a, double b);
 double	cross_prod(double *u, double *v, int i);
 double	dot_prod(double *u, double *v);
 double	plane_dist(double *v, double *o, double *p);
-double	segment_dist(double *A, double *B, double *p);
+double	segment_dist(double *a, double *b, double *p);
 double	min(double a, double b);
 double	dot2_prod(double *u);
 double	dot_2d(double *u, double *v, int x, int y);
@@ -236,15 +236,15 @@ void	copy_cam(t_data *param);
 **	add_obj/
 */
 
-t_sphere	**add_sp(t_sphere **sp, double *O, double r, int c);
-t_plane		**add_pl(t_plane **pl, double *O, double *v, int c);
-t_cylinder	**add_cy(t_cylinder **cy, double *O, double *v, double h, double d,
+t_sphere	**add_sp(t_sphere **sp, double *o, double r, int c);
+t_plane		**add_pl(t_plane **pl, double *o, double *v, int c);
+t_cylinder	**add_cy(t_cylinder **cy, double *o, double *v, double h, double d,
 					int c);
-t_light		**add_l(t_light **l, double *O, int c);
-t_cams		**add_c(t_cams **c, double *O, double *v, int fov);
-t_square	**add_sq(t_square **sq, double *O, double *v, double h, int c);
-t_box		**add_bx(t_box **bx, double *O, double *v, double h, int c);
-t_triangle	**add_tr(t_triangle **tr, double *A, double *B, double *C, int c);
+t_light		**add_l(t_light **l, double *o, int c);
+t_cams		**add_c(t_cams **c, double *o, double *v, int fov);
+t_square	**add_sq(t_square **sq, double *o, double *v, double h, int c);
+t_box		**add_bx(t_box **bx, double *o, double *v, double h, int c);
+t_triangle	**add_tr(t_triangle **tr, double *a, double *b, double *c, int col);
 
 /*
 **	raymarching.c
@@ -258,8 +258,6 @@ int		bounce_ray(t_data *param, int i);
 **	test_func.c
 */
 
-void	show_camera(t_data *param);
-void	show_pov(t_data *param);
 int		show_obj(t_data *param);
 
 /*

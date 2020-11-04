@@ -6,7 +6,7 @@
 /*   By: jserrano <jserrano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/31 15:16:32 by jserrano          #+#    #+#             */
-/*   Updated: 2020/11/03 15:47:20 by jserrano         ###   ########.fr       */
+/*   Updated: 2020/11/04 14:12:30 by jserrano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static void	set_c(t_cams **c, t_cams **aux, double *O, double *v, int fov)
 		{
 			while (++j < 3)
 			{
-				aux[i]->O[j] = c[i]->O[j];
+				aux[i]->o[j] = c[i]->o[j];
 				aux[i]->v[j] = c[i]->v[j];
 			}
 			aux[i]->fov = c[i]->fov;
@@ -39,7 +39,7 @@ static void	set_c(t_cams **c, t_cams **aux, double *O, double *v, int fov)
 		{
 			while (++j < 3)
 			{
-				aux[i]->O[j] = O[j];
+				aux[i]->o[j] = O[j];
 				aux[i]->v[j] = v[j];
 			}
 			aux[i]->fov = fov;

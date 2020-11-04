@@ -6,7 +6,7 @@
 /*   By: jserrano <jserrano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/24 11:03:34 by jserrano          #+#    #+#             */
-/*   Updated: 2020/10/24 11:03:43 by jserrano         ###   ########.fr       */
+/*   Updated: 2020/11/04 14:08:39 by jserrano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,11 @@ double	bx_dist(t_data *param)
 	while (param->bx[++i])
 	{
 		d_xyz[2] =
-			plane_dist(param->bx[i]->v, param->bx[i]->O, param->cam.ray.O);
+			plane_dist(param->bx[i]->v, param->bx[i]->o, param->cam.ray.o);
 		d_xyz[1] =
-			plane_dist(param->bx[i]->y, param->bx[i]->O, param->cam.ray.O);
+			plane_dist(param->bx[i]->y, param->bx[i]->o, param->cam.ray.o);
 		d_xyz[0] =
-			plane_dist(param->bx[i]->x, param->bx[i]->O, param->cam.ray.O);
+			plane_dist(param->bx[i]->x, param->bx[i]->o, param->cam.ray.o);
 		aux = sqrt(pow(max(d_xyz[2], 0), 2) +
 		pow(max(d_xyz[0] - param->bx[i]->h / 2, 0), 2) +
 		pow(max(d_xyz[1] - param->bx[i]->h / 2, 0), 2));

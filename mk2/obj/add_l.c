@@ -6,7 +6,7 @@
 /*   By: jserrano <jserrano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/27 16:23:06 by jserrano          #+#    #+#             */
-/*   Updated: 2020/11/03 17:54:37 by jserrano         ###   ########.fr       */
+/*   Updated: 2020/11/04 14:13:24 by jserrano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static void	set_l(t_light **l, t_light **aux, double *O, int *var)
 		{
 			while (++i_j[1] < 3)
 			{
-				aux[i_j[0]]->O[i_j[1]] = l[i_j[0]]->O[i_j[1]];
+				aux[i_j[0]]->o[i_j[1]] = l[i_j[0]]->o[i_j[1]];
 				aux[i_j[0]]->rgb[i_j[1]] = l[i_j[0]]->rgb[i_j[1]];
 			}
 			aux[i_j[0]]->col = l[i_j[0]]->col;
@@ -33,7 +33,7 @@ static void	set_l(t_light **l, t_light **aux, double *O, int *var)
 		else
 		{
 			while (++i_j[1] < 3)
-				aux[i_j[0]]->O[i_j[1]] = O[i_j[1]];
+				aux[i_j[0]]->o[i_j[1]] = O[i_j[1]];
 			hex_to_rgb(var[1], (int *)aux[i_j[0]]->rgb);
 			aux[i_j[0]]->col = var[1];
 		}

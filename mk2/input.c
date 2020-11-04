@@ -6,7 +6,7 @@
 /*   By: jserrano <jserrano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/17 13:25:20 by jserrano          #+#    #+#             */
-/*   Updated: 2020/11/03 18:01:29 by jserrano         ###   ########.fr       */
+/*   Updated: 2020/11/04 14:08:04 by jserrano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,20 +96,20 @@ int		key_pressed(int keycode, t_data *param)
 		ft_exit(param);
 	else if (keycode == KEY_W)
 		while(++j < 3)
-			param->cam.O[j] += param->cam.Vn[j] * 20;
+			param->cam.o[j] += param->cam.vn[j] * 20;
 	else if (keycode == KEY_A)
 		while(++j < 3)
-			param->cam.O[j] += param->cam.Vx[j] * -20;
+			param->cam.o[j] += param->cam.vx[j] * -20;
 	else if (keycode == KEY_S)
 		while(++j < 3)
-			param->cam.O[j] += param->cam.Vn[j] * -20;
+			param->cam.o[j] += param->cam.vn[j] * -20;
 	else if (keycode == KEY_D)
 		while(++j < 3)
-			param->cam.O[j] += param->cam.Vx[j] * 20;
+			param->cam.o[j] += param->cam.vx[j] * 20;
 	else if (keycode == KEY_SPA)
-		param->cam.O[2] += 10;
+		param->cam.o[2] += 10;
 	else if (keycode == KEY_CTR)
-		param->cam.O[2] += -10;
+		param->cam.o[2] += -10;
 	else if (keycode == KEY_ENT)
 		save_scr(param);
 	else if (keycode == KEY_V)

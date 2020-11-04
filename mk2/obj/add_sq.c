@@ -6,7 +6,7 @@
 /*   By: jserrano <jserrano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/27 16:42:18 by jserrano          #+#    #+#             */
-/*   Updated: 2020/10/27 22:49:14 by jserrano         ###   ########.fr       */
+/*   Updated: 2020/11/04 14:14:07 by jserrano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static void	cpy_sq(t_square **sq, t_square **aux, int i)
 	j = -1;
 	while (++j < 3)
 	{
-		aux[i]->O[j] = sq[i]->O[j];
+		aux[i]->o[j] = sq[i]->o[j];
 		aux[i]->v[j] = sq[i]->v[j];
 		aux[i]->x[j] = sq[i]->x[j];
 		aux[i]->y[j] = sq[i]->y[j];
@@ -35,7 +35,7 @@ static void new_sq(t_square **aux, double *O, double *v, double h, int *var)
 	j = -1;
 	while (++j < 3)
 	{
-		aux[var[0]]->O[j] = O[j];
+		aux[var[0]]->o[j] = O[j];
 		aux[var[0]]->v[j] = v[j];
 	}
 	aux[var[0]]->x[0] = 0;

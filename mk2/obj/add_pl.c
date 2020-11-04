@@ -6,7 +6,7 @@
 /*   By: jserrano <jserrano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/27 16:33:45 by jserrano          #+#    #+#             */
-/*   Updated: 2020/11/03 17:57:35 by jserrano         ###   ########.fr       */
+/*   Updated: 2020/11/04 14:13:41 by jserrano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static void	cpy_pl(t_plane **pl, t_plane **aux, int i)
 	j = -1;
 	while (++j < 3)
 	{
-		aux[i]->O[j] = pl[i]->O[j];
+		aux[i]->o[j] = pl[i]->o[j];
 		aux[i]->v[j] = pl[i]->v[j];
 	}
 	aux[i]->col = pl[i]->col;
@@ -41,7 +41,7 @@ static void	set_pl(t_plane **pl, t_plane **aux, double *O, double *v, int *var)
 			j = -1;
 			while (++j < 3)
 			{
-				aux[i]->O[j] = O[j];
+				aux[i]->o[j] = O[j];
 				aux[i]->v[j] = v[j];
 			}
 			aux[i]->col = var[1];

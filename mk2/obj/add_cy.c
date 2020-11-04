@@ -6,7 +6,7 @@
 /*   By: jserrano <jserrano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/27 17:51:46 by jserrano          #+#    #+#             */
-/*   Updated: 2020/10/27 23:29:32 by jserrano         ###   ########.fr       */
+/*   Updated: 2020/11/04 14:12:59 by jserrano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static void cpy_cy(t_cylinder **cy, t_cylinder **aux, int i)
 	j = -1;
 	while (++j < 3)
 	{
-		aux[i]->O[j] = cy[i]->O[j];
+		aux[i]->o[j] = cy[i]->o[j];
 		aux[i]->v[j] = cy[i]->v[j];
 	}
 	aux[i]->col = cy[i]->col;
@@ -36,7 +36,7 @@ static void	new_cy(t_cylinder **aux, double *O, double *v, double *dim, int *var
 	j = -1;
 	while (++j < 3)
 	{
-		aux[var[0]]->O[j] = O[j];
+		aux[var[0]]->o[j] = O[j];
 		aux[var[0]]->v[j] = Vn[j];
 	}
 	aux[var[0]]->col = var[1];

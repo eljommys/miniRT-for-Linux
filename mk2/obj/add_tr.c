@@ -6,7 +6,7 @@
 /*   By: jserrano <jserrano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/27 18:48:44 by jserrano          #+#    #+#             */
-/*   Updated: 2020/11/03 15:47:57 by jserrano         ###   ########.fr       */
+/*   Updated: 2020/11/04 14:14:44 by jserrano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ static void cpy_tr(t_triangle **tr, t_triangle **aux, int i)
 	j = -1;
 	while (++j < 3)
 	{
-		aux[i]->A[j] = tr[i]->A[j];
-		aux[i]->B[j] = tr[i]->B[j];
-		aux[i]->C[j] = tr[i]->C[j];
+		aux[i]->a[j] = tr[i]->a[j];
+		aux[i]->b[j] = tr[i]->b[j];
+		aux[i]->c[j] = tr[i]->c[j];
 		aux[i]->ab[j] = tr[i]->ab[j];
 		aux[i]->ac[j] = tr[i]->ac[j];
 		aux[i]->nor[j] = tr[i]->nor[j];
@@ -36,9 +36,9 @@ static void new_tr(t_triangle **aux, double *A, double *B, double *C, int *var)
 	j = -1;
 	while (++j < 3)
 	{
-		aux[var[0]]->A[j] = A[j];
-		aux[var[0]]->B[j] = B[j];
-		aux[var[0]]->C[j] = C[j];
+		aux[var[0]]->a[j] = A[j];
+		aux[var[0]]->b[j] = B[j];
+		aux[var[0]]->c[j] = C[j];
 		aux[var[0]]->ab[j] = B[j] - A[j];
 		aux[var[0]]->ac[j] = C[j] - A[j];
 	}
