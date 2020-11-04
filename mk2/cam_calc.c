@@ -6,7 +6,7 @@
 /*   By: jserrano <jserrano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/17 13:49:25 by jserrano          #+#    #+#             */
-/*   Updated: 2020/10/31 17:00:32 by jserrano         ###   ########.fr       */
+/*   Updated: 2020/11/04 13:47:34 by jserrano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	calculate_vectors(t_data *param)
 {
-	double module;
+	double	module;
 	int		i;
 
 	param->cam.Vx[0] = -param->cam.Vn[1];
@@ -37,7 +37,7 @@ void	calculate_vectors(t_data *param)
 
 void	copy_cam(t_data *param)
 {
-	int j;
+	int	j;
 
 	j = -1;
 	while (++j < 3)
@@ -49,9 +49,9 @@ void	copy_cam(t_data *param)
 
 void	calculate_rotation(t_data *param)
 {
-	double rotation_z_axis;
-	double rotation_y_axis;
-	double xy_projection;
+	double	rotation_z_axis;
+	double	rotation_y_axis;
+	double	xy_projection;
 
 	rotation_z_axis = param->crd.x * 2 * param->mou.speed * M_PI / 250 +
 						param->cam.rot_z;
