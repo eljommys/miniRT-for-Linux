@@ -6,7 +6,7 @@
 /*   By: jserrano <jserrano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/01 09:38:55 by jserrano          #+#    #+#             */
-/*   Updated: 2020/11/04 14:03:21 by jserrano         ###   ########.fr       */
+/*   Updated: 2020/11/04 14:33:12 by jserrano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,8 +69,8 @@ int		bounce_ray(t_data *param, int i)
 
 int		is_hit(t_data *param)
 {
-	double dist;
-	double tray;
+	double	dist;
+	double	tray;
 	int		j;
 
 	dist = 2;

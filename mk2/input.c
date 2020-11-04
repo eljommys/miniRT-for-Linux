@@ -6,7 +6,7 @@
 /*   By: jserrano <jserrano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/17 13:25:20 by jserrano          #+#    #+#             */
-/*   Updated: 2020/11/04 14:27:33 by jserrano         ###   ########.fr       */
+/*   Updated: 2020/11/04 14:35:24 by jserrano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ int			button_released(int button, int x, int y, t_data *param)
 	return (0);
 }
 
-static void change_cam(t_data *param)
+static void	change_cam(t_data *param)
 {
 	if (param->cam.i + 1 == param->cam.n)
 		param->cam.i = 0;
@@ -95,16 +95,16 @@ int			key_pressed(int keycode, t_data *param)
 	if (keycode == KEY_ESC)
 		ft_exit(param);
 	else if (keycode == KEY_W)
-		while(++j < 3)
+		while (++j < 3)
 			param->cam.o[j] += param->cam.vn[j] * 20;
 	else if (keycode == KEY_A)
-		while(++j < 3)
+		while (++j < 3)
 			param->cam.o[j] += param->cam.vx[j] * -20;
 	else if (keycode == KEY_S)
-		while(++j < 3)
+		while (++j < 3)
 			param->cam.o[j] += param->cam.vn[j] * -20;
 	else if (keycode == KEY_D)
-		while(++j < 3)
+		while (++j < 3)
 			param->cam.o[j] += param->cam.vx[j] * 20;
 	else if (keycode == KEY_SPA)
 		param->cam.o[2] += 10;

@@ -6,7 +6,7 @@
 /*   By: jserrano <jserrano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/24 11:02:30 by jserrano          #+#    #+#             */
-/*   Updated: 2020/11/04 14:09:10 by jserrano         ###   ########.fr       */
+/*   Updated: 2020/11/04 14:31:25 by jserrano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 double	cy_dist(t_data *param)
 {
-	double	PX[3];
+	double	px[3];
 	double	dy_v[3];
 	double	d_xy[2];
 	double	a_d[2];
@@ -26,10 +26,10 @@ double	cy_dist(t_data *param)
 	{
 		ij[1] = -1;
 		while (++ij[1] < 3)
-			PX[ij[1]] = param->cam.ray.o[ij[1]] - param->cy[ij[0]]->o[ij[1]];
+			px[ij[1]] = param->cam.ray.o[ij[1]] - param->cy[ij[0]]->o[ij[1]];
 		ij[1] = -1;
 		while (++ij[1] < 3)
-			dy_v[ij[1]] = cross_prod(PX, param->cy[ij[0]]->v, ij[1]);
+			dy_v[ij[1]] = cross_prod(px, param->cy[ij[0]]->v, ij[1]);
 		d_xy[1] = mod(dy_v);
 		d_xy[0] = plane_dist(param->cy[ij[0]]->v, param->cy[ij[0]]->o,
 				param->cam.ray.o);

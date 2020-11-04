@@ -6,7 +6,7 @@
 /*   By: jserrano <jserrano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/17 13:45:20 by jserrano          #+#    #+#             */
-/*   Updated: 2020/11/04 14:02:57 by jserrano         ###   ########.fr       */
+/*   Updated: 2020/11/04 14:30:29 by jserrano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,9 @@ static void	draw_pixel(t_data *param, int x, int y)
 			bounce_ray(param, i);
 		i = -1;
 		while (++i < 3)
-			param->cam.ray.ray_rgb[i] = (param->cam.ray.ray_rgb_o[i] * (double)param->cam.ray.ray_rgb_l[i] / 255) +
-										(param->cam.ray.ray_rgb_o[i] * (double)param->amb_l_rgb[i] / 255);
+			param->cam.ray.ray_rgb[i] = (param->cam.ray.ray_rgb_o[i] *
+			(double)param->cam.ray.ray_rgb_l[i] / 255) +
+			(param->cam.ray.ray_rgb_o[i] * (double)param->amb_l_rgb[i] / 255);
 		rgb_to_hex(param->cam.ray.ray_rgb, &param->cam.ray.ray_c);
 	}
 	my_mlx_pixel_put(param, x, y, param->cam.ray.ray_c);

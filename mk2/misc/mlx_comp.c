@@ -6,19 +6,11 @@
 /*   By: jserrano <jserrano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/28 12:57:37 by jserrano          #+#    #+#             */
-/*   Updated: 2020/11/03 16:03:24 by jserrano         ###   ########.fr       */
+/*   Updated: 2020/11/04 14:36:28 by jserrano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../raymarching.h"
-
-int 		ft_loop(t_data *param)
-{
-	show_obj(param);
-	//show_pov(param);
-	//show_camera(param);
-	return (0);
-}
 
 static void	free_elm(t_data *param)
 {
