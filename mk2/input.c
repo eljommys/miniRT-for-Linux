@@ -6,13 +6,13 @@
 /*   By: jserrano <jserrano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/17 13:25:20 by jserrano          #+#    #+#             */
-/*   Updated: 2020/11/04 14:08:04 by jserrano         ###   ########.fr       */
+/*   Updated: 2020/11/04 14:27:33 by jserrano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "raymarching.h"
 
-int		get_pos(int x, int y, t_data *param)
+int			get_pos(int x, int y, t_data *param)
 {
 	if (param->button == 1)
 	{
@@ -38,7 +38,7 @@ int		get_pos(int x, int y, t_data *param)
 	return (0);
 }
 
-int		button_pressed(int button, int x, int y, t_data *param)
+int			button_pressed(int button, int x, int y, t_data *param)
 {
 	param->button = button;
 	if (param->key == KEY_ENT)
@@ -62,7 +62,7 @@ int		button_pressed(int button, int x, int y, t_data *param)
 	return (0);
 }
 
-int		button_released(int button, int x, int y, t_data *param)
+int			button_released(int button, int x, int y, t_data *param)
 {
 	if (button == 1)
 	{
@@ -86,7 +86,7 @@ static void change_cam(t_data *param)
 	vectors_init(param, param->cam.i);
 }
 
-int		key_pressed(int keycode, t_data *param)
+int			key_pressed(int keycode, t_data *param)
 {
 	int	j;
 
