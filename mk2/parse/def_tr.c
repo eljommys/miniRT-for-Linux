@@ -6,7 +6,7 @@
 /*   By: jserrano <jserrano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/30 14:21:06 by jserrano          #+#    #+#             */
-/*   Updated: 2020/11/04 16:58:36 by jserrano         ###   ########.fr       */
+/*   Updated: 2020/11/04 23:59:30 by jserrano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,13 @@ int		def_tr(t_data *param, char *line)
 	abc[2] = (double *)malloc(sizeof(double) * 3);
 	while (line[i] == ' ' || line[i] == '\t')
 		i++;
-	error += def_P(line, &i, abc[0]);
+	error += def_p(line, &i, abc[0]);
 	while (line[i] == ' ' || line[i] == '\t')
 		i++;
-	error += def_P(line, &i, abc[1]);
+	error += def_p(line, &i, abc[1]);
 	while (line[i] == ' ' || line[i] == '\t')
 		i++;
-	error += def_P(line, &i, abc[2]);
+	error += def_p(line, &i, abc[2]);
 	while (line[i] == ' ' || line[i] == '\t')
 		i++;
 	error += def_rgb(line, &i, rgb, 1);

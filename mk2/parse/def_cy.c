@@ -6,7 +6,7 @@
 /*   By: jserrano <jserrano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/30 12:07:29 by jserrano          #+#    #+#             */
-/*   Updated: 2020/11/04 16:13:00 by jserrano         ###   ########.fr       */
+/*   Updated: 2020/11/04 23:59:12 by jserrano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,10 @@ int		def_cy(t_data *param, char *line)
 	p_v[1] = (double *)malloc(sizeof(double) * 2);
 	while (line[i_c_error[0]] == ' ' || line[i_c_error[0]] == '\t')
 		i_c_error[0]++;
-	i_c_error[2] += def_P(line, &i_c_error[0], p_v[0]);
+	i_c_error[2] += def_p(line, &i_c_error[0], p_v[0]);
 	while (line[i_c_error[0]] == ' ' || line[i_c_error[0]] == '\t')
 		i_c_error[0]++;
-	i_c_error[2] += def_P(line, &i_c_error[0], p_v[1]);
+	i_c_error[2] += def_p(line, &i_c_error[0], p_v[1]);
 	while (line[i_c_error[0]] == ' ' || line[i_c_error[0]] == '\t')
 		i_c_error[0]++;
 	i_c_error[2] += def_rgb(line, &i_c_error[0], rgb, 1);

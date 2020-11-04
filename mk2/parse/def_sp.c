@@ -6,7 +6,7 @@
 /*   By: jserrano <jserrano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/30 11:33:04 by jserrano          #+#    #+#             */
-/*   Updated: 2020/11/03 23:56:45 by jserrano         ###   ########.fr       */
+/*   Updated: 2020/11/04 23:59:14 by jserrano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,26 +16,25 @@
 int		def_sp(t_data *param, char *line)
 {
 	int		i;
-	double	P[3];
+	double	p[3];
 	double	d;
 	int		rgb[3];
-	int		c;
-	int		error;
+	int		c_error[2];
 
 	i = 2;
-	error = 0;
+	c_error[1] = 0;
 	while (line[i] == ' ' || line[i] == '\t')
 		i++;
-	error += def_P(line, &i, P);
+	c_error[1] += def_p(line, &i, p);
 	while (line[i] == ' ' || line[i] == '\t')
 		i++;
-	error += def_d(line, &i, &d);
+	c_error[1] += def_d(line, &i, &d);
 	while (line[i] == ' ' || line[i] == '\t')
 		i++;
-	error += def_rgb(line, &i, rgb, 1);
-	rgb_to_hex(rgb, &c);
-	param->sp = add_sp(param->sp, P, d / 2, c);
-	if (error)
+	c_error[1] += def_rgb(line, &i, rgb, 1);
+	rgb_to_hex(rgb, &c_error[0]);
+	param->sp = add_sp(param->sp, p, d / 2, c_error[0]);
+	if (c_error[1])
 		return (1);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: jserrano <jserrano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/30 16:04:14 by jserrano          #+#    #+#             */
-/*   Updated: 2020/11/04 16:35:23 by jserrano         ###   ########.fr       */
+/*   Updated: 2020/11/04 23:59:31 by jserrano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,10 @@ static int	def_cam(t_data *param, char *line, int *i)
 	*i = 1;
 	while (line[*i] == ' ' || line[*i] == '\t')
 		(*i)++;
-	error += def_P(line, i, p_v[0]);
+	error += def_p(line, i, p_v[0]);
 	while (line[*i] == ' ' || line[*i] == '\t')
 		(*i)++;
-	error +=def_P(line, i, p_v[1]);
+	error +=def_p(line, i, p_v[1]);
 	while (line[*i] == ' ' || line[*i] == '\t')
 		(*i)++;
 	fov = ft_atoi(line + *i);
@@ -59,7 +59,7 @@ static int	def_light(t_data *param, char *line, int *i)
 	*i = 1;
 	while (line[*i] == ' ' || line[*i] == '\t')
 		(*i)++;
-	error += def_P(line, i, P);
+	error += def_p(line, i, P);
 	while (line[*i] == ' ' || line[*i] == '\t')
 		(*i)++;
 	error += def_d(line, i, &alpha);

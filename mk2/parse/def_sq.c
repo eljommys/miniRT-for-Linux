@@ -6,7 +6,7 @@
 /*   By: jserrano <jserrano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/30 14:04:34 by jserrano          #+#    #+#             */
-/*   Updated: 2020/11/04 16:51:22 by jserrano         ###   ########.fr       */
+/*   Updated: 2020/11/04 23:59:15 by jserrano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,10 @@ int		def_sq(t_data *param, char *line)
 	p_v[1] = (double *)malloc(sizeof(double) * 3);
 	while (line[i] == ' ' || line[i] == '\t')
 		i++;
-	error += def_P(line, &i, p_v[0]);
+	error += def_p(line, &i, p_v[0]);
 	while (line[i] == ' ' || line[i] == '\t')
 		i++;
-	error += def_P(line, &i, p_v[1]);
+	error += def_p(line, &i, p_v[1]);
 	while (line[i] == ' ' || line[i] == '\t')
 		i++;
 	error += def_d(line, &i, &h);

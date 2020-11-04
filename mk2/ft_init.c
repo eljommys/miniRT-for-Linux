@@ -6,7 +6,7 @@
 /*   By: jserrano <jserrano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/03 17:29:54 by jserrano          #+#    #+#             */
-/*   Updated: 2020/11/04 18:32:22 by jserrano         ###   ########.fr       */
+/*   Updated: 2020/11/04 23:42:57 by jserrano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static void		screen_init(t_data *param)
 	&param->img.bits_per_pixel, &param->img.line_length, &param->img.endian);
 }
 
-void	ft_init(t_data *param, char **argv)
+void			ft_init(t_data *param, char **argv)
 {
 	param->id = mlx_init();
 	mlx_get_screen_size(param->id, &param->max_res[0], &param->max_res[1]);
