@@ -6,7 +6,7 @@
 /*   By: jserrano <jserrano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/03 17:29:54 by jserrano          #+#    #+#             */
-/*   Updated: 2020/11/03 17:31:15 by jserrano         ###   ########.fr       */
+/*   Updated: 2020/11/04 18:32:22 by jserrano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,8 @@ static void		objs_init(t_data *param)
 
 static void		screen_init(t_data *param)
 {
-	param->id = mlx_init();
 	param->win_id = mlx_new_window(param->id, param->scr.x,
-								param->scr.y, "miniRT");
+								param->scr.y, "miniRT de jserrano");
 	param->img.img = mlx_new_image(param->id, param->scr.x,
 								param->scr.y);
 	param->img.addr = mlx_get_data_addr(param->img.img,
@@ -50,10 +49,12 @@ static void		screen_init(t_data *param)
 
 void	ft_init(t_data *param, char **argv)
 {
+	param->id = mlx_init();
+	mlx_get_screen_size(param->id, &param->max_res[0], &param->max_res[1]);
 	objs_init(param);
 	parse(param, argv);
-	mouse_init(param);
 	screen_init(param);
+	mouse_init(param);
 	pos_init(param, 0);
 	vectors_init(param, 0);
 	calculate_rotation(param);

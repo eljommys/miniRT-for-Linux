@@ -166,6 +166,7 @@ typedef struct	s_light{
 typedef struct	s_data{
 	void		*id;
 	void		*win_id;
+	int			max_res[2];
 	int			key;
 	int			button;
 	int			reload;

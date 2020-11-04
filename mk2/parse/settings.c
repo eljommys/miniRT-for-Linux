@@ -6,14 +6,14 @@
 /*   By: jserrano <jserrano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/29 19:18:02 by jserrano          #+#    #+#             */
-/*   Updated: 2020/11/04 01:49:57 by jserrano         ###   ########.fr       */
+/*   Updated: 2020/11/04 18:40:21 by jserrano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../raymarching.h"
 #include "def_ft.h"
 
-static int def_res(t_data *param, char *line, int *i)
+static int	def_x(t_data *param, char *line, int *i)
 {
 	int num_len;
 
@@ -27,6 +27,13 @@ static int def_res(t_data *param, char *line, int *i)
 	while ('0' <= line[*i + num_len] && line[*i + num_len] <= '9')
 		num_len++;
 	*i += num_len;
+	return (0);
+}
+
+static int	def_y(t_data *param, char *line, int *i)
+{
+	int num_len;
+
 	while (line[*i] == ' ' || line[*i] == '\t')
 		(*i)++;
 	if (line[*i] < '0' && '9' < line[*i])
@@ -36,12 +43,26 @@ static int def_res(t_data *param, char *line, int *i)
 	while ('0' <= line[*i + num_len] && line[*i + num_len] <= '9')
 		num_len++;
 	*i += num_len;
+	return (0);
+}
+
+static int	def_res(t_data *param, char *line, int *i)
+{
+	int num_len;
+
+	if (def_x(param, line, i) || def_y(param, line, i))
+		return (1);
 	while (line[*i] == ' ' || line[*i] == '\t')
 		(*i)++;
-	if (line[*i])
+	param->scr.x = (param->scr.x > param->max_res[0]) ?
+			param->max_res[0] : param->scr.x;
+	param->scr.y = (param->scr.y > param->max_res[1]) ?
+			param->max_res[1] : param->scr.y;
+	if (line[*i] || !param->scr.x || !param->scr.y)
 		return (1);
 	return (0);
 }
+
 
 static int	def_amb(t_data *param, char *line, int *i)
 {
