@@ -6,7 +6,7 @@
 /*   By: jserrano <jserrano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/27 16:33:45 by jserrano          #+#    #+#             */
-/*   Updated: 2020/11/04 14:45:05 by jserrano         ###   ########.fr       */
+/*   Updated: 2020/11/04 14:51:44 by jserrano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static void	set_pl(t_plane **pl, t_plane **aux, double **o_v, int *var)
 	int	j;
 
 	i = -1;
-	while(++i < var[0] + 1)
+	while (++i < var[0] + 1)
 	{
 		aux[i] = (t_plane *)malloc(sizeof(t_plane));
 		if (i < var[0])
