@@ -6,7 +6,7 @@
 /*   By: jserrano <jserrano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/17 13:45:20 by jserrano          #+#    #+#             */
-/*   Updated: 2020/11/04 14:30:29 by jserrano         ###   ########.fr       */
+/*   Updated: 2020/11/04 17:22:41 by jserrano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static void	draw_pixel(t_data *param, int x, int y)
 	my_mlx_pixel_put(param, x, y, param->cam.ray.ray_c);
 }
 
-int		show_obj(t_data *param)
+int			show_obj(t_data *param)
 {
 	int x;
 	int y;

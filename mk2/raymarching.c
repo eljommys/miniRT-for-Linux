@@ -6,7 +6,7 @@
 /*   By: jserrano <jserrano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/01 09:38:55 by jserrano          #+#    #+#             */
-/*   Updated: 2020/11/04 14:33:12 by jserrano         ###   ########.fr       */
+/*   Updated: 2020/11/04 17:26:41 by jserrano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,22 +30,12 @@ void	gen_ray(t_data *param, int x, int y, int boolean)
 		param->cam.ray.v_o[i] /= param->cam.ray.mod;
 }
 
-int		bounce_ray(t_data *param, int i)
+static int is_bounce(t_data *param, int i)
 {
 	double	dist;
 	double	tray;
 	int		j;
 
-	j = -1;
-	while (++j < 3)
-	{
-		param->cam.ray.o[j] = param->cam.ray.o_prev[j];
-		param->cam.ray.v_l[j] = param->l[i]->o[j] - param->cam.ray.o[j];
-	}
-	param->cam.ray.mod = mod(param->cam.ray.v_l);
-	j = -1;
-	while (++j < 3)
-		param->cam.ray.v_l[j] /= param->cam.ray.mod;
 	dist = 2;
 	tray = 0;
 	while (dist > 0.001)
@@ -65,6 +55,25 @@ int		bounce_ray(t_data *param, int i)
 		dist = obj_dist(param);
 	}
 	return (0);
+}
+
+int		bounce_ray(t_data *param, int i)
+{
+	double	dist;
+	double	tray;
+	int		j;
+
+	j = -1;
+	while (++j < 3)
+	{
+		param->cam.ray.o[j] = param->cam.ray.o_prev[j];
+		param->cam.ray.v_l[j] = param->l[i]->o[j] - param->cam.ray.o[j];
+	}
+	param->cam.ray.mod = mod(param->cam.ray.v_l);
+	j = -1;
+	while (++j < 3)
+		param->cam.ray.v_l[j] /= param->cam.ray.mod;
+	return (is_bounce(param, i));
 }
 
 int		is_hit(t_data *param)
