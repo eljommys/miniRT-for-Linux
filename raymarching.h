@@ -6,7 +6,7 @@
 /*   By: jserrano <jserrano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 13:46:38 by jserrano          #+#    #+#             */
-/*   Updated: 2020/11/05 14:26:05 by jserrano         ###   ########.fr       */
+/*   Updated: 2020/11/05 14:56:14 by jserrano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@
 # include <stdio.h>
 # include <unistd.h>
 # include <math.h>
-# include "../minilibx-linux-master/mlx.h"
+# include "minilibx-linux-master/mlx.h"
 # include "gnl/get_next_line_bonus.h"
 # include "libft/libft.h"
 
