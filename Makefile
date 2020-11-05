@@ -107,4 +107,7 @@ fclean: clean
 
 re: fclean all
 
+norminette:
+	norminette $(SRC) libft/*
+
 .PHONY: all clean fclean re test
