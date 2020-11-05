@@ -6,7 +6,7 @@
 /*   By: jserrano <jserrano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 13:46:38 by jserrano          #+#    #+#             */
-/*   Updated: 2020/11/05 13:46:55 by jserrano         ###   ########.fr       */
+/*   Updated: 2020/11/05 14:09:40 by jserrano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,10 @@
 # define MOT_NT 6
 # define CLI_MG 33
 
-# define MK_KEY_PR 1L << 0
-# define MK_BUT_PR 1L << 2
-# define MK_BUT_RE 1L << 3
-# define MK_PTR_MO 1L << 6
+# define MK_KEY_PR (1L << 0)
+# define MK_BUT_PR (1L << 2)
+# define MK_BUT_RE (1L << 3)
+# define MK_PTR_MO (1L << 6)
 # define CL_CLOSE 3
 
 # define KEY_ESC	0xff1b
