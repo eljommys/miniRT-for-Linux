@@ -6,7 +6,7 @@
 /*   By: jserrano <jserrano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/17 13:30:40 by jserrano          #+#    #+#             */
-/*   Updated: 2020/11/04 14:16:03 by jserrano         ###   ########.fr       */
+/*   Updated: 2020/11/05 00:37:07 by jserrano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,18 +93,6 @@ static void	ft_hooks(t_data *param)
 	mlx_hook(param->win_id, CLI_MG, CL_CLOSE, ft_exit, param);
 	mlx_loop_hook(param->id, show_obj, param);
 }
-
-/*
-**	queda gestionar errores de archivo
-**	-	solo se puede declarar una vez R y A
-**	-	la resolucion, los rgb, la intensidad, altura y diametro
-**			no pueden ser negativos
-**	-	el tamaño maximo de resolucion es el del display
-**	-	los floats estan separados por puntos solamente
-**	-	los rgb estan separados por comas solamente
-**	-	el fov de camara tiene que estar entre 0 y 179
-**	-	comprobar que los argumentos son los que deben
-*/
 
 int			main(int argc, char **argv)
 {

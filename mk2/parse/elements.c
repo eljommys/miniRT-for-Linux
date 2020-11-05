@@ -6,7 +6,7 @@
 /*   By: jserrano <jserrano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/30 16:04:14 by jserrano          #+#    #+#             */
-/*   Updated: 2020/11/05 00:34:50 by jserrano         ###   ########.fr       */
+/*   Updated: 2020/11/05 00:43:19 by jserrano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,13 +38,13 @@ static int	def_cam(t_data *param, char *line, int *i)
 	cam_points(line, i, p_v, &error);
 	fov = ft_atoi(line + *i);
 	if (fov < 0 || fov > 179)
-		return (1);
+		error++;
 	while (ft_isdigit(line[*i]))
 		(*i)++;
 	while (line[*i] == ' ' || line[*i] == '\t')
 		(*i)++;
 	if (line[*i])
-		return (1);
+		error++;
 	param->c = add_c(param->c, p_v, fov);
 	param->cam.n++;
 	free(p_v[0]);
