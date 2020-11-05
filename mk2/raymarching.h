@@ -6,7 +6,7 @@
 /*   By: jserrano <jserrano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 13:46:38 by jserrano          #+#    #+#             */
-/*   Updated: 2020/11/05 14:09:40 by jserrano         ###   ########.fr       */
+/*   Updated: 2020/11/05 14:19:08 by jserrano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -191,105 +191,105 @@ typedef struct	s_data{
 **	mouse.c && keyboard.c
 */
 
-int		get_pos(int x, int y, t_data *param);
-int		button_pressed(int button, int x, int y, t_data *param);
-int		button_released(int button, int x, int y, t_data *param);
-int		key_pressed(int keycode, t_data *param);
+int				get_pos(int x, int y, t_data *param);
+int				button_pressed(int button, int x, int y, t_data *param);
+int				button_released(int button, int x, int y, t_data *param);
+int				key_pressed(int keycode, t_data *param);
 
 /*
 **	misc/
 */
 
-int		ft_loop(t_data *param);
-int		ft_exit(t_data *param);
-void	my_mlx_pixel_put(t_data *param, int x, int y, int color);
-double	mod(double *v);
-void	rgb_to_hex(int *rgb, int *hex);
-void	hex_to_rgb(int hex, int *rgb);
-double	max(double a, double b);
-double	cross_prod(double *u, double *v, int i);
-double	dot_prod(double *u, double *v);
-double	plane_dist(double *v, double *o, double *p);
-double	segment_dist(double *a, double *b, double *p);
-double	min(double a, double b);
-double	dot2_prod(double *u);
-double	dot_2d(double *u, double *v, int x, int y);
-void	norm(double *u, double *v);
+int				ft_loop(t_data *param);
+int				ft_exit(t_data *param);
+void			my_mlx_pixel_put(t_data *param, int x, int y, int color);
+double			mod(double *v);
+void			rgb_to_hex(int *rgb, int *hex);
+void			hex_to_rgb(int hex, int *rgb);
+double			max(double a, double b);
+double			cross_prod(double *u, double *v, int i);
+double			dot_prod(double *u, double *v);
+double			plane_dist(double *v, double *o, double *p);
+double			segment_dist(double *a, double *b, double *p);
+double			min(double a, double b);
+double			dot2_prod(double *u);
+double			dot_2d(double *u, double *v, int x, int y);
+void			norm(double *u, double *v);
 
 /*
 **	init.c
 */
 
-void	mouse_init(t_data *param);
-void	pos_init(t_data *param, int i);
-void	vectors_init(t_data *param, int i);
-void	ft_init(t_data *param, char **argv);
+void			mouse_init(t_data *param);
+void			pos_init(t_data *param, int i);
+void			vectors_init(t_data *param, int i);
+void			ft_init(t_data *param, char **argv);
 
 /*
 **	cam_calc.c
 */
 
-void	calculate_vectors(t_data *def);
-void	calculate_rotation(t_data *param);
-void	copy_cam(t_data *param);
+void			calculate_vectors(t_data *def);
+void			calculate_rotation(t_data *param);
+void			copy_cam(t_data *param);
 
 /*
 **	add_obj/
 */
 
-t_sphere	**add_sp(t_sphere **sp, double *o, double r, int c);
-t_plane		**add_pl(t_plane **pl, double *o, double *v, int c);
-t_cylinder	**add_cy(t_cylinder **cy, double **o_v, double *h_d, int c);
-t_light		**add_l(t_light **l, double *o, int c);
-t_cams		**add_c(t_cams **c, double **o_v, int fov);
-t_square	**add_sq(t_square **sq, double **o_v, double h, int c);
-t_box		**add_bx(t_box **bx, double **o_v, double h, int c);
-t_triangle	**add_tr(t_triangle **tr, double **abc, int col);
+t_sphere		**add_sp(t_sphere **sp, double *o, double r, int c);
+t_plane			**add_pl(t_plane **pl, double *o, double *v, int c);
+t_cylinder		**add_cy(t_cylinder **cy, double **o_v, double *h_d, int c);
+t_light			**add_l(t_light **l, double *o, int c);
+t_cams			**add_c(t_cams **c, double **o_v, int fov);
+t_square		**add_sq(t_square **sq, double **o_v, double h, int c);
+t_box			**add_bx(t_box **bx, double **o_v, double h, int c);
+t_triangle		**add_tr(t_triangle **tr, double **abc, int col);
 
 /*
 **	raymarching.c
 */
 
-void	gen_ray(t_data *param, int x, int y, int boolean);
-int		is_hit(t_data *param);
-int		bounce_ray(t_data *param, int i);
+void			gen_ray(t_data *param, int x, int y, int boolean);
+int				is_hit(t_data *param);
+int				bounce_ray(t_data *param, int i);
 
 /*
 **	test_func.c
 */
 
-int		show_obj(t_data *param);
+int				show_obj(t_data *param);
 
 /*
 **	dist.c
 */
 
-double	obj_dist(t_data *param);
+double			obj_dist(t_data *param);
 
 /*
 **	parse
 */
 
-int		def_settings(t_data *param, char *line);
-int		def_sp(t_data *param, char *line);
-int		def_pl(t_data *param, char *line);
-int		def_cy(t_data *param, char *line);
-int		def_sq(t_data *param, char *line);
-int		def_tr(t_data *param, char *line);
-int		def_bx(t_data *param, char *line);
-int		def_obj(t_data *param, char *line);
-int		def_elm(t_data *param, char *line);
+int				def_settings(t_data *param, char *line);
+int				def_sp(t_data *param, char *line);
+int				def_pl(t_data *param, char *line);
+int				def_cy(t_data *param, char *line);
+int				def_sq(t_data *param, char *line);
+int				def_tr(t_data *param, char *line);
+int				def_bx(t_data *param, char *line);
+int				def_obj(t_data *param, char *line);
+int				def_elm(t_data *param, char *line);
 
 /*
 **	parser.c
 */
 
-void	parse(t_data *param, char **argv);
+void			parse(t_data *param, char **argv);
 
 /*
 **	save.c
 */
 
-void	save_scr(t_data *param);
+void			save_scr(t_data *param);
 
 #endif
