@@ -6,7 +6,7 @@
 /*   By: jserrano <jserrano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/02 14:19:38 by jserrano          #+#    #+#             */
-/*   Updated: 2020/11/04 13:51:19 by jserrano         ###   ########.fr       */
+/*   Updated: 2020/11/05 15:17:17 by jserrano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void		save_scr(t_data *param)
 
 	param->key = KEY_ENT;
 	show_obj(param);
-	fd = open("../screenshot.bmp", O_WRONLY | O_CREAT);
+	fd = open("screenshot.bmp", O_WRONLY | O_CREAT);
 	write_header(param, fd);
 	i = param->scr.y;
 	while (--i >= 0)
