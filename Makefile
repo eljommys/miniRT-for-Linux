@@ -1,3 +1,5 @@
+NAME = miniRT
+
 SRC	=	main.c\
 		cam_calc.c\
 		dist.c\
@@ -92,10 +94,12 @@ CFLAGS =	-Wall -Werror -Wextra
 
 LFLAGS =	-L.. -lmlx -lXext -lX11 -lm -lbsd
 
-all:
+all: $(NAME)
+
+$(NAME):
 	make -C libft
 	gcc -c $(SRC)
-	gcc $(CFLAGS) $(OBJ) $(LFT) $(MLX) $(LFLAGS) -o miniRT
+	gcc $(CFLAGS) $(OBJ) $(LFT) $(MLX) $(LFLAGS) -o $(NAME)
 
 clean:
 	make -C libft clean
@@ -103,7 +107,7 @@ clean:
 
 fclean: clean
 	make -C libft fclean
-	rm -rf miniRT
+	rm -rf $(NAME)
 
 re: fclean all
 
