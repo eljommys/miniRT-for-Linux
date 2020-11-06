@@ -14,7 +14,7 @@ make
 
 ## Default scene
 This is the default.rt scene:
-[!Preview] = (preview.png)
+![Preview] = (preview.png)
 
 ## How to use it
 
