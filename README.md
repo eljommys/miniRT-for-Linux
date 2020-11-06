@@ -84,6 +84,9 @@ rgb = rgb + lgt / d^2
 Here are some reference links that you might find useful.
 
 [Ray Marching for Dummies!](https://www.youtube.com/watch?v=PGtv-dBi2wE&t=606s)
+
 [Distance functions or SDF](https://iquilezles.org/www/articles/distfunctions/distfunctions.htm)
+
 [SDF of a box](https://www.youtube.com/watch?v=62-pRVZuS5c&t=344s)
+
 [Path-tracing](https://www.youtube.com/watch?v=1HYhrx9bzP8)
