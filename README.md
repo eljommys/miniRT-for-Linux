@@ -1,6 +1,7 @@
 # miniRT-for-Linux
 
 miniRT-for-Linux is a 42 Programming School project that will help us to understand how raytracing and raymarching works in terms of primitive 3D objects. In several extra features are also developed (you can move the camera with the keyboard and mouse and the box element is added).
+
 [![jaeskim's 42Project Score](https://badge42.herokuapp.com/api/project/jserrano/miniRT)](https://github.com/JaeSeoKim/badge42)
 
 ## Installation
