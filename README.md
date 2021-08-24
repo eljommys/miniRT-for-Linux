@@ -28,7 +28,7 @@ If you want to make a render it will be saved in the same folder as "screenshot.
 To control the camera angle and position use W, A, S, D and move the mouse while clicking in the window.
 Use V to change between cameras and right click to reset them.
 
-## How does it works
+## How does it work
 
 In case you're wondering how this thing works which is very common. I suggest you to search for "raymarching" and "sdf of an object".
 I'll explain it a little bit anyway.
